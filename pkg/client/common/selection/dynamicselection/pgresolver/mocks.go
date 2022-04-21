@@ -7,9 +7,9 @@ SPDX-License-Identifier: Apache-2.0
 package pgresolver
 
 import (
+	common "gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
+	mb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/msp"
 	"github.com/golang/protobuf/proto"
-	common "github.com/hyperledger/fabric-protos-go/common"
-	mb "github.com/hyperledger/fabric-protos-go/msp"
 	"github.com/pkg/errors"
 )
 

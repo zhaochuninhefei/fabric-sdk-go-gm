@@ -8,10 +8,11 @@ package peer
 
 import (
 	reqContext "context"
-	// "crypto/x509"
 	"regexp"
 	"time"
 
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/protoutil"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/common/verifier"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/errors/status"
@@ -19,16 +20,12 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/context"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/config/comm"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/config/endpoint"
-	credentials "gitee.com/zhaochuninhefei/gmgo/gmtls/gmcredentials"
+	"gitee.com/zhaochuninhefei/gmgo/grpc"
+	"gitee.com/zhaochuninhefei/gmgo/grpc/credentials"
+	"gitee.com/zhaochuninhefei/gmgo/grpc/keepalive"
+	grpcstatus "gitee.com/zhaochuninhefei/gmgo/grpc/status"
 	"gitee.com/zhaochuninhefei/gmgo/x509"
-	"github.com/hyperledger/fabric-protos-go/common"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/pkg/errors"
-	"google.golang.org/grpc"
-
-	// "google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/keepalive"
-	grpcstatus "google.golang.org/grpc/status"
 )
 
 const (

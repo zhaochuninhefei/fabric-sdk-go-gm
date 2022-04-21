@@ -21,15 +21,13 @@ import (
 	"crypto/elliptic"
 	"crypto/rand"
 	"crypto/rsa"
-	"crypto/x509"
 	"encoding/asn1"
 	"encoding/pem"
-	"errors"
 	"fmt"
 
-	"gitee.com/zhaochuninhefei/gmgo/pkcs12"
 	"gitee.com/zhaochuninhefei/gmgo/sm2"
-	gmx509 "gitee.com/zhaochuninhefei/gmgo/x509"
+	"gitee.com/zhaochuninhefei/gmgo/x509"
+	"github.com/pkg/errors"
 )
 
 // struct to hold info required for PKCS#8
@@ -75,7 +73,7 @@ func PrivateKeyToDER(privateKey *sm2.PrivateKey) ([]byte, error) {
 		return nil, errors.New("Invalid sm2 private key. It must be different from nil.")
 	}
 
-	return pkcs12.MarshalECPrivateKey(privateKey)
+	return x509.MarshalECPrivateKey(privateKey)
 }
 
 // PrivateKeyToPEM converts the private key to PEM format.
@@ -150,7 +148,7 @@ func PrivateKeyToPEM(privateKey interface{}, pwd []byte) ([]byte, error) {
 		if k == nil {
 			return nil, errors.New("Invalid sm2 private key. It must be different from nil.")
 		}
-		return gmx509.WritePrivateKeytoMem(k, nil)
+		return x509.WritePrivateKeyToPem(k, nil)
 	default:
 		return nil, errors.New("Invalid key type. It must be *ecdsa.PrivateKey or *rsa.PrivateKey")
 	}
@@ -190,7 +188,7 @@ func PrivateKeyToEncryptedPEM(privateKey interface{}, pwd []byte) ([]byte, error
 			return nil, errors.New("Invalid sm2 private key. It must be different from nil.")
 		}
 
-		return gmx509.WritePrivateKeytoMem(k, pwd)
+		return x509.WritePrivateKeyToPem(k, pwd)
 	default:
 		return nil, errors.New("Invalid key type. It must be *ecdsa.PrivateKey")
 	}
@@ -226,7 +224,7 @@ func PEMtoPrivateKey(raw []byte, pwd []byte) (interface{}, error) {
 	}
 	block, _ := pem.Decode(raw)
 	if block == nil {
-		return nil, fmt.Errorf("Failed decoding PEM. Block must be different from nil. [% x]", raw)
+		return nil, errors.Errorf("Failed decoding PEM. Block must be different from nil. [% x]", raw)
 	}
 
 	// TODO: derive from header the type of the key
@@ -238,7 +236,7 @@ func PEMtoPrivateKey(raw []byte, pwd []byte) (interface{}, error) {
 
 		decrypted, err := x509.DecryptPEMBlock(block, pwd)
 		if err != nil {
-			return nil, fmt.Errorf("Failed PEM decryption [%s]", err)
+			return nil, errors.Errorf("Failed PEM decryption [%s]", err)
 		}
 
 		key, err := DERToPrivateKey(decrypted)
@@ -262,7 +260,7 @@ func PEMtoAES(raw []byte, pwd []byte) ([]byte, error) {
 	}
 	block, _ := pem.Decode(raw)
 	if block == nil {
-		return nil, fmt.Errorf("Failed decoding PEM. Block must be different from nil. [% x]", raw)
+		return nil, errors.Errorf("Failed decoding PEM. Block must be different from nil. [% x]", raw)
 	}
 
 	if x509.IsEncryptedPEMBlock(block) {
@@ -272,7 +270,7 @@ func PEMtoAES(raw []byte, pwd []byte) ([]byte, error) {
 
 		decrypted, err := x509.DecryptPEMBlock(block, pwd)
 		if err != nil {
-			return nil, fmt.Errorf("Failed PEM decryption. [%s]", err)
+			return nil, errors.Errorf("Failed PEM decryption. [%s]", err)
 		}
 		return decrypted, nil
 	}
@@ -354,7 +352,7 @@ func PublicKeyToPEM(publicKey interface{}, pwd []byte) ([]byte, error) {
 			return nil, errors.New("Invalid sm2 public key. It must be different from nil.")
 		}
 
-		return gmx509.WritePublicKeytoMem(k, nil)
+		return x509.WritePublicKeyToPem(k)
 
 	default:
 		return nil, errors.New("Invalid key type. It must be *ecdsa.PublicKey or *rsa.PublicKey")
@@ -432,7 +430,7 @@ func PublicKeyToEncryptedPEM(publicKey interface{}, pwd []byte) ([]byte, error) 
 			return nil, errors.New("Invalid ecdsa public key. It must be different from nil.")
 		}
 
-		return gmx509.WritePublicKeytoMem(k, nil)
+		return x509.WritePublicKeyToPem(k)
 	default:
 		return nil, errors.New("Invalid key type. It must be *ecdsa.PublicKey")
 	}
@@ -445,7 +443,7 @@ func PEMtoPublicKey(raw []byte, pwd []byte) (interface{}, error) {
 	}
 	block, _ := pem.Decode(raw)
 	if block == nil {
-		return nil, fmt.Errorf("Failed decoding. Block must be different from nil. [% x]", raw)
+		return nil, errors.Errorf("Failed decoding. Block must be different from nil. [% x]", raw)
 	}
 
 	// TODO: derive from header the type of the key
@@ -456,7 +454,7 @@ func PEMtoPublicKey(raw []byte, pwd []byte) (interface{}, error) {
 
 		decrypted, err := x509.DecryptPEMBlock(block, pwd)
 		if err != nil {
-			return nil, fmt.Errorf("Failed PEM decryption. [%s]", err)
+			return nil, errors.Errorf("Failed PEM decryption. [%s]", err)
 		}
 
 		key, err := DERToPublicKey(decrypted)
@@ -479,10 +477,6 @@ func DERToPublicKey(raw []byte) (pub interface{}, err error) {
 		return nil, errors.New("Invalid DER. It must be different from nil.")
 	}
 
-	key, err1 := x509.ParsePKIXPublicKey(raw)
-	if err1 != nil {
-		key, err = gmx509.ParseSm2PublicKey(raw)
-	}
-
+	key, err := x509.ParsePKIXPublicKey(raw)
 	return key, err
 }

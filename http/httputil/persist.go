@@ -9,9 +9,10 @@ import (
 	"errors"
 	"io"
 	"net"
-	"net/http"
 	"net/textproto"
 	"sync"
+
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 )
 
 var (

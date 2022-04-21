@@ -8,14 +8,13 @@ package comm
 
 import (
 	"context"
-	// "crypto/x509"
 	"time"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/options"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
+	"gitee.com/zhaochuninhefei/gmgo/grpc/keepalive"
 	"gitee.com/zhaochuninhefei/gmgo/x509"
 	"github.com/spf13/cast"
-	"google.golang.org/grpc/keepalive"
 )
 
 type params struct {

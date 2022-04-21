@@ -9,8 +9,10 @@ import (
 	"io"
 	"io/ioutil"
 	"log"
-	"net/http"
-	"net/http/httptest"
+
+	"gitee.com/zhaochuninhefei/gmgo/gmhttp/httptest"
+
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 )
 
 func ExampleResponseRecorder() {

@@ -14,6 +14,7 @@ import (
 
 	"github.com/golang/protobuf/proto"
 
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/common/policydsl"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/context"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
@@ -22,7 +23,6 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/resource"
 	mspmocks "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/msp/test/mockmsp"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/test/metadata"
-	"github.com/hyperledger/fabric-protos-go/common"
 )
 
 func Example() {

@@ -11,8 +11,9 @@ Please review third_party pinning scripts and patches for more details.
 package x509
 
 import (
-	"crypto/x509"
 	"fmt"
+
+	"gitee.com/zhaochuninhefei/gmgo/x509"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"
 

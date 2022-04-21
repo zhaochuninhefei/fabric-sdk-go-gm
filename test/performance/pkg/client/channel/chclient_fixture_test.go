@@ -20,7 +20,7 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fabsdk"
 	mspImpl "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/msp"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/util/pathvar"
-	"google.golang.org/grpc/testdata"
+	"gitee.com/zhaochuninhefei/gmgo/grpc/testdata"
 )
 
 const (

@@ -10,9 +10,9 @@ import (
 	"context"
 	"time"
 
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/discovery"
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/gossip"
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric-protos-go/discovery"
-	"github.com/hyperledger/fabric-protos-go/gossip"
 	"github.com/pkg/errors"
 )
 

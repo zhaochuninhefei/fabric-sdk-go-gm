@@ -22,9 +22,9 @@ import (
 	localconfig "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/sdkinternal/configtxgen/genesisconfig"
 
 	"gitee.com/zhaochuninhefei/fabric-config-gm/protolator"
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
+	cb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/resource/genesisconfig"
-	"github.com/hyperledger/fabric-protos-go/common"
-	cb "github.com/hyperledger/fabric-protos-go/common"
 )
 
 // See https://github.com/hyperledger/fabric/blob/be235fd3a236f792a525353d9f9586c8b0d4a61a/cmd/configtxgen/main.go

@@ -7,8 +7,6 @@ SPDX-License-Identifier: Apache-2.0
 package mockfab
 
 import (
-	// tls "crypto/tls"
-	// x509 "crypto/x509"
 	"time"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"

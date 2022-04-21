@@ -9,11 +9,11 @@ package resource
 import (
 	reqContext "context"
 
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
+	lb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer/lifecycle"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/context"
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric-protos-go/common"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
-	lb "github.com/hyperledger/fabric-protos-go/peer/lifecycle"
 	"github.com/pkg/errors"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/errors/retry"

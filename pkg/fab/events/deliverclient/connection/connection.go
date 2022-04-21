@@ -11,6 +11,9 @@ import (
 	"fmt"
 	"io"
 
+	cb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
+	ab "gitee.com/zhaochuninhefei/fabric-protos-go-gm/orderer"
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/common/crypto"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/protoutil"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/logging"
@@ -19,12 +22,9 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/comm"
 	clientdisp "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/events/client/dispatcher"
+	"gitee.com/zhaochuninhefei/gmgo/grpc"
 	"github.com/golang/protobuf/proto"
-	cb "github.com/hyperledger/fabric-protos-go/common"
-	ab "github.com/hyperledger/fabric-protos-go/orderer"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/pkg/errors"
-	"google.golang.org/grpc"
 )
 
 var logger = logging.NewLogger("fabsdk/fab")

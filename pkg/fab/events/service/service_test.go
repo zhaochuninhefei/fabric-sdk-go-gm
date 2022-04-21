@@ -21,9 +21,9 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/events/service/dispatcher"
 	servicemocks "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/events/service/mocks"
 
+	cb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/events/service/blockfilter/headertypefilter"
-	cb "github.com/hyperledger/fabric-protos-go/common"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/pkg/errors"
 )
 

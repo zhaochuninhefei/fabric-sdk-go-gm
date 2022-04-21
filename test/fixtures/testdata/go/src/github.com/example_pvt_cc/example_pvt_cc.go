@@ -12,8 +12,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/hyperledger/fabric-chaincode-go/shim"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
+	"gitee.com/zhaochuninhefei/fabric-chaincode-go-gm/shim"
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 )
 
 type invokeFunc func(stub shim.ChaincodeStubInterface, args []string) pb.Response

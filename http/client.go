@@ -11,7 +11,6 @@ package http
 
 import (
 	"context"
-	"crypto/tls"
 	"encoding/base64"
 	"errors"
 	"fmt"
@@ -24,6 +23,8 @@ import (
 	"strings"
 	"sync"
 	"time"
+
+	tls "gitee.com/zhaochuninhefei/gmgo/gmtls"
 )
 
 // A Client is an HTTP client. Its zero value (DefaultClient) is a
@@ -462,7 +463,7 @@ func alwaysFalse() bool { return false }
 // control how redirects are processed. If returned, the next request
 // is not sent and the most recent response is returned with its body
 // unclosed.
-var ErrUseLastResponse = errors.New("net/http: use last response")
+var ErrUseLastResponse = errors.New("gitee.com/zhaochuninhefei/gmgo/gmhttp use last response")
 
 // checkRedirect calls either the user's configured CheckRedirect
 // function, or the default.

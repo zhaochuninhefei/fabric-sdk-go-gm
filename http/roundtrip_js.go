@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+//go:build js && wasm
 // +build js,wasm
 
 package http
@@ -157,7 +158,7 @@ func (t *Transport) RoundTrip(req *Request) (*Response, error) {
 	})
 	defer success.Release()
 	failure := js.FuncOf(func(this js.Value, args []js.Value) interface{} {
-		err := fmt.Errorf("net/http: fetch() failed: %s", args[0].String())
+		err := fmt.Errorf("gitee.com/zhaochuninhefei/gmgo/gmhttp fetch() failed: %s", args[0].String())
 		select {
 		case errCh <- err:
 		case <-req.Context().Done():
@@ -180,7 +181,7 @@ func (t *Transport) RoundTrip(req *Request) (*Response, error) {
 	}
 }
 
-var errClosed = errors.New("net/http: reader is closed")
+var errClosed = errors.New("gitee.com/zhaochuninhefei/gmgo/gmhttp reader is closed")
 
 // streamReader implements an io.ReadCloser wrapper for ReadableStream.
 // See https://fetch.spec.whatwg.org/#readablestream for more information.

@@ -14,11 +14,12 @@ import (
 	"crypto/ecdsa"
 	"crypto/elliptic"
 	"crypto/rand"
-	"crypto/x509"
 	"encoding/asn1"
 	"encoding/pem"
 	"errors"
 	"fmt"
+
+	"gitee.com/zhaochuninhefei/gmgo/x509"
 )
 
 type pkcs8Info struct {

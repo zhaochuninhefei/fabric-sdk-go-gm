@@ -13,6 +13,7 @@ import (
 	"testing"
 	"time"
 
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/errors/multi"
 	contextApi "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/context"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
@@ -20,7 +21,6 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/mocks"
 	mspmocks "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/msp/test/mockmsp"
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/stretchr/testify/assert"
 )
 

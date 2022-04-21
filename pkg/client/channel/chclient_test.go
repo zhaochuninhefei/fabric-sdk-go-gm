@@ -15,6 +15,8 @@ import (
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/channel/invoke"
 	txnmocks "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/common/mocks"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/common/selection/staticselection"
@@ -27,8 +29,6 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/txn"
 	mspmocks "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/msp/test/mockmsp"
-	"github.com/hyperledger/fabric-protos-go/common"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
 )
 
 const (

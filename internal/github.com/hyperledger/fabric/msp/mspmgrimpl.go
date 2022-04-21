@@ -11,9 +11,9 @@ Please review third_party pinning scripts and patches for more details.
 package msp
 
 import (
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/msp"
 	flogging "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/sdkpatch/logbridge"
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric-protos-go/msp"
 	"github.com/pkg/errors"
 )
 

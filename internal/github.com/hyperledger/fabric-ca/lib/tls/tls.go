@@ -21,8 +21,6 @@ Please review third_party pinning scripts and patches for more details.
 package tls
 
 import (
-	// "crypto/tls"
-	// "crypto/x509"
 	"time"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/sdkinternal/pkg/util"

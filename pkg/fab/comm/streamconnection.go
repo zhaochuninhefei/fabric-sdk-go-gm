@@ -15,11 +15,9 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/options"
 	fabcontext "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/context"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
-	credentials "gitee.com/zhaochuninhefei/gmgo/gmtls/gmcredentials"
-	"google.golang.org/grpc"
-
-	// "google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/peer"
+	"gitee.com/zhaochuninhefei/gmgo/grpc"
+	"gitee.com/zhaochuninhefei/gmgo/grpc/credentials"
+	"gitee.com/zhaochuninhefei/gmgo/grpc/peer"
 )
 
 // StreamProvider creates a GRPC stream

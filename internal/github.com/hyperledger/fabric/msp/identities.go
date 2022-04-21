@@ -13,7 +13,6 @@ package msp
 import (
 	"crypto"
 	"crypto/rand"
-	// "crypto/x509"
 	"encoding/hex"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"
@@ -23,12 +22,12 @@ import (
 	"sync"
 	"time"
 
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/msp"
 	bccsp "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/sdkpatch/cryptosuitebridge"
 	flogging "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/sdkpatch/logbridge"
 	logging "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/sdkpatch/logbridge"
 	"gitee.com/zhaochuninhefei/gmgo/x509"
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric-protos-go/msp"
 	"github.com/pkg/errors"
 )
 

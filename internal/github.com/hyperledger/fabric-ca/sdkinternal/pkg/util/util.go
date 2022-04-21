@@ -23,7 +23,6 @@ package util
 import (
 	"bytes"
 	"crypto/ecdsa"
-	"crypto/x509"
 	"encoding/base64"
 	"encoding/json"
 	"encoding/pem"
@@ -31,6 +30,8 @@ import (
 	"io/ioutil"
 	"math/big"
 	mrand "math/rand"
+
+	"gitee.com/zhaochuninhefei/gmgo/x509"
 
 	factory "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/sdkpatch/cryptosuitebridge"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"

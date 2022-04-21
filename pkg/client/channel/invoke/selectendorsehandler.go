@@ -14,10 +14,10 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/peer"
 	"github.com/pkg/errors"
 
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/rwsetutil"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/logging"
 	"github.com/golang/protobuf/proto"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
 )
 
 var logger = logging.NewLogger("fabsdk/client")

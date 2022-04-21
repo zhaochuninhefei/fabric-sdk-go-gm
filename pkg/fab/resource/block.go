@@ -10,14 +10,14 @@ package resource
 import (
 	reqContext "context"
 
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
+	ab "gitee.com/zhaochuninhefei/fabric-protos-go-gm/orderer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/errors/retry"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
 	contextImpl "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/context"
 	ccomm "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/config/comm"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/txn"
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric-protos-go/common"
-	ab "github.com/hyperledger/fabric-protos-go/orderer"
 	"github.com/pkg/errors"
 )
 

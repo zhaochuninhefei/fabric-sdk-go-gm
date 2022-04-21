@@ -13,12 +13,12 @@ package channelconfig
 import (
 	"time"
 
+	cb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
+	ab "gitee.com/zhaochuninhefei/fabric-protos-go-gm/orderer"
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/common/configtx"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/common/policies"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/msp"
-	cb "github.com/hyperledger/fabric-protos-go/common"
-	ab "github.com/hyperledger/fabric-protos-go/orderer"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
 )
 
 // Org stores the common organizational config

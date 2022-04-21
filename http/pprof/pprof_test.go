@@ -7,10 +7,12 @@ package pprof
 import (
 	"bytes"
 	"io/ioutil"
-	"net/http"
-	"net/http/httptest"
 	"runtime/pprof"
 	"testing"
+
+	"gitee.com/zhaochuninhefei/gmgo/gmhttp/httptest"
+
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 )
 
 // TestDescriptions checks that the profile names under runtime/pprof package

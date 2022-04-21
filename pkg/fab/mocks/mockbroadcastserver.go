@@ -12,14 +12,14 @@ import (
 	"net"
 	"sync"
 
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
+	po "gitee.com/zhaochuninhefei/fabric-protos-go-gm/orderer"
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/events/service/mocks"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/util/test"
+	"gitee.com/zhaochuninhefei/gmgo/grpc"
+	"gitee.com/zhaochuninhefei/gmgo/grpc/credentials"
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric-protos-go/common"
-	po "github.com/hyperledger/fabric-protos-go/orderer"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"
 )
 
 // TestBlock is a test block

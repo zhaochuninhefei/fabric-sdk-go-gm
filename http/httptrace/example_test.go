@@ -7,7 +7,8 @@ package httptrace_test
 import (
 	"fmt"
 	"log"
-	"net/http"
+
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/http/httptrace"
 )

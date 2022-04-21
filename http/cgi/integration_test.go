@@ -14,11 +14,13 @@ import (
 	"fmt"
 	"internal/testenv"
 	"io"
-	"net/http"
-	"net/http/httptest"
 	"os"
 	"testing"
 	"time"
+
+	"gitee.com/zhaochuninhefei/gmgo/gmhttp/httptest"
+
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 )
 
 // This test is a CGI host (testing host.go) that runs its own binary

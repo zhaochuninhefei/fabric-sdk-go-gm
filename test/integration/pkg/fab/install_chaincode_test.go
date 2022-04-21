@@ -13,6 +13,8 @@ import (
 	"strings"
 	"testing"
 
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/errors/retry"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/context"
@@ -20,8 +22,6 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/resource"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fabsdk"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/test/integration"
-	"github.com/hyperledger/fabric-protos-go/common"
-	"github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/require"
 )

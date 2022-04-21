@@ -10,7 +10,7 @@ SPDX-License-Identifier: Apache-2.0
 package dynamicdiscovery
 
 import (
-	"github.com/hyperledger/fabric-protos-go/gossip"
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/gossip"
 	"github.com/pkg/errors"
 	"testing"
 	"time"

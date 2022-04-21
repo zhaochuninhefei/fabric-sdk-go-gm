@@ -13,7 +13,7 @@ import (
 	"time"
 	"unicode/utf8"
 
-	"golang.org/x/net/http/httpguts"
+	"gitee.com/zhaochuninhefei/gmgo/net/http/httpguts"
 )
 
 // maxInt64 is the effective "infinite" value for the Server and
@@ -38,7 +38,9 @@ type contextKey struct {
 	name string
 }
 
-func (k *contextKey) String() string { return "net/http context value " + k.name }
+func (k *contextKey) String() string {
+	return "gitee.com/zhaochuninhefei/gmgo/gmhttp context value " + k.name
+}
 
 // Given a string of the form "host", "host:port", or "[ipv6::address]:port",
 // return true if the string includes a port.

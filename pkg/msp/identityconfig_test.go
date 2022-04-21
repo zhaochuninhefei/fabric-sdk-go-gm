@@ -7,12 +7,13 @@ SPDX-License-Identifier: Apache-2.0
 package msp
 
 import (
-	"crypto/x509"
 	"encoding/pem"
 	"os"
 	"path/filepath"
 	"strings"
 	"testing"
+
+	"gitee.com/zhaochuninhefei/gmgo/x509"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"
 	fabImpl "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"

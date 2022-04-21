@@ -11,10 +11,10 @@ import (
 	"os"
 	"testing"
 
+	"gitee.com/zhaochuninhefei/gmgo/grpc/credentials"
+	"gitee.com/zhaochuninhefei/gmgo/grpc/testdata"
 	"github.com/golang/protobuf/proto"
 	"github.com/pkg/errors"
-	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/testdata"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/channel"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/context"
@@ -26,9 +26,9 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/util/pathvar"
 	"github.com/stretchr/testify/require"
 
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/third_party/github.com/hyperledger/fabric/common/policydsl"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/third_party/github.com/hyperledger/fabric/core/common/ccprovider"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
 )
 
 const (

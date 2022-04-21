@@ -11,7 +11,7 @@ package genesisconfig
 import (
 	"time"
 
-	"github.com/hyperledger/fabric-protos-go/orderer/etcdraft"
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/orderer/etcdraft"
 )
 
 // Profile encodes orderer/application configuration combinations

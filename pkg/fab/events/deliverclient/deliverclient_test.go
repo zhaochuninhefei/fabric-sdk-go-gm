@@ -12,6 +12,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
+	cb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/options"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/events/api"
@@ -26,8 +28,6 @@ import (
 	fabclientmocks "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/mocks"
 	fabmocks "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/mocks"
 	mspmocks "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/msp/test/mockmsp"
-	cb "github.com/hyperledger/fabric-protos-go/common"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/pkg/errors"
 )
 

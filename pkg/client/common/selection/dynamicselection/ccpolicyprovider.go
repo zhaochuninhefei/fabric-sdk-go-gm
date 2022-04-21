@@ -15,6 +15,7 @@ import (
 	"github.com/golang/protobuf/proto"
 	"github.com/pkg/errors"
 
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/core/common/ccprovider"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/channel"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/errors/status"
@@ -22,7 +23,6 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/context"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
 	contextImpl "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/context"
-	"github.com/hyperledger/fabric-protos-go/common"
 )
 
 const loggerModule = "fabsdk/client"

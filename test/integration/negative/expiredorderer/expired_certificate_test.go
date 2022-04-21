@@ -15,7 +15,7 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/msp"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fabsdk"
-	"google.golang.org/grpc/grpclog"
+	"gitee.com/zhaochuninhefei/gmgo/grpc/grpclog"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/logging"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/config"

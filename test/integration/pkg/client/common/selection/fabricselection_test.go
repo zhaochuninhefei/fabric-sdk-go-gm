@@ -18,6 +18,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/common/selection/fabricselection"
 	selectionopts "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/common/selection/options"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/options"
@@ -29,8 +30,7 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/test/integration"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/test/metadata"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/third_party/github.com/hyperledger/fabric/common/policydsl"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
-	grpcCodes "google.golang.org/grpc/codes"
+	grpcCodes "gitee.com/zhaochuninhefei/gmgo/grpc/codes"
 )
 
 const (

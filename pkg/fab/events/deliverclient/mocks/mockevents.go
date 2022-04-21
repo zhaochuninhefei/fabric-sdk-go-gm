@@ -9,10 +9,10 @@ package mocks
 import (
 	"fmt"
 
+	cb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/events/deliverclient/connection"
 	servicemocks "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/events/service/mocks"
-	cb "github.com/hyperledger/fabric-protos-go/common"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
 )
 
 // NewBlockEvent returns a new mock block event initialized with the given block

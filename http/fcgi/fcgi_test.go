@@ -9,8 +9,9 @@ import (
 	"errors"
 	"io"
 	"io/ioutil"
-	"net/http"
 	"testing"
+
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 )
 
 var sizeTests = []struct {

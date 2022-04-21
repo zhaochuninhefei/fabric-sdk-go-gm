@@ -10,10 +10,10 @@
 // The handled paths all begin with /debug/pprof/.
 //
 // To use pprof, link this package into your program:
-//	import _ "net/http/pprof"
+//	import _ "gitee.com/zhaochuninhefei/gmgo/gmhttp/pprof"
 //
 // If your application is not already running an http server, you
-// need to start one. Add "net/http" and "log" to your imports and
+// need to start one. Add http "gitee.com/zhaochuninhefei/gmgo/gmhttp" and "log" to your imports and
 // the following code to your main function:
 //
 // 	go func() {
@@ -61,7 +61,6 @@ import (
 	"html/template"
 	"io"
 	"log"
-	"net/http"
 	"os"
 	"runtime"
 	"runtime/pprof"
@@ -70,6 +69,8 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 )
 
 func init() {

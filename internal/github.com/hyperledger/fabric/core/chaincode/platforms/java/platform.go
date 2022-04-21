@@ -20,9 +20,9 @@ import (
 	"net/url"
 	"regexp"
 
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/core/chaincode/platforms/util"
 	flogging "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/sdkpatch/logbridge"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
 )
 
 var logger = flogging.MustGetLogger("chaincode.platform.java")

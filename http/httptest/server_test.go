@@ -8,8 +8,9 @@ import (
 	"bufio"
 	"io/ioutil"
 	"net"
-	"net/http"
 	"testing"
+
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 )
 
 type newServerFunc func(http.Handler) *Server

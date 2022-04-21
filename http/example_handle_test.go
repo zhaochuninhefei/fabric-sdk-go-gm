@@ -7,8 +7,9 @@ package http_test
 import (
 	"fmt"
 	"log"
-	"net/http"
 	"sync"
+
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 )
 
 type countHandler struct {

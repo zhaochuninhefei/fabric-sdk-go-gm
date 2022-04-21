@@ -6,12 +6,13 @@ package cookiejar
 
 import (
 	"fmt"
-	"net/http"
 	"net/url"
 	"sort"
 	"strings"
 	"testing"
 	"time"
+
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 )
 
 // tNow is the synthetic current time used as now during testing.

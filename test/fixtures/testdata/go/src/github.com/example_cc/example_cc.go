@@ -27,8 +27,8 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/hyperledger/fabric-chaincode-go/shim"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
+	"gitee.com/zhaochuninhefei/fabric-chaincode-go-gm/shim"
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 )
 
 // SimpleChaincode example simple Chaincode implementation

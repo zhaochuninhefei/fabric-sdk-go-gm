@@ -7,8 +7,6 @@ SPDX-License-Identifier: Apache-2.0
 package fab
 
 import (
-	"crypto/tls"
-	"crypto/x509"
 	"encoding/pem"
 	"fmt"
 	"os"
@@ -17,6 +15,10 @@ import (
 	"strings"
 	"testing"
 	"time"
+
+	tls "gitee.com/zhaochuninhefei/gmgo/gmtls"
+
+	"gitee.com/zhaochuninhefei/gmgo/x509"
 
 	"github.com/pkg/errors"
 	"github.com/spf13/viper"

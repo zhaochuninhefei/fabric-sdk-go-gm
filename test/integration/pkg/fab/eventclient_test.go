@@ -21,9 +21,9 @@ import (
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/require"
 
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/events/deliverclient/seek"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/test/integration"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
 )
 
 const eventTimeWindow = 20 * time.Second // the maximum amount of time to watch for events.

@@ -5,7 +5,7 @@ import (
 	reqContext "context"
 	"sync"
 
-	"github.com/hyperledger/fabric-protos-go/common"
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/resource"
 )

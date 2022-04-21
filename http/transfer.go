@@ -22,7 +22,7 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/http/httptrace"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/http/internal"
 
-	"golang.org/x/net/http/httpguts"
+	"gitee.com/zhaochuninhefei/gmgo/net/http/httpguts"
 )
 
 // ErrLineTooLong is returned when reading request or response bodies

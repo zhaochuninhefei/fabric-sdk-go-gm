@@ -7,8 +7,8 @@ SPDX-License-Identifier: Apache-2.0
 package main
 
 import (
-	"github.com/hyperledger/fabric-chaincode-go/shim"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
+	"gitee.com/zhaochuninhefei/fabric-chaincode-go-gm/shim"
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 )
 
 // GolangCC is a sample chaincode written in Go

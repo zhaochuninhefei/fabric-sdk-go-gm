@@ -8,8 +8,9 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"net/http"
 	"testing"
+
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 )
 
 func TestRecorder(t *testing.T) {

@@ -12,6 +12,7 @@ import (
 	"path/filepath"
 	"testing"
 
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/channel"
 	mspclient "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/msp"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/resmgmt"
@@ -27,7 +28,6 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/util/test"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/test/metadata"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/third_party/github.com/hyperledger/fabric/common/policydsl"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/require"
 )

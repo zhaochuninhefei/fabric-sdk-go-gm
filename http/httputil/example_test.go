@@ -8,11 +8,13 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
-	"net/http"
-	"net/http/httptest"
-	"net/http/httputil"
 	"net/url"
 	"strings"
+
+	"gitee.com/zhaochuninhefei/gmgo/gmhttp/httptest"
+	"gitee.com/zhaochuninhefei/gmgo/gmhttp/httputil"
+
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 )
 
 func ExampleDumpRequest() {

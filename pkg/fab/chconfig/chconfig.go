@@ -11,6 +11,9 @@ import (
 	"math/rand"
 	"regexp"
 
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
+	mb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/msp"
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	channelConfig "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/common/channelconfig"
 	imsp "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/msp"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/errors/retry"
@@ -22,9 +25,6 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/channel"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/resource"
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric-protos-go/common"
-	mb "github.com/hyperledger/fabric-protos-go/msp"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/pkg/errors"
 )
 

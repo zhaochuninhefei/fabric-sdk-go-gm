@@ -9,17 +9,19 @@ package cgi
 
 import (
 	"bufio"
-	"crypto/tls"
 	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
 	"net"
-	"net/http"
 	"net/url"
 	"os"
 	"strconv"
 	"strings"
+
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
+
+	tls "gitee.com/zhaochuninhefei/gmgo/gmtls"
 )
 
 // Request returns the HTTP request as represented in the current

@@ -13,12 +13,13 @@ import (
 	"go/token"
 	"io"
 	"io/ioutil"
-	"net/http/internal"
 	"net/url"
 	"reflect"
 	"regexp"
 	"strings"
 	"testing"
+
+	"gitee.com/zhaochuninhefei/gmgo/gmhttp/internal"
 )
 
 type respTest struct {

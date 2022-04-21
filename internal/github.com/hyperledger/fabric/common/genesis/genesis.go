@@ -11,8 +11,8 @@ Please review third_party pinning scripts and patches for more details.
 package genesis
 
 import (
+	cb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/protoutil"
-	cb "github.com/hyperledger/fabric-protos-go/common"
 )
 
 const (

@@ -11,13 +11,13 @@ import (
 	"testing"
 	"time"
 
-	"google.golang.org/grpc/keepalive"
+	"gitee.com/zhaochuninhefei/gmgo/grpc/keepalive"
 
 	fabmocks "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/mocks"
 
-	pb "github.com/hyperledger/fabric-protos-go/peer"
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
+	"gitee.com/zhaochuninhefei/gmgo/grpc"
 	"github.com/pkg/errors"
-	"google.golang.org/grpc"
 )
 
 var testStream = func(grpcconn *grpc.ClientConn) (grpc.ClientStream, func(), error) {

@@ -9,12 +9,15 @@ package resource
 
 import (
 	reqContext "context"
-	"net/http"
 	"sync"
+
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/pkg/errors"
 
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/errors/multi"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/errors/retry"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/logging"
@@ -24,8 +27,6 @@ import (
 	contextImpl "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/context"
 	ccomm "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/config/comm"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/txn"
-	"github.com/hyperledger/fabric-protos-go/common"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
 )
 
 var logger = logging.NewLogger("fabsdk/fab")

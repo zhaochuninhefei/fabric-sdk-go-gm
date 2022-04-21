@@ -12,12 +12,12 @@ import (
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes/timestamp"
 
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
+	mb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/msp"
+	ab "gitee.com/zhaochuninhefei/fabric-protos-go-gm/orderer"
+	pp "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	cutil "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/common/util"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/protoutil"
-	"github.com/hyperledger/fabric-protos-go/common"
-	mb "github.com/hyperledger/fabric-protos-go/msp"
-	ab "github.com/hyperledger/fabric-protos-go/orderer"
-	pp "github.com/hyperledger/fabric-protos-go/peer"
 
 	"time"
 

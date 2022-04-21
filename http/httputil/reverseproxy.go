@@ -12,13 +12,14 @@ import (
 	"io"
 	"log"
 	"net"
-	"net/http"
 	"net/url"
 	"strings"
 	"sync"
 	"time"
 
-	"golang.org/x/net/http/httpguts"
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
+
+	"gitee.com/zhaochuninhefei/gmgo/net/http/httpguts"
 )
 
 // ReverseProxy is an HTTP Handler that takes an incoming request and

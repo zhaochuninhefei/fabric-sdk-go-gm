@@ -16,9 +16,9 @@ import (
 	"os"
 	"path/filepath"
 
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/msp"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp"
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric-protos-go/msp"
 	"github.com/pkg/errors"
 	"gopkg.in/yaml.v2"
 )

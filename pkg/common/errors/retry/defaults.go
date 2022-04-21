@@ -9,10 +9,10 @@ package retry
 import (
 	"time"
 
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/errors/status"
-	"github.com/hyperledger/fabric-protos-go/common"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
-	grpcCodes "google.golang.org/grpc/codes"
+	grpcCodes "gitee.com/zhaochuninhefei/gmgo/grpc/codes"
 )
 
 const (

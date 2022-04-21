@@ -11,11 +11,11 @@ import (
 	reqContext "context"
 	"time"
 
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	selectopts "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/common/selection/options"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/errors/retry"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
 )
 
 // CCFilter returns true if the given chaincode should be included

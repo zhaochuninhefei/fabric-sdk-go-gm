@@ -8,11 +8,12 @@ package mocks
 
 import (
 	reqContex "context"
-	"net/http"
 
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
+
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"github.com/golang/protobuf/proto"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
 )
 
 // MockTransactor provides an implementation of Transactor that exposes all its context.

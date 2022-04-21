@@ -8,11 +8,13 @@ package httptest
 import (
 	"bufio"
 	"bytes"
-	"crypto/tls"
 	"io"
 	"io/ioutil"
-	"net/http"
 	"strings"
+
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
+
+	tls "gitee.com/zhaochuninhefei/gmgo/gmtls"
 )
 
 // NewRequest returns a new incoming server Request, suitable

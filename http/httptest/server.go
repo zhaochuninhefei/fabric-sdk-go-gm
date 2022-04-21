@@ -7,17 +7,20 @@
 package httptest
 
 import (
-	"crypto/tls"
-	"crypto/x509"
 	"flag"
 	"fmt"
 	"log"
 	"net"
-	"net/http"
 	"os"
 	"strings"
 	"sync"
 	"time"
+
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
+
+	tls "gitee.com/zhaochuninhefei/gmgo/gmtls"
+
+	"gitee.com/zhaochuninhefei/gmgo/x509"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/http/internal"
 )

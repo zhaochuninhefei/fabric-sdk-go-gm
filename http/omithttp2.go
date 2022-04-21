@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+//go:build nethttpomithttp2
 // +build nethttpomithttp2
 
 package http
@@ -18,7 +19,7 @@ func init() {
 
 const noHTTP2 = "no bundled HTTP/2" // should never see this
 
-var http2errRequestCanceled = errors.New("net/http: request canceled")
+var http2errRequestCanceled = errors.New("gitee.com/zhaochuninhefei/gmgo/gmhttp request canceled")
 
 var http2goAwayTimeout = 1 * time.Second
 

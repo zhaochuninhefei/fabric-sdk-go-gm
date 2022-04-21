@@ -17,8 +17,6 @@ limitations under the License.
 package gmtls
 
 import (
-	// "crypto/tls"
-	// "crypto/x509"
 	"io/ioutil"
 	"time"
 

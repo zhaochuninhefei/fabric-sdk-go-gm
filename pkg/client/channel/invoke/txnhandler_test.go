@@ -9,13 +9,14 @@ package invoke
 import (
 	reqContext "context"
 	"fmt"
-	"net/http"
 	"strings"
 	"testing"
 	"time"
 
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
+
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"github.com/golang/protobuf/proto"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

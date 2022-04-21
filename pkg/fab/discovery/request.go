@@ -7,8 +7,8 @@ SPDX-License-Identifier: Apache-2.0
 package discovery
 
 import (
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/discovery"
 	discclient "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/discovery/client"
-	"github.com/hyperledger/fabric-protos-go/discovery"
 )
 
 // Request aggregates several queries inside it

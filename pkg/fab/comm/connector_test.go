@@ -14,12 +14,12 @@ import (
 	"time"
 	"unsafe"
 
-	pb "github.com/hyperledger/fabric-protos-go/peer"
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
+	"gitee.com/zhaochuninhefei/gmgo/grpc"
+	"gitee.com/zhaochuninhefei/gmgo/grpc/connectivity"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/connectivity"
 )
 
 const (

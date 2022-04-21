@@ -9,9 +9,9 @@ package status
 import (
 	"strconv"
 
-	"github.com/hyperledger/fabric-protos-go/common"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
-	grpcCodes "google.golang.org/grpc/codes"
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
+	grpcCodes "gitee.com/zhaochuninhefei/gmgo/grpc/codes"
 )
 
 // Code represents a status code

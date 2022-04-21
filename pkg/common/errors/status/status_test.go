@@ -10,13 +10,13 @@ import (
 	"fmt"
 	"testing"
 
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/errors/multi"
-	"github.com/hyperledger/fabric-protos-go/common"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
+	grpccodes "gitee.com/zhaochuninhefei/gmgo/grpc/codes"
+	grpcstatus "gitee.com/zhaochuninhefei/gmgo/grpc/status"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
-	grpccodes "google.golang.org/grpc/codes"
-	grpcstatus "google.golang.org/grpc/status"
 )
 
 func TestStatusConstructors(t *testing.T) {

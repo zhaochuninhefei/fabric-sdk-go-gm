@@ -12,15 +12,14 @@ package msp
 
 import (
 	"bytes"
-	// "crypto/x509"
 	"crypto/x509/pkix"
 	"fmt"
 	"time"
 
+	m "gitee.com/zhaochuninhefei/fabric-protos-go-gm/msp"
 	bccsp "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/sdkpatch/cryptosuitebridge"
 	"gitee.com/zhaochuninhefei/gmgo/x509"
 	"github.com/golang/protobuf/proto"
-	m "github.com/hyperledger/fabric-protos-go/msp"
 	errors "github.com/pkg/errors"
 )
 

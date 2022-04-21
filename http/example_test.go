@@ -10,9 +10,10 @@ import (
 	"io"
 	"io/ioutil"
 	"log"
-	"net/http"
 	"os"
 	"os/signal"
+
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 )
 
 func ExampleHijacker() {

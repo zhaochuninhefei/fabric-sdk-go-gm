@@ -17,9 +17,9 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/test/metadata"
 	"github.com/stretchr/testify/require"
 
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/test/integration"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/third_party/github.com/hyperledger/fabric/common/policydsl"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/channel"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/resmgmt"

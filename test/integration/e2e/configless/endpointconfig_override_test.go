@@ -7,8 +7,6 @@ SPDX-License-Identifier: Apache-2.0
 package configless
 
 import (
-	// "crypto/tls"
-	// "crypto/x509"
 	"encoding/pem"
 	"fmt"
 	"io/ioutil"

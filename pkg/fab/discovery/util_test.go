@@ -9,11 +9,11 @@ package discovery
 import (
 	"testing"
 
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/gossip"
 	discclient "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/discovery/client"
 	gprotoext "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/gossip/protoext"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/discovery/mocks"
-	"github.com/hyperledger/fabric-protos-go/gossip"
 	"github.com/stretchr/testify/require"
 )
 

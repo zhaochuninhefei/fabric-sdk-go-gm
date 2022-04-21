@@ -13,6 +13,7 @@ import (
 	"strings"
 	"time"
 
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/discovery"
 	discclient "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/discovery/client"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/common/random"
 	soptions "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/common/selection/options"
@@ -28,7 +29,6 @@ import (
 	peerImpl "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/util/concurrent/lazycache"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/util/concurrent/lazyref"
-	"github.com/hyperledger/fabric-protos-go/discovery"
 	"github.com/pkg/errors"
 )
 

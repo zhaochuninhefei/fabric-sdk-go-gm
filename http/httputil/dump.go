@@ -12,10 +12,11 @@ import (
 	"io"
 	"io/ioutil"
 	"net"
-	"net/http"
 	"net/url"
 	"strings"
 	"time"
+
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 )
 
 // drainBody reads all of b to memory and then returns two equivalent

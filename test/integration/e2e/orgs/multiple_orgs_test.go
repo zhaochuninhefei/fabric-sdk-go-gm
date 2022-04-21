@@ -27,10 +27,10 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
+	mb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/msp"
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/ledger"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/resmgmt"
-	mb "github.com/hyperledger/fabric-protos-go/msp"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/test/integration"
 

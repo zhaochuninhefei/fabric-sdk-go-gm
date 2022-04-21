@@ -17,9 +17,10 @@ package gm
 
 import (
 	"crypto/rand"
-	"crypto/x509"
 	"io"
 	"math/big"
+
+	"gitee.com/zhaochuninhefei/gmgo/x509"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp"
 	"gitee.com/zhaochuninhefei/gmgo/sm2"

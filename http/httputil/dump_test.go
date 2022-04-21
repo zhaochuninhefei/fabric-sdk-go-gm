@@ -10,11 +10,12 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"net/http"
 	"net/url"
 	"runtime"
 	"strings"
 	"testing"
+
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 )
 
 type eofReader struct{}

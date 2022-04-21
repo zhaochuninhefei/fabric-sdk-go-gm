@@ -12,7 +12,6 @@ package signer
 
 import (
 	"crypto"
-	// "crypto/x509"
 	"io"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"

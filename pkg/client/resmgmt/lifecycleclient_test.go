@@ -8,12 +8,13 @@ package resmgmt
 
 import (
 	"fmt"
-	"net/http"
 	"testing"
 
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
+
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
+	lb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer/lifecycle"
 	"github.com/golang/protobuf/proto"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
-	lb "github.com/hyperledger/fabric-protos-go/peer/lifecycle"
 	"github.com/stretchr/testify/require"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"

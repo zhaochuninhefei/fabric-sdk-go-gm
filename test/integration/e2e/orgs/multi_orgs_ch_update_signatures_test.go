@@ -22,9 +22,9 @@ import (
 	"time"
 
 	"gitee.com/zhaochuninhefei/fabric-config-gm/protolator"
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/sdkpatch/keyutil"
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 

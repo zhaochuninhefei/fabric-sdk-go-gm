@@ -12,8 +12,9 @@ package pkcs11
 
 import (
 	"crypto/ecdsa"
-	"crypto/x509"
 	"os"
+
+	"gitee.com/zhaochuninhefei/gmgo/x509"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp/sw"

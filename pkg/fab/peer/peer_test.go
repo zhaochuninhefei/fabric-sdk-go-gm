@@ -12,10 +12,10 @@ import (
 	"testing"
 	"time"
 
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/gossip"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/test/mockfab"
 	"github.com/golang/mock/gomock"
-	"github.com/hyperledger/fabric-protos-go/gossip"
 	"github.com/stretchr/testify/require"
 )
 

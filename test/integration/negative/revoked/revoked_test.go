@@ -9,7 +9,6 @@ package revoked
 import (
 	"bytes"
 	"crypto/rand"
-	"crypto/x509"
 	"crypto/x509/pkix"
 	"encoding/pem"
 	"io"
@@ -20,10 +19,12 @@ import (
 	"testing"
 	"time"
 
+	"gitee.com/zhaochuninhefei/gmgo/x509"
+
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/msp"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/sdkpatch/keyutil"
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric-protos-go/common"
-	"github.com/hyperledger/fabric-protos-go/msp"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

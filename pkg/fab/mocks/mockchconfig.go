@@ -9,11 +9,11 @@ package mocks
 import (
 	reqContext "context"
 
-	"github.com/hyperledger/fabric-protos-go/common"
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
 
+	msp "gitee.com/zhaochuninhefei/fabric-protos-go-gm/msp"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/context"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
-	msp "github.com/hyperledger/fabric-protos-go/msp"
 )
 
 // MockChannelCfg contains mock channel configuration

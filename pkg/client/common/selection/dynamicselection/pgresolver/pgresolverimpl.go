@@ -10,11 +10,11 @@ import (
 	"fmt"
 	"reflect"
 
+	common "gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
+	mb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/msp"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/logging"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"github.com/golang/protobuf/proto"
-	common "github.com/hyperledger/fabric-protos-go/common"
-	mb "github.com/hyperledger/fabric-protos-go/msp"
 	"github.com/pkg/errors"
 )
 

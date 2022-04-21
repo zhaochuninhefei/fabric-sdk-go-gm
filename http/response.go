@@ -19,7 +19,7 @@ import (
 
 	tls "gitee.com/zhaochuninhefei/gmgo/gmtls"
 
-	"golang.org/x/net/http/httpguts"
+	"gitee.com/zhaochuninhefei/gmgo/net/http/httpguts"
 )
 
 var respExcludeHeader = map[string]bool{

@@ -15,13 +15,13 @@ import (
 	"io/ioutil"
 	"math"
 
+	cb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
+	mspprotos "gitee.com/zhaochuninhefei/fabric-protos-go-gm/msp"
+	ab "gitee.com/zhaochuninhefei/fabric-protos-go-gm/orderer"
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/orderer/etcdraft"
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp"
 	"github.com/golang/protobuf/proto"
-	cb "github.com/hyperledger/fabric-protos-go/common"
-	mspprotos "github.com/hyperledger/fabric-protos-go/msp"
-	ab "github.com/hyperledger/fabric-protos-go/orderer"
-	"github.com/hyperledger/fabric-protos-go/orderer/etcdraft"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
 )
 
 const (

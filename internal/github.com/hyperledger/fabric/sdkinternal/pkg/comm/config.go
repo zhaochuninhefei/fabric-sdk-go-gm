@@ -11,8 +11,9 @@ Please review third_party pinning scripts and patches for more details.
 package comm
 
 import (
-	"crypto/tls"
 	"time"
+
+	tls "gitee.com/zhaochuninhefei/gmgo/gmtls"
 )
 
 // Configuration defaults

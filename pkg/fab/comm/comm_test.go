@@ -12,10 +12,10 @@ import (
 	"os"
 	"testing"
 
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	eventmocks "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/events/mocks"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/mocks"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
-	"google.golang.org/grpc"
+	"gitee.com/zhaochuninhefei/gmgo/grpc"
 )
 
 const (

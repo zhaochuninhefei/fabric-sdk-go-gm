@@ -11,8 +11,6 @@ Please review third_party pinning scripts and patches for more details.
 package lib
 
 import (
-	// "crypto/tls"
-	"crypto/x509"
 	"encoding/hex"
 	"encoding/json"
 	"encoding/pem"
@@ -23,12 +21,11 @@ import (
 	"strings"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/http"
-
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/sdkinternal/pkg/util"
 	log "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/sdkpatch/logbridge"
 	tls "gitee.com/zhaochuninhefei/gmgo/gmtls"
+	"gitee.com/zhaochuninhefei/gmgo/x509"
 	gx509 "gitee.com/zhaochuninhefei/gmgo/x509"
-	"github.com/grantae/certinfo"
 	"github.com/pkg/errors"
 	"github.com/spf13/viper"
 )
@@ -187,7 +184,7 @@ func (cd *CertificateDecoder) CertificateDecoder(decoder *json.Decoder) error {
 		}
 	}
 
-	result, err := certinfo.CertificateText(certificate)
+	result, err := x509.CertificateText(certificate)
 	if err != nil {
 		return err
 	}

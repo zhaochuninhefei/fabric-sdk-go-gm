@@ -29,7 +29,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"golang.org/x/net/http/httpguts"
+	"gitee.com/zhaochuninhefei/gmgo/net/http/httpguts"
 
 	tls "gitee.com/zhaochuninhefei/gmgo/gmtls"
 )
@@ -1103,7 +1103,7 @@ func relevantCaller() runtime.Frame {
 	var frame runtime.Frame
 	for {
 		frame, more := frames.Next()
-		if !strings.HasPrefix(frame.Function, "net/http.") {
+		if !strings.HasPrefix(frame.Function, "gitee.com/zhaochuninhefei/gmgo/gmhttp.") {
 			return frame
 		}
 		if !more {
@@ -1743,7 +1743,7 @@ func (e badRequestError) Error() string { return "Bad Request: " + string(e) }
 // While any panic from ServeHTTP aborts the response to the client,
 // panicking with ErrAbortHandler also suppresses logging of a stack
 // trace to the server's error log.
-var ErrAbortHandler = errors.New("net/http: abort Handler")
+var ErrAbortHandler = errors.New("gitee.com/zhaochuninhefei/gmgo/gmhttp abort Handler")
 
 // isCommonNetReadError reports whether err is a common error
 // encountered during reading a request off the network when the
@@ -1948,7 +1948,7 @@ func (w *response) sendExpectationFailed() {
 // and a Hijacker.
 func (w *response) Hijack() (rwc net.Conn, buf *bufio.ReadWriter, err error) {
 	if w.handlerDone.isSet() {
-		panic("net/http: Hijack called after ServeHTTP finished")
+		panic("gitee.com/zhaochuninhefei/gmgo/gmhttp Hijack called after ServeHTTP finished")
 	}
 	if w.wroteHeader {
 		w.cw.flush()
@@ -1970,7 +1970,7 @@ func (w *response) Hijack() (rwc net.Conn, buf *bufio.ReadWriter, err error) {
 
 func (w *response) CloseNotify() <-chan bool {
 	if w.handlerDone.isSet() {
-		panic("net/http: CloseNotify called after ServeHTTP finished")
+		panic("gitee.com/zhaochuninhefei/gmgo/gmhttp CloseNotify called after ServeHTTP finished")
 	}
 	return w.closeNotifyCh
 }

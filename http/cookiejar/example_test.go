@@ -7,10 +7,12 @@ package cookiejar_test
 import (
 	"fmt"
 	"log"
-	"net/http"
-	"net/http/cookiejar"
-	"net/http/httptest"
 	"net/url"
+
+	"gitee.com/zhaochuninhefei/gmgo/gmhttp/cookiejar"
+	"gitee.com/zhaochuninhefei/gmgo/gmhttp/httptest"
+
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 )
 
 func ExampleNew() {
@@ -30,7 +32,7 @@ func ExampleNew() {
 		log.Fatal(err)
 	}
 
-	// All users of cookiejar should import "golang.org/x/net/publicsuffix"
+	// All users of cookiejar should import "gitee.com/zhaochuninhefei/gmgo/net/publicsuffix"
 	jar, err := cookiejar.New(&cookiejar.Options{PublicSuffixList: publicsuffix.List})
 	if err != nil {
 		log.Fatal(err)

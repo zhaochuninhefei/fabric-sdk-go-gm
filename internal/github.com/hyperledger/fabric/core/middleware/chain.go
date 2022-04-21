@@ -11,7 +11,7 @@ Please review third_party pinning scripts and patches for more details.
 package middleware
 
 import (
-	"net/http"
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 )
 
 type Middleware func(http.Handler) http.Handler

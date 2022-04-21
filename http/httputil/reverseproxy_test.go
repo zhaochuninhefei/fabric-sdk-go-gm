@@ -15,8 +15,6 @@ import (
 	"io"
 	"io/ioutil"
 	"log"
-	"net/http"
-	"net/http/httptest"
 	"net/url"
 	"os"
 	"reflect"
@@ -26,6 +24,10 @@ import (
 	"sync"
 	"testing"
 	"time"
+
+	"gitee.com/zhaochuninhefei/gmgo/gmhttp/httptest"
+
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 )
 
 const fakeHopHeader = "X-Fake-Hop-Header-For-Test"

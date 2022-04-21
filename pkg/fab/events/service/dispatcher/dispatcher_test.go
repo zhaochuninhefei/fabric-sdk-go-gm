@@ -13,12 +13,12 @@ import (
 
 	"github.com/stretchr/testify/require"
 
+	cb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/events/service/blockfilter"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/events/service/blockfilter/headertypefilter"
 	servicemocks "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/events/service/mocks"
-	cb "github.com/hyperledger/fabric-protos-go/common"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
 )
 
 var sourceURL = "localhost:9051"

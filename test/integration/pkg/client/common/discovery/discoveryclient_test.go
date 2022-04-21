@@ -28,10 +28,10 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
+	protosdiscovery "gitee.com/zhaochuninhefei/fabric-protos-go-gm/discovery"
 	discclient "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/discovery/client"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/context"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fabsdk"
-	protosdiscovery "github.com/hyperledger/fabric-protos-go/discovery"
 )
 
 const (

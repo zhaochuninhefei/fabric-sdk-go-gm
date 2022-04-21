@@ -13,9 +13,9 @@ package channelconfig
 import (
 	"fmt"
 
+	cb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
+	mspprotos "gitee.com/zhaochuninhefei/fabric-protos-go-gm/msp"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/msp"
-	cb "github.com/hyperledger/fabric-protos-go/common"
-	mspprotos "github.com/hyperledger/fabric-protos-go/msp"
 	"github.com/pkg/errors"
 )
 

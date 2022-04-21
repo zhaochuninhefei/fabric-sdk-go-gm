@@ -20,7 +20,6 @@ import (
 	"io"
 	"log"
 	"net"
-	"net/http"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -28,6 +27,8 @@ import (
 	"runtime"
 	"strconv"
 	"strings"
+
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 )
 
 var trailingPort = regexp.MustCompile(`:([0-9]+)$`)

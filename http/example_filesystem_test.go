@@ -6,9 +6,10 @@ package http_test
 
 import (
 	"log"
-	"net/http"
 	"os"
 	"strings"
+
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 )
 
 // containsDotFile reports whether name contains a path element starting with a period.

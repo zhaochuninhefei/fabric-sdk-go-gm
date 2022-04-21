@@ -9,9 +9,10 @@ package sw
 import (
 	"crypto/rsa"
 	"crypto/sha256"
-	"crypto/x509"
 	"errors"
 	"fmt"
+
+	"gitee.com/zhaochuninhefei/gmgo/x509"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp"
 )

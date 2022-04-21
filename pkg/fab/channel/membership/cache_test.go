@@ -11,11 +11,11 @@ import (
 	"testing"
 	"time"
 
+	mb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/msp"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/mocks"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/util/concurrent/lazyref"
 	"github.com/golang/protobuf/proto"
-	mb "github.com/hyperledger/fabric-protos-go/msp"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

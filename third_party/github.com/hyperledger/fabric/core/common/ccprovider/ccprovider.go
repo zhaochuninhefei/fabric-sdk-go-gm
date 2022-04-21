@@ -11,8 +11,8 @@ Please review third_party pinning scripts and patches for more details.
 package ccprovider
 
 import (
+	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"github.com/golang/protobuf/proto"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
 )
 
 // CCPackage encapsulates a chaincode package which can be

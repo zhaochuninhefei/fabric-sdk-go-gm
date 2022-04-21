@@ -9,12 +9,13 @@ import (
 	"errors"
 	"fmt"
 	"net"
-	"net/http"
 	"net/url"
 	"sort"
 	"strings"
 	"sync"
 	"time"
+
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 )
 
 // PublicSuffixList provides the public suffix of a domain. For example:

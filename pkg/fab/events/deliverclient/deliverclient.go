@@ -10,6 +10,7 @@ import (
 	"math"
 	"time"
 
+	ab "gitee.com/zhaochuninhefei/fabric-protos-go-gm/orderer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/logging"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/options"
 	fabcontext "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/context"
@@ -20,7 +21,6 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/events/deliverclient/dispatcher"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/events/deliverclient/seek"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/events/endpoint"
-	ab "github.com/hyperledger/fabric-protos-go/orderer"
 	"github.com/pkg/errors"
 )
 
