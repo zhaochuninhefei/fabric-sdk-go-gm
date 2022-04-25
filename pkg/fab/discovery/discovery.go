@@ -12,14 +12,14 @@ import (
 	"sync"
 
 	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/discovery"
-	discclient "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/discovery/client"
+	discclient "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/discovery/client"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/logging"
 	fabcontext "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/context"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
 	corecomm "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/config/comm"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/comm"
-	"gitee.com/zhaochuninhefei/gmgo/grpc"
 	"github.com/pkg/errors"
+	"google.golang.org/grpc"
 )
 
 var logger = logging.NewLogger("fabsdk/fab")

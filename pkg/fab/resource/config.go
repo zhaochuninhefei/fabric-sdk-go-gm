@@ -11,8 +11,8 @@ import (
 	"github.com/pkg/errors"
 
 	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
-	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/common/crypto"
-	fcutils "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/common/util"
+	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/common/crypto"
+	fcutils "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/common/util"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/context"
 )
 

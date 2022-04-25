@@ -15,7 +15,7 @@ import (
 	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	eventmocks "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/events/mocks"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/mocks"
-	"gitee.com/zhaochuninhefei/gmgo/grpc"
+	"google.golang.org/grpc"
 )
 
 const (

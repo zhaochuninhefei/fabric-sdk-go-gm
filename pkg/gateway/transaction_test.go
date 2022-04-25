@@ -9,11 +9,10 @@ package gateway
 import (
 	reqContext "context"
 	"errors"
+	"net/http"
 	"strings"
 	"testing"
 	"time"
-
-	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 
 	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/channel/invoke"

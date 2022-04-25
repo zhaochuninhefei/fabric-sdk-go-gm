@@ -8,8 +8,7 @@ package mocks
 
 import (
 	reqContex "context"
-
-	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
+	"net/http"
 
 	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"

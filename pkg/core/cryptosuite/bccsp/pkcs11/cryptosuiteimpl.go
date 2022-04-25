@@ -7,9 +7,9 @@ SPDX-License-Identifier: Apache-2.0
 package pkcs11
 
 import (
-	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp"
-	bccspPkcs11 "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp/factory/pkcs11"
-	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp/pkcs11"
+	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/bccsp"
+	bccspPkcs11 "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/bccsp/factory/pkcs11"
+	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/bccsp/pkcs11"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/logging"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/cryptosuite/bccsp/wrapper"

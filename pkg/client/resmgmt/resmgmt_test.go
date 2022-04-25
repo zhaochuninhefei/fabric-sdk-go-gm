@@ -12,13 +12,12 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"net/http"
 	"os"
 	"path/filepath"
 	"strings"
 	"testing"
 	"time"
-
-	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 
 	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/orderer"
 
@@ -29,7 +28,7 @@ import (
 
 	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
 	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
-	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/common/policydsl"
+	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/common/policydsl"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/errors/status"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/context"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"

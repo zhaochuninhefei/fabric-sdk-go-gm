@@ -7,7 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 package endpoint
 
 import (
-	"gitee.com/zhaochuninhefei/gmgo/x509"
+	"crypto/x509"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/options"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"

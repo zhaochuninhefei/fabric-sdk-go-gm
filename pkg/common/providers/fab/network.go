@@ -7,10 +7,10 @@ SPDX-License-Identifier: Apache-2.0
 package fab
 
 import (
+	"crypto/x509"
 	"time"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/errors/retry"
-	"gitee.com/zhaochuninhefei/gmgo/x509"
 )
 
 // NetworkConfig provides a static definition of endpoint configuration network

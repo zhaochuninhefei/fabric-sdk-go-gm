@@ -7,11 +7,11 @@ SPDX-License-Identifier: Apache-2.0
 package tls
 
 import (
+	"crypto/x509"
 	"sync"
 	"sync/atomic"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/logging"
-	"gitee.com/zhaochuninhefei/gmgo/x509"
 )
 
 var logger = logging.NewLogger("fabsdk/core")

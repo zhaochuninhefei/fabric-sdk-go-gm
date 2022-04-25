@@ -32,7 +32,7 @@ import (
 	"github.com/golang/protobuf/proto"
 	"github.com/pkg/errors"
 
-	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/sdkinternal/configtxlator/update"
+	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/sdkinternal/configtxlator/update"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/common/verifier"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/errors/multi"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/errors/retry"

@@ -11,7 +11,7 @@ import (
 
 	"fmt"
 
-	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp"
+	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/bccsp"
 )
 
 // MemoryKeyStore is in-memory implementation of BCCSP key store

@@ -12,8 +12,9 @@ import (
 
 	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/discovery"
 	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/gossip"
-	discclient "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/discovery/client"
-	gprotoext "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/gossip/protoext"
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
+	discclient "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/discovery/client"
+	gprotoext "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/gossip/protoext"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/discovery/mocks"
 	"github.com/pkg/errors"
@@ -113,7 +114,7 @@ func (cr *channelResponse) Config() (*discovery.ConfigResult, error) {
 }
 
 // Peers returns a response for a peer membership query, or error if something went wrong
-func (cr *channelResponse) Peers(invocationChain ...*discovery.ChaincodeCall) ([]*discclient.Peer, error) {
+func (cr *channelResponse) Peers(invocationChain ...*peer.ChaincodeCall) ([]*discclient.Peer, error) {
 	return cr.peers, cr.err
 }
 

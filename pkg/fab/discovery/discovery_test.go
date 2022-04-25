@@ -15,14 +15,14 @@ import (
 	"time"
 
 	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/discovery"
-	discclient "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/discovery/client"
+	discclient "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/discovery/client"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/comm"
 	discmocks "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/discovery/mocks"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/mocks"
 	mspmocks "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/msp/test/mockmsp"
-	"gitee.com/zhaochuninhefei/gmgo/grpc"
 	"github.com/stretchr/testify/assert"
+	"google.golang.org/grpc"
 )
 
 const (

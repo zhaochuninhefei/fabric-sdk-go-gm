@@ -17,7 +17,7 @@ import (
 
 	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
 	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
-	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/common/crypto"
+	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/common/crypto"
 	contextApi "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/context"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/cryptosuite"

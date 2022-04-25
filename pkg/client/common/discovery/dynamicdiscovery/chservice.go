@@ -7,7 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 package dynamicdiscovery
 
 import (
-	discclient "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/discovery/client"
+	discclient "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/discovery/client"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/common/random"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/errors/multi"
 	coptions "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/options"

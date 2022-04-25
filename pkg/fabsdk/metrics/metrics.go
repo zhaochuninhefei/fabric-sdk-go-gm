@@ -6,7 +6,7 @@ SPDX-License-Identifier: Apache-2.0
 
 package metrics
 
-import "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/common/metrics"
+import "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/common/metrics"
 
 var (
 	// for now, only channel clients require metrics tracking. TODO: update to generalize metrics for other client types if needed.

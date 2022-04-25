@@ -16,7 +16,7 @@ import (
 	"github.com/golang/protobuf/proto"
 	"github.com/stretchr/testify/require"
 
-	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/common/policydsl"
+	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/common/policydsl"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/context"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
 	contextImpl "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/context"

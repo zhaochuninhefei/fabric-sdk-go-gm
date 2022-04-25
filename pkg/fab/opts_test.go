@@ -7,10 +7,9 @@ SPDX-License-Identifier: Apache-2.0
 package fab
 
 import (
+	"crypto/tls"
 	"testing"
 	"time"
-
-	tls "gitee.com/zhaochuninhefei/gmgo/gmtls"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
 	commtls "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/config/comm/tls"

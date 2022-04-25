@@ -6,7 +6,7 @@ SPDX-License-Identifier: Apache-2.0
 
 package core
 
-import "errors"
+import "github.com/pkg/errors"
 
 var (
 	// ErrKeyValueNotFound indicates that a value for the key does not exist

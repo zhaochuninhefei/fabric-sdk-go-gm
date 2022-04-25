@@ -9,16 +9,16 @@ package cryptoutil
 import (
 	"crypto"
 	"crypto/ecdsa"
+	"crypto/tls"
+	"crypto/x509"
 	"encoding/pem"
 	"io"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/logging"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"
-	tls "gitee.com/zhaochuninhefei/gmgo/gmtls"
-	"gitee.com/zhaochuninhefei/gmgo/x509"
 	"github.com/pkg/errors"
 
-	factory "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/sdkpatch/cryptosuitebridge"
+	factory "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-ca-gm/sdkpatch/cryptosuitebridge"
 )
 
 var logger = logging.NewLogger("fabsdk/core")

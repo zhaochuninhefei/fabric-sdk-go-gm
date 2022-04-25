@@ -14,17 +14,17 @@ import (
 	cb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
 	ab "gitee.com/zhaochuninhefei/fabric-protos-go-gm/orderer"
 	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
-	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/common/crypto"
-	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/protoutil"
+	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/common/crypto"
+	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/protoutil"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/logging"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/options"
 	fabcontext "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/context"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/comm"
 	clientdisp "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/events/client/dispatcher"
-	"gitee.com/zhaochuninhefei/gmgo/grpc"
 	"github.com/golang/protobuf/proto"
 	"github.com/pkg/errors"
+	"google.golang.org/grpc"
 )
 
 var logger = logging.NewLogger("fabsdk/fab")

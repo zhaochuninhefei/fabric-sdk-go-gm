@@ -8,6 +8,7 @@ package fab
 
 import (
 	reqContext "context"
+	"crypto/tls"
 	"time"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/options"
@@ -15,8 +16,7 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/msp"
 	commtls "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/config/comm/tls"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fabsdk/metrics"
-	tls "gitee.com/zhaochuninhefei/gmgo/gmtls"
-	"gitee.com/zhaochuninhefei/gmgo/grpc"
+	"google.golang.org/grpc"
 )
 
 // ClientContext contains the client context

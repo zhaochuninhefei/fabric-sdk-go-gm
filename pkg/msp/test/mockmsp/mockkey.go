@@ -6,7 +6,7 @@ SPDX-License-Identifier: Apache-2.0
 
 package mockmsp
 
-import "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp"
+import "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/bccsp"
 
 // MockKey mockcore BCCSP key
 type MockKey struct {

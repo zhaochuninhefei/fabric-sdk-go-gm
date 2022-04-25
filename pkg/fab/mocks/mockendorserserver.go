@@ -13,12 +13,12 @@ import (
 
 	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/ledger/rwset/kvrwset"
 	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
-	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/rwsetutil"
+	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/core/ledger/kvledger/txmgmt/rwsetutil"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/util/test"
-	"gitee.com/zhaochuninhefei/gmgo/grpc"
-	"gitee.com/zhaochuninhefei/gmgo/grpc/credentials"
-	"gitee.com/zhaochuninhefei/gmgo/net/context"
 	"github.com/golang/protobuf/proto"
+	"golang.org/x/net/context"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
 )
 
 // MockEndorserServer mock endoreser server to process endorsement proposals

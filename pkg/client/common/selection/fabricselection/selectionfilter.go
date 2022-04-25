@@ -10,7 +10,7 @@ import (
 	"context"
 	"sort"
 
-	discclient "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/discovery/client"
+	discclient "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/discovery/client"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/common/selection/balancer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/common/selection/options"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/common/selection/sorter/balancedsorter"

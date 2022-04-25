@@ -14,7 +14,7 @@ import (
 
 	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/ledger/rwset/kvrwset"
 	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
-	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/rwsetutil"
+	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/core/ledger/kvledger/txmgmt/rwsetutil"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"github.com/golang/protobuf/proto"
 )

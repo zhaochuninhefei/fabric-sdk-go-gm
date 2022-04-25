@@ -19,7 +19,7 @@ import (
 
 	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/errors/multi"
-	grpcstatus "gitee.com/zhaochuninhefei/gmgo/grpc/status"
+	grpcstatus "google.golang.org/grpc/status"
 )
 
 // Status provides additional information about an unsuccessful operation

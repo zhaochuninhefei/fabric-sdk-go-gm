@@ -16,13 +16,13 @@ import (
 	mb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/msp"
 	ab "gitee.com/zhaochuninhefei/fabric-protos-go-gm/orderer"
 	pp "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
-	cutil "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/common/util"
-	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/protoutil"
+	cutil "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/common/util"
+	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/protoutil"
 
 	"time"
 
-	channelConfig "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/common/channelconfig"
-	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/sdkinternal/pkg/txflags"
+	channelConfig "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/common/channelconfig"
+	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/sdkinternal/pkg/txflags"
 	"github.com/pkg/errors"
 )
 

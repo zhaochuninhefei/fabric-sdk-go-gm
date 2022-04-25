@@ -11,7 +11,7 @@ import (
 	"time"
 
 	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
-	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/core/common/ccprovider"
+	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/core/common/ccprovider"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/common/selection/dynamicselection/pgresolver"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/common/selection/options"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/logging"

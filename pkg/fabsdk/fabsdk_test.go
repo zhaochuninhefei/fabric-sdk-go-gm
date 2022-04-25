@@ -488,7 +488,7 @@ func TestErrorHandler(t *testing.T) {
 
 	errHandler := func(ctxt fab.ClientContext, channelID string, err error) {
 		//todo this misunderstanding with DiscoveryError will be removed once fabricselection is fixed
-		//https://gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pull/62#issuecomment-605343770
+		//https://github.com/hyperledger/fabric-sdk-go/pull/62#issuecomment-605343770
 		selectionDiscoveryErr, selectionOk := errors.Cause(err).(fabricselection.DiscoveryError)
 		dynamicDiscoveryErr, discoveryOk := errors.Cause(err).(dynamicdiscovery.DiscoveryError)
 

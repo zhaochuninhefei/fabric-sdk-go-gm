@@ -9,8 +9,8 @@ SPDX-License-Identifier: Apache-2.0
 // defaults defined below.
 // They can be used in conjunction with the WithRetry setting offered by certain
 // clients in the SDK:
-// https://godoc.org/gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/channel#WithRetry
-// https://godoc.org/gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/resmgmt#WithRetry
+// https://godoc.org/github.com/hyperledger/fabric-sdk-go/pkg/client/channel#WithRetry
+// https://godoc.org/github.com/hyperledger/fabric-sdk-go/pkg/client/resmgmt#WithRetry
 package retry
 
 import (

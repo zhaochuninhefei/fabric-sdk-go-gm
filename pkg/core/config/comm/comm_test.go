@@ -10,14 +10,18 @@ import (
 	"bytes"
 	"encoding/hex"
 	"path/filepath"
-	"reflect"
 	"strconv"
-	"strings"
 	"testing"
 
+	"strings"
+
+	"crypto/tls"
+
+	"reflect"
+
+	"crypto/x509"
+
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/test/mockfab"
-	tls "gitee.com/zhaochuninhefei/gmgo/gmtls"
-	"gitee.com/zhaochuninhefei/gmgo/x509"
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
 )

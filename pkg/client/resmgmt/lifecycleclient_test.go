@@ -8,9 +8,8 @@ package resmgmt
 
 import (
 	"fmt"
+	"net/http"
 	"testing"
-
-	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 
 	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	lb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer/lifecycle"
@@ -21,7 +20,7 @@ import (
 	lifecyclepkg "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/ccpackager/lifecycle"
 	fcmocks "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/mocks"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/resource"
-	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/third_party/github.com/hyperledger/fabric/common/policydsl"
+	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/third_party/gitee.com/zhaochuninhefei/fabric-gm/common/policydsl"
 )
 
 func TestClient_LifecycleInstallCC(t *testing.T) {

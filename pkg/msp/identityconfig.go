@@ -7,6 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 package msp
 
 import (
+	"crypto/x509"
 	"encoding/pem"
 	"fmt"
 	"strconv"
@@ -27,7 +28,6 @@ import (
 	logApi "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/logging/api"
 	fabImpl "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/util/pathvar"
-	"gitee.com/zhaochuninhefei/gmgo/x509"
 )
 
 var defaultCAServerSchema = "https"

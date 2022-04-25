@@ -10,8 +10,8 @@ SPDX-License-Identifier: Apache-2.0
 package fabsdk
 
 import (
-	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/core/operations"
-	flogging "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/sdkpatch/logbridge"
+	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/core/operations"
+	flogging "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/sdkpatch/logbridge"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fabsdk/metrics"
 )
 
