@@ -11,7 +11,7 @@ go 1.17
 require (
 	gitee.com/zhaochuninhefei/fabric-config-gm v0.0.4
 	gitee.com/zhaochuninhefei/fabric-protos-go-gm v0.0.1
-	gitee.com/zhaochuninhefei/gmgo v0.0.8
+	gitee.com/zhaochuninhefei/gmgo v0.0.14
 	github.com/Knetic/govaluate v3.0.1-0.20171022003610-9aa49832a739+incompatible
 	github.com/cloudflare/cfssl v1.6.1
 	github.com/go-kit/kit v0.12.0
