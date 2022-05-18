@@ -7,6 +7,7 @@ require (
 	gitee.com/zhaochuninhefei/fabric-config-gm v0.0.4
 	gitee.com/zhaochuninhefei/fabric-protos-go-gm v0.0.1
 	gitee.com/zhaochuninhefei/gmgo v0.0.14
+	gitee.com/zhaochuninhefei/zcgolog v0.0.13
 	github.com/Knetic/govaluate v3.0.1-0.20171022003610-9aa49832a739+incompatible
 	github.com/go-kit/kit v0.12.0
 	github.com/golang/mock v1.6.0
@@ -24,7 +25,6 @@ require (
 require (
 	bitbucket.org/creachadair/shell v0.0.6 // indirect
 	cloud.google.com/go v0.99.0 // indirect
-	gitee.com/zhaochuninhefei/zcgolog v0.0.13 // indirect
 	github.com/benbjohnson/clock v1.1.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/bgentry/speakeasy v0.1.0 // indirect
