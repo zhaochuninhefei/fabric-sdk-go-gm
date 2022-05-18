@@ -10,9 +10,6 @@ import (
 	reqContext "context"
 	"sync"
 
-	"github.com/golang/protobuf/proto"
-	"github.com/pkg/errors"
-
 	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
 	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/protoutil"
@@ -20,6 +17,8 @@ import (
 	contextApi "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/context"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/context"
+	"github.com/golang/protobuf/proto"
+	"github.com/pkg/errors"
 )
 
 // CreateChaincodeInvokeProposal creates a proposal for transaction.
@@ -68,7 +67,6 @@ func signProposal(ctx contextApi.Client, proposal *pb.Proposal) (*pb.SignedPropo
 	if signingMgr == nil {
 		return nil, errors.New("signing manager is nil")
 	}
-
 	signature, err := signingMgr.Sign(proposalBytes, ctx.PrivateKey())
 	if err != nil {
 		return nil, errors.WithMessage(err, "sign failed")
@@ -100,6 +98,7 @@ func SendProposal(reqCtx reqContext.Context, proposal *fab.TransactionProposal, 
 	if !ok {
 		return nil, errors.New("failed get client context from reqContext for signProposal")
 	}
+
 	signedProposal, err := signProposal(ctx, proposal.Proposal)
 	if err != nil {
 		return nil, errors.WithMessage(err, "sign proposal failed")

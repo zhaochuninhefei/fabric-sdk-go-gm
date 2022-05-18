@@ -29,6 +29,7 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/cryptosuite"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fabsdk"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fabsdk/api"
+	"gitee.com/zhaochuninhefei/zcgolog/zclog"
 	"github.com/pkg/errors"
 )
 
@@ -209,7 +210,7 @@ func WithIdentity(wallet wallet, label string) IdentityOption {
 			enrollmentCertificate: []byte(creds.(*X509Identity).Certificate()),
 			privateKey:            privateKey,
 		}
-
+		zclog.Debugf("===== 尝试从wallet获取账户信息 id: %s, mspID: %s, privateKey: %s", wid.id, wid.mspID, wid.privateKey)
 		gw.options.Identity = wid
 		gw.mspfactory = &walletmsp{}
 

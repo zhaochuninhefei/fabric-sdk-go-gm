@@ -29,7 +29,6 @@ func New(cryptoProvider core.CryptoSuite) (*SigningManager, error) {
 
 // Sign will sign the given object using provided key
 func (mgr *SigningManager) Sign(object []byte, key core.Key) ([]byte, error) {
-
 	if len(object) == 0 {
 		return nil, errors.New("object (to sign) required")
 	}
