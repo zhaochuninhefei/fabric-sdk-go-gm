@@ -57,7 +57,7 @@ func TestDiscoveryClient(t *testing.T) {
 	}
 
 	ctx, _ := context.WithTimeout(context.Background(), 5*time.Second)
-	responsesCh, err := client.Send(ctx, req, target1, target2, target3)
+	responsesCh, _ := client.Send(ctx, req, target1, target2, target3)
 
 	var successfulResponses []Response
 	var responsesWithErr []Response
@@ -90,7 +90,7 @@ func TestDiscoveryClient(t *testing.T) {
 	assert.Equal(t, 2, len(peers))
 	t.Logf("Got success response from channel query [%s]: Num Peers: %d", response.Target(), len(peers))
 
-	responsesCh, err = client.Send(ctx, req)
+	_, err = client.Send(ctx, req)
 	assert.Error(t, err)
 	assert.EqualError(t, err, "no targets specified")
 

@@ -2,12 +2,6 @@ module gitee.com/zhaochuninhefei/fabric-sdk-go-gm
 
 go 1.17
 
-// replace github.com/spf13/viper => github.com/spf13/viper v0.0.0-20150908122457-1967d93db724
-// replace gitee.com/zhaochuninhefei/fabric-config-gm => /home/zhaochun/work/sources/gcbaas/fabric-config-gm
-// replace gitee.com/zhaochuninhefei/fabric-protos-go-gm => /home/zhaochun/work/sources/gcbaas/fabric-protos-go-gm
-// replace gitee.com/zhaochuninhefei/gmgo => /home/zhaochun/work/sources/gm-zc/gmgo
-// replace github.com/hyperledger/fabric-protos-go => github.com/hyperledger/fabric-protos-go v0.0.0-20200506201313-25f6564b9ac4
-
 require (
 	gitee.com/zhaochuninhefei/cfssl-gm v0.0.4
 	gitee.com/zhaochuninhefei/fabric-config-gm v0.0.4
@@ -141,7 +135,6 @@ require (
 )
 
 replace (
-	gitee.com/zhaochuninhefei/fabric-chaincode-go-gm => gitee.com/zhaochuninhefei/fabric-chaincode-go-gm v0.0.5
 	github.com/zmap/zcrypto => github.com/zmap/zcrypto v0.0.0-20190729165852-9051775e6a2e
 	github.com/zmap/zlint => github.com/zmap/zlint v0.0.0-20190806154020-fd021b4cfbeb
 )
