@@ -32,8 +32,8 @@ import (
 	"reflect"
 	"strings"
 
+	"gitee.com/zhaochuninhefei/cfssl-gm/api"
 	log "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-ca-gm/sdkpatch/logbridge"
-	"github.com/cloudflare/cfssl/api"
 	"github.com/pkg/errors"
 )
 

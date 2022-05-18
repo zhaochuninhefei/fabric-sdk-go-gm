@@ -9,15 +9,13 @@ package peer
 import (
 	reqContext "context"
 
-	"crypto/x509"
-
-	"github.com/spf13/cast"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/keepalive"
-
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/common/verifier"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/logging"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
+	"gitee.com/zhaochuninhefei/gmgo/grpc"
+	"gitee.com/zhaochuninhefei/gmgo/grpc/keepalive"
+	"gitee.com/zhaochuninhefei/gmgo/x509"
+	"github.com/spf13/cast"
 )
 
 var logger = logging.NewLogger("fabsdk/fab")

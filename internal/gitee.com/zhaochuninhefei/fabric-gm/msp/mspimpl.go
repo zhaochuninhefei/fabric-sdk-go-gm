@@ -12,15 +12,15 @@ package msp
 
 import (
 	"bytes"
-	"gitee.com/zhaochuninhefei/gmgo/x509"
 	"crypto/x509/pkix"
 	"encoding/hex"
 	"encoding/pem"
 
 	m "gitee.com/zhaochuninhefei/fabric-protos-go-gm/msp"
-	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/bccsp/utils"
+	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/bccsp/sw"
 	factory "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/sdkpatch/cryptosuitebridge"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"
+	"gitee.com/zhaochuninhefei/gmgo/x509"
 	"github.com/golang/protobuf/proto"
 	"github.com/pkg/errors"
 )
@@ -173,7 +173,7 @@ func (msp *bccspmsp) getIdentityFromConf(idBytes []byte) (Identity, core.Key, er
 
 	// get the public key in the right format
 	// TODO: 国密改造
-	certPubK, err := msp.bccsp.KeyImport(cert, factory.GetX509PublicKeyImportOpts(true))
+	certPubK, err := msp.bccsp.KeyImport(cert, factory.GetGMX509PublicKeyImportOpts(true))
 	if err != nil {
 		return nil, nil, err
 	}
@@ -211,7 +211,7 @@ func (msp *bccspmsp) getSigningIdentityFromConf(sidInfo *m.SigningIdentityInfo) 
 			return nil, errors.Errorf("%s: wrong PEM encoding", sidInfo.PrivateSigner.KeyIdentifier)
 		}
 		// TODO: 国密改造
-		privKey, err = msp.bccsp.KeyImport(pemKey.Bytes, factory.GetECDSAPrivateKeyImportOpts(true))
+		privKey, err = msp.bccsp.KeyImport(pemKey.Bytes, factory.GetSM2PrivateKeyImportOpts(true))
 		if err != nil {
 			return nil, errors.WithMessage(err, "getIdentityFromBytes error: Failed to import EC private key")
 		}
@@ -402,7 +402,7 @@ func (msp *bccspmsp) deserializeIdentityInternal(serializedIdentity []byte) (Ide
 	// (yet) to encode the MSP ID into the x.509 body of a cert
 
 	// TODO: 国密改造
-	pub, err := msp.bccsp.KeyImport(cert, factory.GetX509PublicKeyImportOpts(true))
+	pub, err := msp.bccsp.KeyImport(cert, factory.GetGMX509PublicKeyImportOpts(true))
 	if err != nil {
 		return nil, errors.WithMessage(err, "failed to import certificate's public key")
 	}

@@ -8,10 +8,7 @@ package membership
 
 import (
 	"bytes"
-	"crypto/ecdsa"
-	"crypto/elliptic"
 	"crypto/rand"
-	"crypto/x509"
 	"crypto/x509/pkix"
 	"encoding/asn1"
 	"encoding/pem"
@@ -26,14 +23,15 @@ import (
 	"time"
 
 	mb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/msp"
-	"github.com/golang/protobuf/proto"
-	"github.com/pkg/errors"
-	"github.com/stretchr/testify/assert"
-
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/sdkpatch/keyutil"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/config/comm/tls"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/mocks"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/test/metadata"
+	"gitee.com/zhaochuninhefei/gmgo/sm2"
+	"gitee.com/zhaochuninhefei/gmgo/x509"
+	"github.com/golang/protobuf/proto"
+	"github.com/pkg/errors"
+	"github.com/stretchr/testify/assert"
 )
 
 var pathRevokeCaRoot = filepath.Join(metadata.GetProjectPath(), metadata.CryptoConfigPath, "peerOrganizations/org1.example.com/ca/")
@@ -333,7 +331,7 @@ func encodeCertToMemory(c certificate) string {
 }
 
 func generateSelfSignedCert(t *testing.T, now time.Time) string {
-	k, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
+	k, err := sm2.GenerateKey(rand.Reader)
 	assert.NoError(t, err)
 
 	// Generate a self-signed certificate
@@ -350,7 +348,7 @@ func generateSelfSignedCert(t *testing.T, now time.Time) string {
 		},
 		NotBefore:             now.Add(-1 * time.Hour),
 		NotAfter:              now.Add(1 * time.Hour),
-		SignatureAlgorithm:    x509.ECDSAWithSHA256,
+		SignatureAlgorithm:    x509.SM2WithSM3,
 		SubjectKeyId:          []byte{1, 2, 3, 4},
 		KeyUsage:              x509.KeyUsageCertSign,
 		ExtKeyUsage:           testExtKeyUsage,

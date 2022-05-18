@@ -13,7 +13,8 @@ package httpadmin
 import (
 	"encoding/json"
 	"fmt"
-	"net/http"
+
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 
 	flogging "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/sdkpatch/logbridge"
 )

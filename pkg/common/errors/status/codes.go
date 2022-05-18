@@ -11,7 +11,7 @@ import (
 
 	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
 	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
-	grpcCodes "google.golang.org/grpc/codes"
+	grpcCodes "gitee.com/zhaochuninhefei/gmgo/grpc/codes"
 )
 
 // Code represents a status code

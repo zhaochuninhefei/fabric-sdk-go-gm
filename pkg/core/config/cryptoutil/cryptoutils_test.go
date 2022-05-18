@@ -7,11 +7,11 @@ SPDX-License-Identifier: Apache-2.0
 package cryptoutil
 
 import (
-	"crypto/ecdsa"
 	"testing"
 
 	fabricCaUtil "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-ca-gm/sdkinternal/pkg/util"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/cryptosuite"
+	"gitee.com/zhaochuninhefei/gmgo/sm2"
 )
 
 func TestGetPrivateKeyFromCert(t *testing.T) {
@@ -77,9 +77,9 @@ func TestX509KeyPair(t *testing.T) {
 		t.Fatal("Should have loaded private key as cryptoutils.PrivateKey")
 	}
 
-	pubKey, ok := key.Public().(*ecdsa.PublicKey)
+	pubKey, ok := key.Public().(*sm2.PublicKey)
 	if !ok {
-		t.Fatal("Should have loaded public key as ECDSA")
+		t.Fatal("Should have loaded public key as SM2")
 	}
 
 	// Valid public key in private key

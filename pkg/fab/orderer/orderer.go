@@ -8,27 +8,26 @@ package orderer
 
 import (
 	reqContext "context"
-	"crypto/x509"
 	"io"
 	"time"
-
-	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/errors/multi"
-	"github.com/pkg/errors"
-	"github.com/spf13/cast"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/keepalive"
-	grpcstatus "google.golang.org/grpc/status"
 
 	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
 	ab "gitee.com/zhaochuninhefei/fabric-protos-go-gm/orderer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/common/verifier"
+	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/errors/multi"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/errors/status"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/logging"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/context"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/config/comm"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/config/endpoint"
+	"gitee.com/zhaochuninhefei/gmgo/grpc"
+	"gitee.com/zhaochuninhefei/gmgo/grpc/credentials"
+	"gitee.com/zhaochuninhefei/gmgo/grpc/keepalive"
+	grpcstatus "gitee.com/zhaochuninhefei/gmgo/grpc/status"
+	"gitee.com/zhaochuninhefei/gmgo/x509"
+	"github.com/pkg/errors"
+	"github.com/spf13/cast"
 )
 
 var logger = logging.NewLogger("fabsdk/fab")

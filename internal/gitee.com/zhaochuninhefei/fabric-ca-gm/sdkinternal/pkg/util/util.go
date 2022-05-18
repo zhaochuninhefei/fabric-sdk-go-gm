@@ -22,8 +22,6 @@ package util
 
 import (
 	"bytes"
-	"crypto/ecdsa"
-	"crypto/x509"
 	"encoding/base64"
 	"encoding/json"
 	"encoding/pem"
@@ -31,11 +29,6 @@ import (
 	"io/ioutil"
 	"math/big"
 	mrand "math/rand"
-
-	factory "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-ca-gm/sdkpatch/cryptosuitebridge"
-	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"
-
-	"net/http"
 	"os"
 	"path"
 	"path/filepath"
@@ -44,17 +37,23 @@ import (
 	"strings"
 	"time"
 
+	factory "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-ca-gm/sdkpatch/cryptosuitebridge"
+	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
+	"gitee.com/zhaochuninhefei/gmgo/sm2"
+	"gitee.com/zhaochuninhefei/gmgo/x509"
+	"gitee.com/zhaochuninhefei/gmgo/xcrypto/ocsp"
 	"github.com/pkg/errors"
-	"golang.org/x/crypto/ocsp"
 )
 
 var (
-	rnd = mrand.NewSource(time.Now().UnixNano())
+	// rnd = mrand.NewSource(time.Now().UnixNano())
+	_ = mrand.NewSource(time.Now().UnixNano())
 	// ErrNotImplemented used to return errors for functions not implemented
 	ErrNotImplemented = errors.New("NOT YET IMPLEMENTED")
 )
 
-const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+// const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 const (
 	letterIdxBits = 6                    // 6 bits to represent a letter index
 	letterIdxMask = 1<<letterIdxBits - 1 // All 1-bits, as many as letterIdxBits
@@ -79,7 +78,8 @@ var RevocationReasonCodes = map[string]int{
 const SecretTag = "mask"
 
 // URLRegex is the regular expression to check if a value is an URL
-var URLRegex = regexp.MustCompile("(ldap|http)s*://(\\S+):(\\S+)@")
+// var URLRegex = regexp.MustCompile("(ldap|http)s*://(\\S+):(\\S+)@")
+var URLRegex = regexp.MustCompile(`(ldap|http)s*://(\S+):(\S+)@`)
 
 //ECDSASignature forms the structure for R and S value for ECDSA
 type ECDSASignature struct {
@@ -149,8 +149,8 @@ func CreateToken(csp core.CryptoSuite, cert []byte, key core.Key, method, uri st
 	var token string
 
 	switch publicKey.(type) {
-	case *ecdsa.PublicKey:
-		token, err = GenECDSAToken(csp, cert, key, method, uri, body)
+	case *sm2.PublicKey:
+		token, err = GenSM2Token(csp, cert, key, method, uri, body)
 		if err != nil {
 			return "", err
 		}
@@ -158,18 +158,18 @@ func CreateToken(csp core.CryptoSuite, cert []byte, key core.Key, method, uri st
 	return token, nil
 }
 
-//GenECDSAToken signs the http body and cert with ECDSA using EC private key
-func GenECDSAToken(csp core.CryptoSuite, cert []byte, key core.Key, method, uri string, body []byte) (string, error) {
+//GenSM2Token signs the http body and cert with SM2 using SM2 private key
+func GenSM2Token(csp core.CryptoSuite, cert []byte, key core.Key, method, uri string, body []byte) (string, error) {
 	b64body := B64Encode(body)
 	b64cert := B64Encode(cert)
 	b64uri := B64Encode([]byte(uri))
 	payload := method + "." + b64uri + "." + b64body + "." + b64cert
 
-	return genECDSAToken(csp, key, b64cert, payload)
+	return genSM2Token(csp, key, b64cert, payload)
 }
 
-func genECDSAToken(csp core.CryptoSuite, key core.Key, b64cert, payload string) (string, error) {
-	digest, digestError := csp.Hash([]byte(payload), factory.GetSHAOpts())
+func genSM2Token(csp core.CryptoSuite, key core.Key, b64cert, payload string) (string, error) {
+	digest, digestError := csp.Hash([]byte(payload), factory.GetSM3Opts())
 	if digestError != nil {
 		return "", errors.WithMessage(digestError, fmt.Sprintf("Hash failed on '%s'", payload))
 	}
@@ -311,7 +311,7 @@ func GetMaskedURL(url string) string {
 				matchStr = strings.Replace(matchStr, matches[idx], "****", 1)
 			}
 		}
-		url = url[:matchIdxs[0]] + matchStr + url[matchIdxs[1]:len(url)]
+		url = url[:matchIdxs[0]] + matchStr + url[matchIdxs[1]:]
 	}
 	return url
 }

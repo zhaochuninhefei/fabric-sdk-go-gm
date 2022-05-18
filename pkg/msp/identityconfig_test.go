@@ -7,7 +7,6 @@ SPDX-License-Identifier: Apache-2.0
 package msp
 
 import (
-	"crypto/x509"
 	"encoding/pem"
 	"os"
 	"path/filepath"
@@ -21,6 +20,7 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/mocks"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/test/metadata"
+	"gitee.com/zhaochuninhefei/gmgo/x509"
 	"github.com/pkg/errors"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"

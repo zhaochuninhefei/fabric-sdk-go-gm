@@ -11,11 +11,12 @@ Please review third_party pinning scripts and patches for more details.
 package keyutil
 
 import (
-	"crypto/ecdsa"
-	"crypto/x509"
 	"encoding/pem"
 	"errors"
 	"fmt"
+
+	"gitee.com/zhaochuninhefei/gmgo/sm2"
+	"gitee.com/zhaochuninhefei/gmgo/x509"
 )
 
 func derToPrivateKey(der []byte) (key interface{}, err error) {
@@ -26,7 +27,7 @@ func derToPrivateKey(der []byte) (key interface{}, err error) {
 
 	if key, err = x509.ParsePKCS8PrivateKey(der); err == nil {
 		switch key.(type) {
-		case *ecdsa.PrivateKey:
+		case *sm2.PrivateKey:
 			return
 		default:
 			return nil, errors.New("found unknown private key type in PKCS#8 wrapping")
@@ -37,7 +38,7 @@ func derToPrivateKey(der []byte) (key interface{}, err error) {
 		return
 	}
 
-	return nil, errors.New("invalid key type. The DER must contain an ecdsa.PrivateKey")
+	return nil, errors.New("invalid key type. The DER must contain an sm2.PrivateKey")
 }
 
 func PEMToPrivateKey(raw []byte, pwd []byte) (interface{}, error) {

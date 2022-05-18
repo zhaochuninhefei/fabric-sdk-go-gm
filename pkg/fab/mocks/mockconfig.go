@@ -7,20 +7,18 @@ SPDX-License-Identifier: Apache-2.0
 package mocks
 
 import (
-	"crypto/tls"
 	"path/filepath"
 	"time"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"
-	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/config/endpoint"
-	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/test/metadata"
-
-	"crypto/x509"
-
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/msp"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/test/mockfab"
 	commtls "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/config/comm/tls"
+	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/config/endpoint"
+	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/test/metadata"
+	tls "gitee.com/zhaochuninhefei/gmgo/gmtls"
+	"gitee.com/zhaochuninhefei/gmgo/x509"
 	"github.com/pkg/errors"
 )
 

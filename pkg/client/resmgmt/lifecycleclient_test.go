@@ -8,8 +8,9 @@ package resmgmt
 
 import (
 	"fmt"
-	"net/http"
 	"testing"
+
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 
 	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	lb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer/lifecycle"

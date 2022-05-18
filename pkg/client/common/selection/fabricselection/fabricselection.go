@@ -13,7 +13,7 @@ import (
 	"strings"
 	"time"
 
-	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/discovery"
 	discclient "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/discovery/client"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/common/random"
 	soptions "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/common/selection/options"
@@ -300,8 +300,8 @@ func (s *Service) getTargets(ctx contextAPI.Client) ([]fab.PeerConfig, error) {
 	return random.PickRandomNPeerConfigs(chpeers, chConfig.Policies.Discovery.MaxTargets), nil
 }
 
-func asChaincodeInterests(chaincodes []*fab.ChaincodeCall) *peer.ChaincodeInterest {
-	return &peer.ChaincodeInterest{
+func asChaincodeInterests(chaincodes []*fab.ChaincodeCall) *discovery.ChaincodeInterest {
+	return &discovery.ChaincodeInterest{
 		Chaincodes: asInvocationChain(chaincodes),
 	}
 }
@@ -309,7 +309,7 @@ func asChaincodeInterests(chaincodes []*fab.ChaincodeCall) *peer.ChaincodeIntere
 func asInvocationChain(chaincodes []*fab.ChaincodeCall) discclient.InvocationChain {
 	var invocChain discclient.InvocationChain
 	for _, cc := range chaincodes {
-		invocChain = append(invocChain, &peer.ChaincodeCall{
+		invocChain = append(invocChain, &discovery.ChaincodeCall{
 			Name:            cc.ID,
 			CollectionNames: cc.Collections,
 		})

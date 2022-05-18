@@ -13,8 +13,8 @@ package api
 import (
 	"time"
 
+	"gitee.com/zhaochuninhefei/cfssl-gm/csr"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-ca-gm/sdkinternal/pkg/util"
-	"github.com/cloudflare/cfssl/csr"
 )
 
 // RegistrationRequest for a new identity

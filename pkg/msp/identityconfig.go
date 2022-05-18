@@ -7,27 +7,23 @@ SPDX-License-Identifier: Apache-2.0
 package msp
 
 import (
-	"crypto/x509"
 	"encoding/pem"
 	"fmt"
+	"io/ioutil"
+	"regexp"
 	"strconv"
 	"strings"
 
-	commtls "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/config/comm/tls"
-
-	"github.com/pkg/errors"
-
-	"regexp"
-
-	"io/ioutil"
-
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/msp"
+	commtls "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/config/comm/tls"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/config/endpoint"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/config/lookup"
 	logApi "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/logging/api"
 	fabImpl "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/util/pathvar"
+	"gitee.com/zhaochuninhefei/gmgo/x509"
+	"github.com/pkg/errors"
 )
 
 var defaultCAServerSchema = "https"

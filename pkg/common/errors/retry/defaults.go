@@ -12,7 +12,7 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
 	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/errors/status"
-	grpcCodes "google.golang.org/grpc/codes"
+	grpcCodes "gitee.com/zhaochuninhefei/gmgo/grpc/codes"
 )
 
 const (

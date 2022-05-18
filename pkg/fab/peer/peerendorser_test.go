@@ -8,23 +8,22 @@ package peer
 
 import (
 	reqContext "context"
-	"crypto/x509"
 	"fmt"
 	"reflect"
 	"testing"
 	"time"
 
 	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
-	"github.com/golang/mock/gomock"
-	"github.com/stretchr/testify/assert"
-	"google.golang.org/grpc"
-	grpcCodes "google.golang.org/grpc/codes"
-	"google.golang.org/grpc/keepalive"
-
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/errors/status"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/test/mockfab"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/mocks"
+	"gitee.com/zhaochuninhefei/gmgo/grpc"
+	grpcCodes "gitee.com/zhaochuninhefei/gmgo/grpc/codes"
+	"gitee.com/zhaochuninhefei/gmgo/grpc/keepalive"
+	"gitee.com/zhaochuninhefei/gmgo/x509"
+	"github.com/golang/mock/gomock"
+	"github.com/stretchr/testify/assert"
 )
 
 const (

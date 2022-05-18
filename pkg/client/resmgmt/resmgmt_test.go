@@ -12,12 +12,13 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"net/http"
 	"os"
 	"path/filepath"
 	"strings"
 	"testing"
 	"time"
+
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 
 	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/orderer"
 

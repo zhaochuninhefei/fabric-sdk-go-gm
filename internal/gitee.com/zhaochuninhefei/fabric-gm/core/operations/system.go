@@ -17,8 +17,6 @@ import (
 	"strings"
 	"time"
 
-	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
-
 	"gitee.com/zhaochuninhefei/fabric-config-gm/healthz"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/common/metrics"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/common/metrics/disabled"
@@ -27,11 +25,12 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/common/metrics/statsd/goruntime"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/common/util"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/core/middleware"
-	tls "gitee.com/zhaochuninhefei/gmgo/gmtls"
 	flogging "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/sdkpatch/logbridge"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/sdkpatch/logbridge/httpadmin"
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
+	tls "gitee.com/zhaochuninhefei/gmgo/gmtls"
+	"gitee.com/zhaochuninhefei/gmgo/prometheus/promhttp"
 	kitstatsd "github.com/go-kit/kit/metrics/statsd"
-	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 //go:generate counterfeiter -o fakes/logger.go -fake-name Logger . Logger

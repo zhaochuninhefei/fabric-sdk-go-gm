@@ -12,10 +12,11 @@ package msp
 
 import (
 	"bytes"
-	"gitee.com/zhaochuninhefei/gmgo/x509"
 	"crypto/x509/pkix"
 	"fmt"
 	"time"
+
+	"gitee.com/zhaochuninhefei/gmgo/x509"
 
 	m "gitee.com/zhaochuninhefei/fabric-protos-go-gm/msp"
 	bccsp "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/sdkpatch/cryptosuitebridge"

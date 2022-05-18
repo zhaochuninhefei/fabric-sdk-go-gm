@@ -22,45 +22,33 @@ package util
 
 import (
 	"crypto"
-	"crypto/ecdsa"
-	"crypto/tls"
-	"crypto/x509"
 	"encoding/hex"
 	"encoding/pem"
 	"fmt"
 	"io/ioutil"
 	"strings"
 
-	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"
-
+	"gitee.com/zhaochuninhefei/cfssl-gm/csr"
+	"gitee.com/zhaochuninhefei/cfssl-gm/helpers"
 	factory "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-ca-gm/sdkpatch/cryptosuitebridge"
 	log "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-ca-gm/sdkpatch/logbridge"
-	"github.com/cloudflare/cfssl/csr"
-	"github.com/cloudflare/cfssl/helpers"
+	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"
+	tls "gitee.com/zhaochuninhefei/gmgo/gmtls"
+	"gitee.com/zhaochuninhefei/gmgo/sm2"
+	"gitee.com/zhaochuninhefei/gmgo/x509"
 	"github.com/pkg/errors"
 )
 
 // getBCCSPKeyOpts generates a key as specified in the request.
-// This supports ECDSA.
+// This supports SM2.
 func getBCCSPKeyOpts(kr *csr.KeyRequest, ephemeral bool) (opts core.KeyGenOpts, err error) {
 	if kr == nil {
-		return factory.GetECDSAKeyGenOpts(ephemeral), nil
+		return factory.GetSM2KeyGenOpts(ephemeral), nil
 	}
 	log.Debugf("generate key from request: algo=%s, size=%d", kr.Algo(), kr.Size())
 	switch kr.Algo() {
-	case "ecdsa":
-		switch kr.Size() {
-		case 256:
-			return factory.GetECDSAP256KeyGenOpts(ephemeral), nil
-		case 384:
-			return factory.GetECDSAP384KeyGenOpts(ephemeral), nil
-		case 521:
-			// Need to add curve P521 to bccsp
-			// return &bccsp.ECDSAP512KeyGenOpts{Temporary: false}, nil
-			return nil, errors.New("Unsupported ECDSA key size: 521")
-		default:
-			return nil, errors.Errorf("Invalid ECDSA key size: %d", kr.Size())
-		}
+	case "sm2":
+		return factory.GetSM2KeyGenOpts(ephemeral), nil
 	default:
 		return nil, errors.Errorf("Invalid algorithm: %s", kr.Algo())
 	}
@@ -72,7 +60,7 @@ func GetSignerFromCert(cert *x509.Certificate, csp core.CryptoSuite) (core.Key, 
 		return nil, nil, errors.New("CSP was not initialized")
 	}
 	// get the public key in the right format
-	certPubK, err := csp.KeyImport(cert, factory.GetX509PublicKeyImportOpts(true))
+	certPubK, err := csp.KeyImport(cert, factory.GetGMX509PublicKeyImportOpts(true))
 	if err != nil {
 		return nil, nil, errors.WithMessage(err, "Failed to import certificate's public key")
 	}
@@ -152,15 +140,15 @@ func ImportBCCSPKeyFromPEMBytes(keyBuff []byte, myCSP core.CryptoSuite, temporar
 	if err != nil {
 		return nil, errors.WithMessage(err, fmt.Sprintf("Failed parsing private key from %s", keyFile))
 	}
-	switch key.(type) {
-	case *ecdsa.PrivateKey:
-		priv, err := factory.PrivateKeyToDER(key.(*ecdsa.PrivateKey))
+	switch key := key.(type) {
+	case *sm2.PrivateKey:
+		priv, err := factory.PrivateKeyToDER(key)
 		if err != nil {
-			return nil, errors.WithMessage(err, fmt.Sprintf("Failed to convert ECDSA private key for '%s'", keyFile))
+			return nil, errors.WithMessage(err, fmt.Sprintf("Failed to convert SM2 private key for '%s'", keyFile))
 		}
-		sk, err := myCSP.KeyImport(priv, factory.GetECDSAPrivateKeyImportOpts(temporary))
+		sk, err := myCSP.KeyImport(priv, factory.GetSM2PrivateKeyImportOpts(temporary))
 		if err != nil {
-			return nil, errors.WithMessage(err, fmt.Sprintf("Failed to import ECDSA private key for '%s'", keyFile))
+			return nil, errors.WithMessage(err, fmt.Sprintf("Failed to import SM2 private key for '%s'", keyFile))
 		}
 		return sk, nil
 	default:

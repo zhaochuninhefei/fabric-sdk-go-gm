@@ -21,8 +21,8 @@ import (
 	discmocks "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/discovery/mocks"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/mocks"
 	mspmocks "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/msp/test/mockmsp"
+	"gitee.com/zhaochuninhefei/gmgo/grpc"
 	"github.com/stretchr/testify/assert"
-	"google.golang.org/grpc"
 )
 
 const (

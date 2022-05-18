@@ -19,7 +19,6 @@ import (
 
 	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/discovery"
 	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/msp"
-	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/discovery/protoext"
 	gprotoext "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/gossip/protoext"
 	"github.com/golang/protobuf/proto"
@@ -81,7 +80,7 @@ func (req *Request) AddConfigQuery() *Request {
 // AddEndorsersQuery adds to the request a query for given chaincodes
 // interests are the chaincode interests that the client wants to query for.
 // All interests for a given channel should be supplied in an aggregated slice
-func (req *Request) AddEndorsersQuery(interests ...*peer.ChaincodeInterest) (*Request, error) {
+func (req *Request) AddEndorsersQuery(interests ...*discovery.ChaincodeInterest) (*Request, error) {
 	if err := validateInterests(interests...); err != nil {
 		return nil, err
 	}
@@ -118,11 +117,11 @@ func (req *Request) AddLocalPeersQuery() *Request {
 }
 
 // AddPeersQuery adds to the request a peer query
-func (req *Request) AddPeersQuery(invocationChain ...*peer.ChaincodeCall) *Request {
+func (req *Request) AddPeersQuery(invocationChain ...*discovery.ChaincodeCall) *Request {
 	ch := req.lastChannel
 	q := &discovery.Query_PeerQuery{
 		PeerQuery: &discovery.PeerMembershipQuery{
-			Filter: &peer.ChaincodeInterest{
+			Filter: &discovery.ChaincodeInterest{
 				Chaincodes: invocationChain,
 			},
 		},
@@ -227,7 +226,7 @@ func (cr *channelResponse) Config() (*discovery.ConfigResult, error) {
 	return nil, res.(error)
 }
 
-func parsePeers(queryType protoext.QueryType, r response, channel string, invocationChain ...*peer.ChaincodeCall) ([]*Peer, error) {
+func parsePeers(queryType protoext.QueryType, r response, channel string, invocationChain ...*discovery.ChaincodeCall) ([]*Peer, error) {
 	peerKeys := key{
 		queryType: queryType,
 		k:         fmt.Sprintf("%s %s", channel, InvocationChain(invocationChain).String()),
@@ -245,7 +244,7 @@ func parsePeers(queryType protoext.QueryType, r response, channel string, invoca
 	return nil, res.(error)
 }
 
-func (cr *channelResponse) Peers(invocationChain ...*peer.ChaincodeCall) ([]*Peer, error) {
+func (cr *channelResponse) Peers(invocationChain ...*discovery.ChaincodeCall) ([]*Peer, error) {
 	return parsePeers(protoext.PeerMembershipQueryType, cr.response, cr.channel, invocationChain...)
 }
 
@@ -602,7 +601,7 @@ func validateStateInfoMessage(message *gprotoext.SignedGossipMessage) error {
 	return nil
 }
 
-func validateInterests(interests ...*peer.ChaincodeInterest) error {
+func validateInterests(interests ...*discovery.ChaincodeInterest) error {
 	if len(interests) == 0 {
 		return errors.New("no chaincode interests given")
 	}
@@ -618,7 +617,7 @@ func validateInterests(interests ...*peer.ChaincodeInterest) error {
 }
 
 // InvocationChain aggregates ChaincodeCalls
-type InvocationChain []*peer.ChaincodeCall
+type InvocationChain []*discovery.ChaincodeCall
 
 // String returns a string representation of this invocation chain
 func (ic InvocationChain) String() string {

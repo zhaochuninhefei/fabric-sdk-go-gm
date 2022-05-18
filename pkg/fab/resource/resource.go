@@ -9,8 +9,9 @@ package resource
 
 import (
 	reqContext "context"
-	"net/http"
 	"sync"
+
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/pkg/errors"

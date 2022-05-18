@@ -7,7 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 package discovery
 
 import (
-	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
+	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/discovery"
 	discclient "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/discovery/client"
 )
 
@@ -42,23 +42,23 @@ func (req *Request) OfChannel(ch string) *Request {
 // AddEndorsersQuery adds to the request a query for given chaincodes
 // interests are the chaincode interests that the client wants to query for.
 // All interests for a given channel should be supplied in an aggregated slice
-func (req *Request) AddEndorsersQuery(interests ...*peer.ChaincodeInterest) (*Request, error) {
+func (req *Request) AddEndorsersQuery(interests ...*discovery.ChaincodeInterest) (*Request, error) {
 	_, err := req.r.AddEndorsersQuery(interests...)
 	return req, err
 }
 
 // AddPeersQuery adds to the request a peer query
-func (req *Request) AddPeersQuery(invocationChain ...*peer.ChaincodeCall) *Request {
+func (req *Request) AddPeersQuery(invocationChain ...*discovery.ChaincodeCall) *Request {
 	req.r.AddPeersQuery(invocationChain...)
 	return req
 }
 
 // CcCalls creates an array of ChaincodeCalls based of cc names, can be used in AddPeersQuery(CcCalls(...))
-func CcCalls(ccNames ...string) []*peer.ChaincodeCall {
-	var call []*peer.ChaincodeCall
+func CcCalls(ccNames ...string) []*discovery.ChaincodeCall {
+	var call []*discovery.ChaincodeCall
 
 	for _, ccName := range ccNames {
-		call = append(call, &peer.ChaincodeCall{
+		call = append(call, &discovery.ChaincodeCall{
 			Name: ccName,
 		})
 	}
@@ -67,11 +67,11 @@ func CcCalls(ccNames ...string) []*peer.ChaincodeCall {
 }
 
 // CcInterests creates an array of ChaincodeInterests based of ChaincodeCalls, can be used in AddEndorsersQuery(CcInterests(CcCalls(...)))
-func CcInterests(invocationsChains ...[]*peer.ChaincodeCall) []*peer.ChaincodeInterest {
-	var interests []*peer.ChaincodeInterest
+func CcInterests(invocationsChains ...[]*discovery.ChaincodeCall) []*discovery.ChaincodeInterest {
+	var interests []*discovery.ChaincodeInterest
 
 	for _, invocationChain := range invocationsChains {
-		interests = append(interests, &peer.ChaincodeInterest{
+		interests = append(interests, &discovery.ChaincodeInterest{
 			Chaincodes: invocationChain,
 		})
 	}

@@ -7,11 +7,10 @@ SPDX-License-Identifier: Apache-2.0
 package endpoint
 
 import (
-	"crypto/x509"
-
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/options"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/comm"
+	"gitee.com/zhaochuninhefei/gmgo/x509"
 )
 
 // EventEndpoint extends a Peer endpoint

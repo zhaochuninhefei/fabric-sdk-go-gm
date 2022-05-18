@@ -7,8 +7,6 @@ SPDX-License-Identifier: Apache-2.0
 package fab
 
 import (
-	"crypto/tls"
-	"crypto/x509"
 	"encoding/pem"
 	"fmt"
 	"os"
@@ -18,11 +16,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/pkg/errors"
-	"github.com/spf13/viper"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/config"
@@ -31,6 +24,12 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/mocks"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/comm"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/util/pathvar"
+	tls "gitee.com/zhaochuninhefei/gmgo/gmtls"
+	"gitee.com/zhaochuninhefei/gmgo/x509"
+	"github.com/pkg/errors"
+	"github.com/spf13/viper"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 const (

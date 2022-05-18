@@ -13,7 +13,6 @@ package lib
 import (
 	"encoding/json"
 	"fmt"
-	"net/http"
 	"strconv"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-ca-gm/lib/client/credential"
@@ -21,6 +20,7 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-ca-gm/sdkinternal/pkg/api"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-ca-gm/sdkinternal/pkg/util"
 	log "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-ca-gm/sdkpatch/logbridge"
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 	"github.com/pkg/errors"
 )
 

@@ -11,13 +11,12 @@ Please review third_party pinning scripts and patches for more details.
 package x509
 
 import (
-	"crypto/x509"
 	"fmt"
-
-	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-ca-gm/lib/attrmgr"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-ca-gm/sdkinternal/pkg/util"
+	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"
+	"gitee.com/zhaochuninhefei/gmgo/x509"
 	"github.com/pkg/errors"
 )
 

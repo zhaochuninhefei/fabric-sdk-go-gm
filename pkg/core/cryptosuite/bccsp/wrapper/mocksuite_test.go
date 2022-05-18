@@ -10,7 +10,7 @@ import (
 	"fmt"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/bccsp"
-	bccspSw "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/bccsp/factory/sw"
+	bccspSw "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/bccsp/factory"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"
 )
 
@@ -25,9 +25,11 @@ func getSuiteByConfig(config core.CryptoSuiteConfig) (core.CryptoSuite, error) {
 	return &CryptoSuite{BCCSP: bccsp}, nil
 }
 
-func getBCCSPFromOpts(config *bccspSw.SwOpts) (bccsp.BCCSP, error) {
+func getBCCSPFromOpts(opts *bccspSw.SwOpts) (bccsp.BCCSP, error) {
 	f := &bccspSw.SWFactory{}
-
+	config := &bccspSw.FactoryOpts{
+		SwOpts: opts,
+	}
 	return f.Get(config)
 }
 

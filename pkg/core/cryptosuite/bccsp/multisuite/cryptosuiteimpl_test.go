@@ -10,7 +10,6 @@ import (
 	"reflect"
 	"testing"
 
-	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/bccsp/pkcs11"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/test/mockcore"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/cryptosuite/bccsp/wrapper"
@@ -52,32 +51,32 @@ func TestCryptoSuiteByConfigSW(t *testing.T) {
 	verifySuiteType(t, c, "*sw.CSP")
 }
 
-func TestCryptoSuiteByConfigPKCS11(t *testing.T) {
+// func TestCryptoSuiteByConfigPKCS11(t *testing.T) {
 
-	mockCtrl := gomock.NewController(t)
-	defer mockCtrl.Finish()
+// 	mockCtrl := gomock.NewController(t)
+// 	defer mockCtrl.Finish()
 
-	//Prepare Config
-	providerLib, softHSMPin, softHSMTokenLabel := pkcs11.FindPKCS11Lib()
+// 	//Prepare Config
+// 	providerLib, softHSMPin, softHSMTokenLabel := pkcs11.FindPKCS11Lib()
 
-	mockConfig := mockcore.NewMockCryptoSuiteConfig(mockCtrl)
-	mockConfig.EXPECT().SecurityProvider().Return("pkcs11")
-	mockConfig.EXPECT().SecurityProvider().Return("pkcs11")
-	mockConfig.EXPECT().SecurityAlgorithm().Return("SHA2")
-	mockConfig.EXPECT().SecurityLevel().Return(256)
-	mockConfig.EXPECT().SecurityProviderLibPath().Return(providerLib)
-	mockConfig.EXPECT().SecurityProviderLabel().Return(softHSMTokenLabel)
-	mockConfig.EXPECT().SecurityProviderPin().Return(softHSMPin)
-	mockConfig.EXPECT().SoftVerify().Return(true)
+// 	mockConfig := mockcore.NewMockCryptoSuiteConfig(mockCtrl)
+// 	mockConfig.EXPECT().SecurityProvider().Return("pkcs11")
+// 	mockConfig.EXPECT().SecurityProvider().Return("pkcs11")
+// 	mockConfig.EXPECT().SecurityAlgorithm().Return("SHA2")
+// 	mockConfig.EXPECT().SecurityLevel().Return(256)
+// 	mockConfig.EXPECT().SecurityProviderLibPath().Return(providerLib)
+// 	mockConfig.EXPECT().SecurityProviderLabel().Return(softHSMTokenLabel)
+// 	mockConfig.EXPECT().SecurityProviderPin().Return(softHSMPin)
+// 	mockConfig.EXPECT().SoftVerify().Return(true)
 
-	//Get cryptosuite using config
-	c, err := GetSuiteByConfig(mockConfig)
-	if err != nil {
-		t.Fatalf("Not supposed to get error, but got: %s", err)
-	}
+// 	//Get cryptosuite using config
+// 	c, err := GetSuiteByConfig(mockConfig)
+// 	if err != nil {
+// 		t.Fatalf("Not supposed to get error, but got: %s", err)
+// 	}
 
-	verifySuiteType(t, c, "*pkcs11.impl")
-}
+// 	verifySuiteType(t, c, "*pkcs11.impl")
+// }
 
 func verifySuiteType(t *testing.T, c core.CryptoSuite, expectedType string) {
 	w, ok := c.(*wrapper.CryptoSuite)

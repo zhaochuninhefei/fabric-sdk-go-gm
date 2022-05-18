@@ -11,13 +11,13 @@ Please review third_party pinning scripts and patches for more details.
 package lib
 
 import (
-	"crypto/tls"
-	"crypto/x509"
 	"encoding/hex"
 	"encoding/pem"
-	"net/http"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-ca-gm/sdkinternal/pkg/util"
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
+	tls "gitee.com/zhaochuninhefei/gmgo/gmtls"
+	"gitee.com/zhaochuninhefei/gmgo/x509"
 	"github.com/pkg/errors"
 )
 

@@ -7,9 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 package membership
 
 import (
-	"crypto/x509"
 	"encoding/pem"
-
 	"strings"
 
 	mb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/msp"
@@ -18,6 +16,7 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/logging"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
+	"gitee.com/zhaochuninhefei/gmgo/x509"
 	"github.com/golang/protobuf/proto"
 	"github.com/pkg/errors"
 )

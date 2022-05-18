@@ -7,8 +7,6 @@ SPDX-License-Identifier: Apache-2.0
 package fab
 
 import (
-	"crypto/tls"
-	"crypto/x509"
 	"reflect"
 	"regexp"
 	"strconv"
@@ -27,9 +25,11 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/config/lookup"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/cryptosuite"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/util/pathvar"
+	tls "gitee.com/zhaochuninhefei/gmgo/gmtls"
+	grpcCodes "gitee.com/zhaochuninhefei/gmgo/grpc/codes"
+	"gitee.com/zhaochuninhefei/gmgo/x509"
 	"github.com/mitchellh/mapstructure"
 	"github.com/pkg/errors"
-	grpcCodes "google.golang.org/grpc/codes"
 )
 
 var logger = logging.NewLogger("fabsdk/fab")

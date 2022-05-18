@@ -11,14 +11,16 @@ Please review third_party pinning scripts and patches for more details.
 package keyutil
 
 import (
-	"crypto/ecdsa"
-	"crypto/x509"
 	"encoding/pem"
 	"errors"
 	"fmt"
+
+	"gitee.com/zhaochuninhefei/gmgo/sm2"
+	"gitee.com/zhaochuninhefei/gmgo/x509"
 )
 
-func PrivateKeyToDER(privateKey *ecdsa.PrivateKey) ([]byte, error) {
+// 将sm2私钥转为DER字节数组
+func PrivateKeyToDER(privateKey *sm2.PrivateKey) ([]byte, error) {
 	if privateKey == nil {
 		return nil, errors.New("invalid ecdsa private key. It must be different from nil")
 	}
@@ -34,7 +36,7 @@ func derToPrivateKey(der []byte) (key interface{}, err error) {
 
 	if key, err = x509.ParsePKCS8PrivateKey(der); err == nil {
 		switch key.(type) {
-		case *ecdsa.PrivateKey:
+		case *sm2.PrivateKey:
 			return
 		default:
 			return nil, errors.New("found unknown private key type in PKCS#8 wrapping")

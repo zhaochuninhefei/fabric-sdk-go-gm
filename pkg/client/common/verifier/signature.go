@@ -8,13 +8,13 @@ SPDX-License-Identifier: Apache-2.0
 package verifier
 
 import (
-	"crypto/x509"
 	"time"
 
 	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/errors/status"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/logging"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
+	"gitee.com/zhaochuninhefei/gmgo/x509"
 	"github.com/pkg/errors"
 )
 

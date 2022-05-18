@@ -11,9 +11,8 @@ Please review third_party pinning scripts and patches for more details.
 package credential
 
 import (
-	"net/http"
-
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-ca-gm/sdkinternal/pkg/api"
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 )
 
 // Credential represents an credential of an identity

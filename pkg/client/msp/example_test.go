@@ -8,11 +8,11 @@ package msp
 import (
 	"fmt"
 
+	"gitee.com/zhaochuninhefei/cfssl-gm/log"
 	fabricCaUtil "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-ca-gm/sdkinternal/pkg/util"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/logging"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/context"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/msp"
-	"github.com/cloudflare/cfssl/log"
 )
 
 func Example() {

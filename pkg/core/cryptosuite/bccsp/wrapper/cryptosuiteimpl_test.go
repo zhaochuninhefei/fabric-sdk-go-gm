@@ -60,7 +60,7 @@ func TestCryptoSuiteByConfig(t *testing.T) {
 	assert.Empty(t, err, "Not supposed to get error on GetSuiteByConfig call : %s", err)
 	assert.NotEmpty(t, samplecryptoSuite, "Supposed to get valid cryptosuite")
 
-	hashbytes, err := samplecryptoSuite.Hash([]byte(hashMessage), &bccsp.SHAOpts{})
+	hashbytes, err := samplecryptoSuite.Hash([]byte(hashMessage), &bccsp.SM3Opts{})
 	assert.Empty(t, err, "Not supposed to get error on GetSuiteByConfig call : %s", err)
 	assert.NotEmpty(t, hashbytes, "Supposed to get valid hash from sample cryptosuite")
 
@@ -150,7 +150,7 @@ func verifyCryptoSuite(t *testing.T, samplecryptoSuite core.CryptoSuite) {
 	assert.True(t, string(signedBytes) == mockIdentifier+signedIdentifier, "Got unexpected result from samplecryptoSuite.Sign")
 
 	//Test cryptosuite.Hash
-	hashBytes, err := samplecryptoSuite.Hash([]byte(hashMessage), &bccsp.SHAOpts{})
+	hashBytes, err := samplecryptoSuite.Hash([]byte(hashMessage), &bccsp.SM3Opts{})
 	assert.Empty(t, err, "Not supposed to get any error for samplecryptoSuite.GetKey")
 	assert.True(t, string(hashBytes) == mockIdentifier+hashMessage, "Got unexpected result from samplecryptoSuite.Hash")
 
@@ -174,7 +174,7 @@ func verifyCryptoSuite(t *testing.T, samplecryptoSuite core.CryptoSuite) {
 	assert.NotEmpty(t, publikey, "Not supposed to get empty key for samplecryptoSuite.GetKey().PublicKey()")
 
 	//Test cryptosuite.KeyImport
-	key, err = samplecryptoSuite.KeyImport(nil, &bccsp.X509PublicKeyImportOpts{Temporary: true})
+	key, err = samplecryptoSuite.KeyImport(nil, &bccsp.GMX509PublicKeyImportOpts{Temporary: true})
 	assert.Empty(t, err, "Not supposed to get any error for samplecryptoSuite.KeyImport")
 	assert.NotEmpty(t, key, "Not supposed to get empty key for samplecryptoSuite.KeyImport")
 
@@ -212,7 +212,7 @@ func verifyCryptoSuite(t *testing.T, samplecryptoSuite core.CryptoSuite) {
 	assert.NotEmpty(t, publikey, "Not supposed to get empty key for samplecryptoSuite.KeyGen().PublicKey()")
 
 	//Test cryptosuite.GetHash
-	hash, err := samplecryptoSuite.GetHash(&bccsp.SHA256Opts{})
+	hash, err := samplecryptoSuite.GetHash(&bccsp.SM3Opts{})
 	assert.NotEmpty(t, err, "Supposed to get error for samplecryptoSuite.GetHash")
 	assert.Empty(t, hash, "Supposed to get empty hash for samplecryptoSuite.GetHash")
 
@@ -236,6 +236,10 @@ func getMockKey(identifier string) bccsp.Key {
 
 type mockBCCSP struct {
 	identifier string
+}
+
+func (mock *mockBCCSP) ShowAlgorithms() string {
+	return ""
 }
 
 func (mock *mockBCCSP) KeyGen(opts bccsp.KeyGenOpts) (k bccsp.Key, err error) {
@@ -300,4 +304,8 @@ func (k *mockKey) Private() bool {
 
 func (k *mockKey) PublicKey() (bccsp.Key, error) {
 	return &mockKey{k.identifier + "-public"}, nil
+}
+
+func (k *mockKey) InsideKey() interface{} {
+	return nil
 }

@@ -36,3 +36,7 @@ func (m *MockKey) Private() bool {
 func (m *MockKey) PublicKey() (bccsp.Key, error) {
 	return m, nil
 }
+
+func (m *MockKey) InsideKey() interface{} {
+	return nil
+}

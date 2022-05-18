@@ -18,8 +18,8 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
 	corecomm "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/config/comm"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/comm"
+	"gitee.com/zhaochuninhefei/gmgo/grpc"
 	"github.com/pkg/errors"
-	"google.golang.org/grpc"
 )
 
 var logger = logging.NewLogger("fabsdk/fab")

@@ -7,13 +7,12 @@ SPDX-License-Identifier: Apache-2.0
 package fab
 
 import (
-	"crypto/tls"
 	"time"
-
-	"github.com/pkg/errors"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
 	commtls "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/config/comm/tls"
+	tls "gitee.com/zhaochuninhefei/gmgo/gmtls"
+	"github.com/pkg/errors"
 )
 
 // EndpointConfigOptions represents EndpointConfig interface with overridable interface functions

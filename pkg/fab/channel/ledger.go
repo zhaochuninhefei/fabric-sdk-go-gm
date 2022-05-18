@@ -8,7 +8,8 @@ package channel
 
 import (
 	reqContext "context"
-	"net/http"
+
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/pkg/errors"

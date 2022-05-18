@@ -7,13 +7,12 @@ SPDX-License-Identifier: Apache-2.0
 package endpoint
 
 import (
-	"crypto/x509"
 	"encoding/pem"
 	"io/ioutil"
+	"regexp"
 	"strings"
 
-	"regexp"
-
+	"gitee.com/zhaochuninhefei/gmgo/x509"
 	"github.com/pkg/errors"
 )
 

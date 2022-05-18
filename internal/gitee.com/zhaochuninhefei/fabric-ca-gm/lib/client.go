@@ -16,7 +16,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net"
-	"net/http"
 	"net/url"
 	"os"
 	"path"
@@ -24,8 +23,8 @@ import (
 	"strconv"
 	"strings"
 
-	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"
-
+	cfsslapi "gitee.com/zhaochuninhefei/cfssl-gm/api"
+	"gitee.com/zhaochuninhefei/cfssl-gm/csr"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-ca-gm/lib/client/credential"
 	x509cred "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-ca-gm/lib/client/credential/x509"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-ca-gm/lib/streamer"
@@ -33,8 +32,8 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-ca-gm/sdkinternal/pkg/api"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-ca-gm/sdkinternal/pkg/util"
 	log "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-ca-gm/sdkpatch/logbridge"
-	cfsslapi "github.com/cloudflare/cfssl/api"
-	"github.com/cloudflare/cfssl/csr"
+	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"
+	http "gitee.com/zhaochuninhefei/gmgo/gmhttp"
 	"github.com/mitchellh/mapstructure"
 	"github.com/pkg/errors"
 )

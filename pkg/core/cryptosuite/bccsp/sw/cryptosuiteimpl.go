@@ -8,7 +8,7 @@ package sw
 
 import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/bccsp"
-	bccspSw "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/bccsp/factory/sw"
+	bccspSw "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/bccsp/factory"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/bccsp/sw"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/logging"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"
@@ -20,7 +20,6 @@ var logger = logging.NewLogger("fabsdk/core")
 
 //GetSuiteByConfig returns cryptosuite adaptor for bccsp loaded according to given config
 func GetSuiteByConfig(config core.CryptoSuiteConfig) (core.CryptoSuite, error) {
-	// TODO: delete this check?
 	if config.SecurityProvider() != "sw" {
 		return nil, errors.Errorf("Unsupported BCCSP Provider: %s", config.SecurityProvider())
 	}
@@ -44,9 +43,11 @@ func GetSuiteWithDefaultEphemeral() (core.CryptoSuite, error) {
 	return wrapper.NewCryptoSuite(bccsp), nil
 }
 
-func getBCCSPFromOpts(config *bccspSw.SwOpts) (bccsp.BCCSP, error) {
+func getBCCSPFromOpts(opts *bccspSw.SwOpts) (bccsp.BCCSP, error) {
 	f := &bccspSw.SWFactory{}
-
+	config := &bccspSw.FactoryOpts{
+		SwOpts: opts,
+	}
 	csp, err := f.Get(config)
 	if err != nil {
 		return nil, errors.Wrapf(err, "Could not initialize BCCSP %s", f.Name())
@@ -57,7 +58,7 @@ func getBCCSPFromOpts(config *bccspSw.SwOpts) (bccsp.BCCSP, error) {
 // GetSuite returns a new instance of the software-based BCCSP
 // set at the passed security level, hash family and KeyStore.
 func GetSuite(securityLevel int, hashFamily string, keyStore bccsp.KeyStore) (core.CryptoSuite, error) {
-	bccsp, err := sw.NewWithParams(securityLevel, hashFamily, keyStore)
+	bccsp, err := sw.NewWithParams(true, securityLevel, hashFamily, keyStore)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +81,7 @@ func getOptsByConfig(c core.CryptoSuiteConfig) *bccspSw.SwOpts {
 
 func getEphemeralOpts() *bccspSw.SwOpts {
 	opts := &bccspSw.SwOpts{
-		HashFamily: "SHA2",
+		HashFamily: "SM3",
 		SecLevel:   256,
 		Ephemeral:  false,
 	}

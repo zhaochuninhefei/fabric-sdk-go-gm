@@ -21,15 +21,14 @@ Please review third_party pinning scripts and patches for more details.
 package tls
 
 import (
-	"crypto/tls"
-	"crypto/x509"
 	"time"
-
-	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-ca-gm/sdkinternal/pkg/util"
 	factory "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-ca-gm/sdkpatch/cryptosuitebridge"
 	log "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-ca-gm/sdkpatch/logbridge"
+	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"
+	tls "gitee.com/zhaochuninhefei/gmgo/gmtls"
+	"gitee.com/zhaochuninhefei/gmgo/x509"
 	"github.com/pkg/errors"
 )
 

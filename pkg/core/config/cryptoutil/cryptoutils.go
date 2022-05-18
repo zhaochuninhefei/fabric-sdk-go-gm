@@ -8,17 +8,16 @@ package cryptoutil
 
 import (
 	"crypto"
-	"crypto/ecdsa"
-	"crypto/tls"
-	"crypto/x509"
 	"encoding/pem"
 	"io"
 
+	factory "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-ca-gm/sdkpatch/cryptosuitebridge"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/logging"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"
+	tls "gitee.com/zhaochuninhefei/gmgo/gmtls"
+	"gitee.com/zhaochuninhefei/gmgo/sm2"
+	"gitee.com/zhaochuninhefei/gmgo/x509"
 	"github.com/pkg/errors"
-
-	factory "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-ca-gm/sdkpatch/cryptosuitebridge"
 )
 
 var logger = logging.NewLogger("fabsdk/core")
@@ -63,7 +62,7 @@ func GetPublicKeyFromCert(cert []byte, cs core.CryptoSuite) (core.Key, error) {
 	}
 
 	// get the public key in the right format
-	key, err := cs.KeyImport(x509Cert, factory.GetX509PublicKeyImportOpts(true))
+	key, err := cs.KeyImport(x509Cert, factory.GetGMX509PublicKeyImportOpts(true))
 	if err != nil {
 		return nil, errors.WithMessage(err, "Failed to import certificate's public key")
 	}
@@ -101,7 +100,7 @@ func X509KeyPair(certPEMBlock []byte, pk core.Key, cs core.CryptoSuite) (tls.Cer
 	}
 
 	switch x509Cert.PublicKey.(type) {
-	case *ecdsa.PublicKey:
+	case *sm2.PublicKey:
 		cert.PrivateKey = &PrivateKey{cs, pk, x509Cert.PublicKey}
 	default:
 		return fail(errors.New("tls: unknown public key algorithm"))

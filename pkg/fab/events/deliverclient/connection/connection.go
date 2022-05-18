@@ -22,9 +22,9 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/comm"
 	clientdisp "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/events/client/dispatcher"
+	"gitee.com/zhaochuninhefei/gmgo/grpc"
 	"github.com/golang/protobuf/proto"
 	"github.com/pkg/errors"
-	"google.golang.org/grpc"
 )
 
 var logger = logging.NewLogger("fabsdk/fab")

@@ -17,9 +17,9 @@ import (
 	pb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/events/service/mocks"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/util/test"
+	"gitee.com/zhaochuninhefei/gmgo/grpc"
+	"gitee.com/zhaochuninhefei/gmgo/grpc/credentials"
 	"github.com/golang/protobuf/proto"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"
 )
 
 // TestBlock is a test block

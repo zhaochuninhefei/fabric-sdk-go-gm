@@ -8,7 +8,6 @@ package signingmgr
 
 import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"
-
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/cryptosuite"
 	"github.com/pkg/errors"
 )
@@ -25,7 +24,7 @@ type SigningManager struct {
 // @param {Config} config - configuration provider
 // @returns {SigningManager} new signing manager
 func New(cryptoProvider core.CryptoSuite) (*SigningManager, error) {
-	return &SigningManager{cryptoProvider: cryptoProvider, hashOpts: cryptosuite.GetSHAOpts()}, nil
+	return &SigningManager{cryptoProvider: cryptoProvider, hashOpts: cryptosuite.GetSM3Opts()}, nil
 }
 
 // Sign will sign the given object using provided key

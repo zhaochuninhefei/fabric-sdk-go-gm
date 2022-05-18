@@ -8,12 +8,12 @@ package sw
 
 import (
 	"bytes"
-	"crypto/sha256"
 	"testing"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/bccsp"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/test/mockcore"
+	"gitee.com/zhaochuninhefei/gmgo/sm3"
 	"github.com/golang/mock/gomock"
 )
 
@@ -57,7 +57,7 @@ func TestCryptoSuiteByBadConfigSW(t *testing.T) {
 
 	mockConfig := mockcore.NewMockCryptoSuiteConfig(mockCtrl)
 	mockConfig.EXPECT().SecurityProvider().Return("sw")
-	mockConfig.EXPECT().SecurityAlgorithm().Return("SHA0")
+	mockConfig.EXPECT().SecurityAlgorithm().Return("SM3")
 	mockConfig.EXPECT().SecurityLevel().Return(256)
 	mockConfig.EXPECT().KeyStorePath().Return("")
 
@@ -78,8 +78,9 @@ func TestCryptoSuiteDefaultEphemeral(t *testing.T) {
 
 func verifyHashFn(t *testing.T, c core.CryptoSuite) {
 	msg := []byte("Hello")
-	e := sha256.Sum256(msg)
-	a, err := c.Hash(msg, &bccsp.SHA256Opts{})
+	// e := sha256.Sum256(msg)
+	e := sm3.Sm3Sum(msg)
+	a, err := c.Hash(msg, &bccsp.SM3Opts{})
 	if err != nil {
 		t.Fatalf("Not supposed to get error, but got: %s", err)
 	}
