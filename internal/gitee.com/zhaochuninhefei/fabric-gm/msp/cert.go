@@ -64,12 +64,6 @@ type tbsCertificate struct {
 	Extensions         []pkix.Extension `asn1:"optional,explicit,tag:3"`
 }
 
-// func isECDSASignedCert(cert *x509.Certificate) bool {
-// 	return cert.SignatureAlgorithm == x509.ECDSAWithSHA1 ||
-// 		cert.SignatureAlgorithm == x509.ECDSAWithSHA256 ||
-// 		cert.SignatureAlgorithm == x509.ECDSAWithSHA384 ||
-// 		cert.SignatureAlgorithm == x509.ECDSAWithSHA512
-// }
 func isSM2SignedCert(cert *x509.Certificate) bool {
 	return cert.SignatureAlgorithm == x509.SM2WithSM3
 }

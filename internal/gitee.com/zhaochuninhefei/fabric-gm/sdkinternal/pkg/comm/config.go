@@ -29,6 +29,7 @@ var (
 		ServerTimeout:     time.Duration(20) * time.Second, // 20 sec - gRPC default
 		ServerMinInterval: time.Duration(1) * time.Minute,  // match ClientInterval
 	}
+	// tls1.2的密码套件列表
 	// strong TLS cipher suites
 	DefaultTLSCipherSuites = []uint16{
 		tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,

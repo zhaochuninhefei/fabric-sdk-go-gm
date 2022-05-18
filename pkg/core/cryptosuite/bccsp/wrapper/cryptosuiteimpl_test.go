@@ -51,7 +51,7 @@ func TestCryptoSuiteByConfig(t *testing.T) {
 	defer mockCtrl.Finish()
 	mockConfig := mockcore.NewMockCryptoSuiteConfig(mockCtrl)
 	mockConfig.EXPECT().SecurityProvider().Return("SW")
-	mockConfig.EXPECT().SecurityAlgorithm().Return("SHA2")
+	mockConfig.EXPECT().SecurityAlgorithm().Return("SM3")
 	mockConfig.EXPECT().SecurityLevel().Return(256)
 	mockConfig.EXPECT().KeyStorePath().Return("/tmp/msp")
 
@@ -73,7 +73,7 @@ func TestCryptoSuiteByConfigFailures(t *testing.T) {
 	defer mockCtrl.Finish()
 	mockConfig := mockcore.NewMockCryptoSuiteConfig(mockCtrl)
 	mockConfig.EXPECT().SecurityProvider().Return("SW")
-	mockConfig.EXPECT().SecurityAlgorithm().Return("SHA2")
+	mockConfig.EXPECT().SecurityAlgorithm().Return("SM3")
 	mockConfig.EXPECT().SecurityLevel().Return(100)
 	mockConfig.EXPECT().KeyStorePath().Return("/tmp/msp")
 
@@ -95,7 +95,7 @@ func TestCreateInvalidBCCSPSecurityLevel(t *testing.T) {
 	mockConfig := mockcore.NewMockCryptoSuiteConfig(mockCtrl)
 
 	mockConfig.EXPECT().SecurityProvider().Return("SW")
-	mockConfig.EXPECT().SecurityAlgorithm().Return("SHA2")
+	mockConfig.EXPECT().SecurityAlgorithm().Return("SM3")
 	mockConfig.EXPECT().SecurityLevel().Return(100)
 	mockConfig.EXPECT().KeyStorePath().Return("/tmp/msp")
 

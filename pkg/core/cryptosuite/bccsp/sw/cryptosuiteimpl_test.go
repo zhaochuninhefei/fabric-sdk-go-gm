@@ -38,7 +38,7 @@ func TestCryptoSuiteByConfigSW(t *testing.T) {
 
 	mockConfig := mockcore.NewMockCryptoSuiteConfig(mockCtrl)
 	mockConfig.EXPECT().SecurityProvider().Return("sw").AnyTimes()
-	mockConfig.EXPECT().SecurityAlgorithm().Return("SHA2")
+	mockConfig.EXPECT().SecurityAlgorithm().Return("SM3")
 	mockConfig.EXPECT().SecurityLevel().Return(256)
 	mockConfig.EXPECT().KeyStorePath().Return("/tmp/msp")
 
@@ -78,7 +78,6 @@ func TestCryptoSuiteDefaultEphemeral(t *testing.T) {
 
 func verifyHashFn(t *testing.T, c core.CryptoSuite) {
 	msg := []byte("Hello")
-	// e := sha256.Sum256(msg)
 	e := sm3.Sm3Sum(msg)
 	a, err := c.Hash(msg, &bccsp.SM3Opts{})
 	if err != nil {

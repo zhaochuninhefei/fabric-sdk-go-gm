@@ -7,10 +7,10 @@ SPDX-License-Identifier: Apache-2.0
 package mocks
 
 import (
-	"crypto/sha256"
 	"hash"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"
+	"gitee.com/zhaochuninhefei/gmgo/sm3"
 )
 
 // MockCryptoSuite implementation
@@ -40,7 +40,7 @@ func (m *MockCryptoSuite) Hash(msg []byte, opts core.HashOpts) (hash []byte, err
 
 // GetHash mock get hash
 func (m *MockCryptoSuite) GetHash(opts core.HashOpts) (hash.Hash, error) {
-	return sha256.New(), nil
+	return sm3.New(), nil
 }
 
 // Sign mock signing

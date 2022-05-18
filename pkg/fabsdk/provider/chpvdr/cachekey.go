@@ -7,11 +7,11 @@ SPDX-License-Identifier: Apache-2.0
 package chpvdr
 
 import (
-	"crypto/sha256"
 	"strconv"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/options"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
+	"gitee.com/zhaochuninhefei/gmgo/sm3"
 )
 
 // ctxtCacheKey is a lazy cache key for the context cache
@@ -27,7 +27,7 @@ func newCtxtCacheKey(ctx fab.ClientContext) (*ctxtCacheKey, error) {
 		return nil, err
 	}
 
-	h := sha256.New()
+	h := sm3.New()
 	if _, err := h.Write(identity); err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ func newEventCacheKey(chConfig fab.ChannelCfg, opts ...options.Opt) (*eventCache
 	params := defaultParams()
 	options.Apply(params, opts)
 
-	h := sha256.New()
+	h := sm3.New()
 	if _, err := h.Write([]byte(params.getOptKey())); err != nil {
 		return nil, err
 	}

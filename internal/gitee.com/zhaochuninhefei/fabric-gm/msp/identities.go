@@ -13,8 +13,9 @@ package msp
 import (
 	"crypto"
 	"crypto/rand"
-	"gitee.com/zhaochuninhefei/gmgo/x509"
 	"encoding/hex"
+
+	"gitee.com/zhaochuninhefei/gmgo/x509"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"
 
@@ -207,10 +208,6 @@ func (id *identity) Serialize() ([]byte, error) {
 
 func (id *identity) getHashOpt(hashFamily string) (core.HashOpts, error) {
 	switch hashFamily {
-	// case bccsp.SHA2:
-	// 	return bccsp.GetHashOpt(bccsp.SHA256)
-	// case bccsp.SHA3:
-	// 	return bccsp.GetHashOpt(bccsp.SHA3_256)
 	case bccsp.SM3:
 		return bccsp.GetHashOpt(bccsp.SM3)
 	}

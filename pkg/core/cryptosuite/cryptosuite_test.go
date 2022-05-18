@@ -14,13 +14,9 @@ import (
 )
 
 const (
-	sm3HashOptsAlgorithm = "SM3"
-	sm2KeyGenOpts        = "SM2"
-	sm2ImportOpts        = "SM2"
-	// shaHashOptsAlgorithm       = "SHA"
-	// sha256HashOptsAlgorithm    = "SHA256"
-	// ecdsap256KeyGenOpts        = "ECDSAP256"
-	// ecdsaImportOpts            = "ECDSA"
+	sm3HashOptsAlgorithm       = "SM3"
+	sm2KeyGenOpts              = "SM2"
+	sm2ImportOpts              = "SM2"
 	setDefAlreadySetErrorMsg   = "default crypto suite is already set"
 	InvalidDefSuiteSetErrorMsg = "attempting to set invalid default suite"
 )
@@ -80,11 +76,6 @@ func TestHashOpts(t *testing.T) {
 	hashOpts := GetSM3Opts()
 	assert.NotZero(t, hashOpts, "Not supposed to be empty sm3HashOpts")
 	assert.True(t, hashOpts.Algorithm() == sm3HashOptsAlgorithm, "Unexpected SHA hash opts, expected [%s], got [%s]", sm3HashOptsAlgorithm, hashOpts.Algorithm())
-
-	// //Get CryptoSuite SHA256 Opts
-	// hashOpts = GetSHA256Opts()
-	// assert.NotZero(t, hashOpts, "Not supposed to be empty sha256HashOpts")
-	// assert.True(t, hashOpts.Algorithm() == sha256HashOptsAlgorithm, "Unexpected SHA hash opts, expected [%v], got [%v]", sha256HashOptsAlgorithm, hashOpts.Algorithm())
 
 }
 

@@ -38,97 +38,12 @@ type ecdsaPublicKeyKeyDeriver struct{}
 
 func (kd *ecdsaPublicKeyKeyDeriver) KeyDeriv(key bccsp.Key, opts bccsp.KeyDerivOpts) (bccsp.Key, error) {
 	return nil, fmt.Errorf("unsupported 'KeyDerivOpts' provided [%v]", opts)
-	// // Validate opts
-	// if opts == nil {
-	// 	return nil, errors.New("invalid opts parameter. It must not be nil")
-	// }
-
-	// ecdsaK := key.(*ECDSAPublicKey)
-
-	// // Re-randomized an ECDSA private key
-	// reRandOpts, ok := opts.(*bccsp.ECDSAReRandKeyOpts)
-	// if !ok {
-	// 	return nil, fmt.Errorf("unsupported 'KeyDerivOpts' provided [%v]", opts)
-	// }
-
-	// tempSK := &ecdsa.PublicKey{
-	// 	Curve: ecdsaK.pubKey.Curve,
-	// 	X:     new(big.Int),
-	// 	Y:     new(big.Int),
-	// }
-
-	// var k = new(big.Int).SetBytes(reRandOpts.ExpansionValue())
-	// var one = new(big.Int).SetInt64(1)
-	// n := new(big.Int).Sub(ecdsaK.pubKey.Params().N, one)
-	// k.Mod(k, n)
-	// k.Add(k, one)
-
-	// // Compute temporary public key
-	// tempX, tempY := ecdsaK.pubKey.ScalarBaseMult(k.Bytes())
-	// tempSK.X, tempSK.Y = tempSK.Add(
-	// 	ecdsaK.pubKey.X, ecdsaK.pubKey.Y,
-	// 	tempX, tempY,
-	// )
-
-	// // Verify temporary public key is a valid point on the reference curve
-	// isOn := tempSK.Curve.IsOnCurve(tempSK.X, tempSK.Y)
-	// if !isOn {
-	// 	return nil, errors.New("failed temporary public key IsOnCurve check")
-	// }
-
-	// return &ECDSAPublicKey{tempSK}, nil
 }
 
 type ecdsaPrivateKeyKeyDeriver struct{}
 
 func (kd *ecdsaPrivateKeyKeyDeriver) KeyDeriv(key bccsp.Key, opts bccsp.KeyDerivOpts) (bccsp.Key, error) {
 	return nil, fmt.Errorf("unsupported 'KeyDerivOpts' provided [%v]", opts)
-	// // Validate opts
-	// if opts == nil {
-	// 	return nil, errors.New("invalid opts parameter. It must not be nil")
-	// }
-
-	// ecdsaK := key.(*ECDSAPrivateKey)
-
-	// // Re-randomized an ECDSA private key
-	// reRandOpts, ok := opts.(*bccsp.ECDSAReRandKeyOpts)
-	// if !ok {
-	// 	return nil, fmt.Errorf("unsupported 'KeyDerivOpts' provided [%v]", opts)
-	// }
-
-	// tempSK := &ecdsa.PrivateKey{
-	// 	PublicKey: ecdsa.PublicKey{
-	// 		Curve: ecdsaK.privKey.Curve,
-	// 		X:     new(big.Int),
-	// 		Y:     new(big.Int),
-	// 	},
-	// 	D: new(big.Int),
-	// }
-
-	// var k = new(big.Int).SetBytes(reRandOpts.ExpansionValue())
-	// var one = new(big.Int).SetInt64(1)
-	// n := new(big.Int).Sub(ecdsaK.privKey.Params().N, one)
-	// k.Mod(k, n)
-	// k.Add(k, one)
-
-	// tempSK.D.Add(ecdsaK.privKey.D, k)
-	// tempSK.D.Mod(tempSK.D, ecdsaK.privKey.PublicKey.Params().N)
-
-	// // Compute temporary public key
-	// tempX, tempY := ecdsaK.privKey.PublicKey.ScalarBaseMult(k.Bytes())
-	// tempSK.PublicKey.X, tempSK.PublicKey.Y =
-	// 	tempSK.PublicKey.Add(
-	// 		ecdsaK.privKey.PublicKey.X, ecdsaK.privKey.PublicKey.Y,
-	// 		tempX, tempY,
-	// 	)
-
-	// // Verify temporary public key is a valid point on the reference curve
-	// isOn := tempSK.Curve.IsOnCurve(tempSK.PublicKey.X, tempSK.PublicKey.Y)
-	// if !isOn {
-	// 	return nil, errors.New("failed temporary public key IsOnCurve check")
-	// }
-
-	// return &ECDSAPrivateKey{tempSK}, nil
 }
 
 type aesPrivateKeyKeyDeriver struct {
@@ -137,25 +52,4 @@ type aesPrivateKeyKeyDeriver struct {
 
 func (kd *aesPrivateKeyKeyDeriver) KeyDeriv(k bccsp.Key, opts bccsp.KeyDerivOpts) (bccsp.Key, error) {
 	return nil, fmt.Errorf("unsupported 'KeyDerivOpts' provided [%v]", opts)
-	// // Validate opts
-	// if opts == nil {
-	// 	return nil, errors.New("invalid opts parameter. It must not be nil")
-	// }
-
-	// aesK := k.(*AESPrivateKey)
-
-	// switch hmacOpts := opts.(type) {
-	// case *bccsp.HMACTruncated256AESDeriveKeyOpts:
-	// 	mac := hmac.New(kd.conf.shaFunction, aesK.privKey)
-	// 	mac.Write(hmacOpts.Argument())
-	// 	return &AESPrivateKey{mac.Sum(nil)[:kd.conf.aesByteLength], false}, nil
-
-	// case *bccsp.HMACDeriveKeyOpts:
-	// 	mac := hmac.New(kd.conf.shaFunction, aesK.privKey)
-	// 	mac.Write(hmacOpts.Argument())
-	// 	return &AESPrivateKey{mac.Sum(nil), true}, nil
-
-	// default:
-	// 	return nil, fmt.Errorf("unsupported 'KeyDerivOpts' provided [%v]", opts)
-	// }
 }

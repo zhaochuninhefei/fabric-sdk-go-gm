@@ -19,7 +19,7 @@ import (
 
 const (
 	defEnabled       = true
-	defHashAlgorithm = "SHA2"
+	defHashAlgorithm = "SM3"
 	defLevel         = 256
 	defProvider      = "SW"
 	defSoftVerify    = true

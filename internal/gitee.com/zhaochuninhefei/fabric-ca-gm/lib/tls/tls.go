@@ -32,6 +32,7 @@ import (
 	"github.com/pkg/errors"
 )
 
+// tls1.2的默认密码套件列表
 // DefaultCipherSuites is a set of strong TLS cipher suites
 var DefaultCipherSuites = []uint16{
 	tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,

@@ -7,9 +7,10 @@ SPDX-License-Identifier: Apache-2.0
 package mocks
 
 import (
-	"crypto/sha256"
 	"encoding/hex"
+	"fmt"
 	"hash"
+	"strings"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/common/crypto"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"
@@ -18,11 +19,7 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/mocks"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fabsdk/metrics"
 	mspmocks "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/msp/test/mockmsp"
-
-	"strings"
-
-	"fmt"
-
+	"gitee.com/zhaochuninhefei/gmgo/sm3"
 	"github.com/pkg/errors"
 )
 
@@ -352,7 +349,7 @@ func NewMockTransactionHeader(channelID string) (fab.TransactionHeader, error) {
 		return nil, err
 	}
 
-	h := sha256.New()
+	h := sm3.New()
 	id, err := computeTxnID(nonce, creator, h)
 	if err != nil {
 		return nil, err

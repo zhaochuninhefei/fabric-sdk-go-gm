@@ -164,7 +164,7 @@ func (c *MockConfig) TcertBatchSize() int {
 
 // SecurityAlgorithm ...
 func (c *MockConfig) SecurityAlgorithm() string {
-	return "SHA2"
+	return "SM3"
 }
 
 // SecurityLevel ...

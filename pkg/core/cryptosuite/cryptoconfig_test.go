@@ -33,7 +33,7 @@ func TestEmptyTestFile(t *testing.T) {
 
 	// Test for defaults
 	assert.Equal(t, true, cryptoConfig.IsSecurityEnabled())
-	assert.Equal(t, "SHA2", cryptoConfig.SecurityAlgorithm())
+	assert.Equal(t, "SM3", cryptoConfig.SecurityAlgorithm())
 	assert.Equal(t, 256, cryptoConfig.SecurityLevel())
 	// Note that we transform to lower case in SecurityProvider()
 	assert.Equal(t, "sw", cryptoConfig.SecurityProvider())
@@ -263,7 +263,7 @@ func TestCryptoConfigWithMultipleBackends(t *testing.T) {
 	backends = append(backends, &mocks.MockConfigBackend{KeyValueMap: backendMap})
 
 	backendMap = make(map[string]interface{})
-	backendMap["client.BCCSP.security.hashAlgorithm"] = "SHA2"
+	backendMap["client.BCCSP.security.hashAlgorithm"] = "SM3"
 	backends = append(backends, &mocks.MockConfigBackend{KeyValueMap: backendMap})
 
 	backendMap = make(map[string]interface{})
@@ -289,7 +289,7 @@ func TestCryptoConfigWithMultipleBackends(t *testing.T) {
 	cryptoConfig := ConfigFromBackend(backends...)
 
 	assert.Equal(t, cryptoConfig.IsSecurityEnabled(), true)
-	assert.Equal(t, cryptoConfig.SecurityAlgorithm(), "SHA2")
+	assert.Equal(t, cryptoConfig.SecurityAlgorithm(), "SM3")
 	assert.Equal(t, cryptoConfig.SecurityProvider(), "pkcs11")
 	assert.Equal(t, cryptoConfig.SecurityLevel(), 2)
 	assert.Equal(t, cryptoConfig.SecurityProviderPin(), "1234")

@@ -29,7 +29,7 @@ func TLSConfig(cert *x509.Certificate, serverName string, config fab.EndpointCon
 	return &tls.Config{RootCAs: certPool, Certificates: config.TLSClientCerts(), ServerName: serverName}, nil
 }
 
-// TLSCertHash is a utility method to calculate the SHA256 hash of the configured certificate (for usage in channel headers)
+// TLSCertHash is a utility method to calculate the SM3 hash of the configured certificate (for usage in channel headers)
 func TLSCertHash(config fab.EndpointConfig) ([]byte, error) {
 	certs := config.TLSClientCerts()
 	if len(certs) == 0 {

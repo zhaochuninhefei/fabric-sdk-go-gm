@@ -98,7 +98,7 @@ client:
      default:
       # provider: "SW"
       provider: ""
-     # hashAlgorithm: "SHA2"
+     # hashAlgorithm: "SM3"
      hashAlgorithm: ""
      softVerify: true
      level: 256

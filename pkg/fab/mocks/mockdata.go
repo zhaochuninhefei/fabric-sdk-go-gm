@@ -7,22 +7,19 @@ SPDX-License-Identifier: Apache-2.0
 package mocks
 
 import (
-	"crypto/sha256"
-
-	"github.com/golang/protobuf/proto"
-	"github.com/golang/protobuf/ptypes/timestamp"
+	"time"
 
 	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
 	mb "gitee.com/zhaochuninhefei/fabric-protos-go-gm/msp"
 	ab "gitee.com/zhaochuninhefei/fabric-protos-go-gm/orderer"
 	pp "gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
+	channelConfig "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/common/channelconfig"
 	cutil "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/common/util"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/protoutil"
-
-	"time"
-
-	channelConfig "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/common/channelconfig"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/sdkinternal/pkg/txflags"
+	"gitee.com/zhaochuninhefei/gmgo/sm3"
+	"github.com/golang/protobuf/proto"
+	"github.com/golang/protobuf/ptypes/timestamp"
 	"github.com/pkg/errors"
 )
 
@@ -545,7 +542,7 @@ func CreateBlockWithCCEventAndTxStatus(events *pp.ChaincodeEvent, txID string,
 	block.Data.Data = append(block.Data.Data, ebytes)
 
 	blockbytes := cutil.ConcatenateBytes(block.Data.Data...)
-	block.Header.DataHash = computeSHA256(blockbytes)
+	block.Header.DataHash = computeSM3(blockbytes)
 
 	txsfltr := txflags.New(len(block.Data.Data))
 	for i := 0; i < len(block.Data.Data); i++ {
@@ -574,8 +571,8 @@ func newBlock(seqNum uint64, previousHash []byte) *common.Block {
 	return block
 }
 
-func computeSHA256(data []byte) (hash []byte) {
-	h := sha256.New()
+func computeSM3(data []byte) (hash []byte) {
+	h := sm3.New()
 	_, err := h.Write(data)
 	if err != nil {
 		panic("unable to create digest")

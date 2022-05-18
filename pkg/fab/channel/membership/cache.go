@@ -7,11 +7,11 @@ SPDX-License-Identifier: Apache-2.0
 package membership
 
 import (
-	"crypto/sha256"
 	"time"
 
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/util/concurrent/lazycache"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/util/concurrent/lazyref"
+	"gitee.com/zhaochuninhefei/gmgo/sm3"
 
 	"github.com/pkg/errors"
 )
@@ -34,7 +34,7 @@ type cacheKey struct {
 
 // NewCacheKey returns a new CacheKey
 func NewCacheKey(context Context, chConfigRef *lazyref.Reference, channelID string) (CacheKey, error) {
-	h := sha256.New()
+	h := sm3.New()
 	hash := h.Sum([]byte(channelID))
 
 	return &cacheKey{

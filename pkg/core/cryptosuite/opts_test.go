@@ -57,7 +57,7 @@ func TestCreateCustomCryptoConfig(t *testing.T) {
 
 	// test m2 implementation
 	a := cco.SecurityAlgorithm()
-	require.Equal(t, "SHA2", a, "SecurityAlgorithm did not return expected interface value")
+	require.Equal(t, "SM3", a, "SecurityAlgorithm did not return expected interface value")
 
 	// test m3 implementation
 	s := cco.SecurityLevel()
@@ -156,7 +156,7 @@ func TestCreateCustomCryptoConfigWithSomeDefaultFunctions(t *testing.T) {
 
 	// test m2 implementation
 	a := cryptoConfigOptionWithSomeDefaults.SecurityAlgorithm()
-	require.Equal(t, "SHA2", a, "SecurityAlgorithm did not return expected interface value")
+	require.Equal(t, "SM3", a, "SecurityAlgorithm did not return expected interface value")
 
 	// test m3 implementation
 	s := cryptoConfigOptionWithSomeDefaults.SecurityLevel()
@@ -191,7 +191,7 @@ func (m *mockIsSecurityEnabled) IsSecurityEnabled() bool {
 type mockSecurityAlgorithm struct{}
 
 func (m *mockSecurityAlgorithm) SecurityAlgorithm() string {
-	return "SHA2"
+	return "SM3"
 }
 
 type mockSecurityLevel struct{}

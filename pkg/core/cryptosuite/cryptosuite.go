@@ -88,24 +88,3 @@ func GetSM2KeyGenOpts(ephemeral bool) core.KeyGenOpts {
 func GetSM2PrivateKeyImportOpts(ephemeral bool) core.KeyImportOpts {
 	return &bccsp.SM2PrivateKeyImportOpts{Temporary: ephemeral}
 }
-
-// //GetSHA256Opts returns options relating to SHA-256.
-// func GetSHA256Opts() core.HashOpts {
-// 	return &bccsp.SHA256Opts{}
-// }
-
-// //GetSHAOpts returns options for computing SHA.
-// func GetSHAOpts() core.HashOpts {
-// 	return &bccsp.SHAOpts{}
-// }
-
-// //GetECDSAP256KeyGenOpts returns options for ECDSA key generation with curve P-256.
-// func GetECDSAP256KeyGenOpts(ephemeral bool) core.KeyGenOpts {
-// 	return &bccsp.ECDSAP256KeyGenOpts{Temporary: ephemeral}
-// }
-
-// //GetECDSAPrivateKeyImportOpts options for ECDSA secret key importation in DER format
-// // or PKCS#8 format.
-// func GetECDSAPrivateKeyImportOpts(ephemeral bool) core.KeyImportOpts {
-// 	return &bccsp.ECDSAPrivateKeyImportOpts{Temporary: ephemeral}
-// }

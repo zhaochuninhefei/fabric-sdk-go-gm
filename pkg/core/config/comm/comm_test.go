@@ -140,8 +140,7 @@ func TestTlsCertHash(t *testing.T) {
 	tlsCertHash, err := TLSCertHash(config)
 	assert.NotNil(t, tlsCertHash)
 	assert.Nil(t, err)
-	// openssl x509 -fingerprint -sha256 -in testdata/server.crt
-	// SHA256 Fingerprint=0D:D5:90:B8:A5:0E:A6:04:3E:A8:75:16:BF:77:A8:FE:E7:C5:62:2D:4C:B3:CB:99:12:74:72:2A:D8:BA:B8:92
+	// openssl x509 -fingerprint -sm3 -in testdata/server.crt
 	expectedHash, err := hex.DecodeString("0DD590B8A50EA6043EA87516BF77A8FEE7C5622D4CB3CB991274722AD8BAB892")
 	if err != nil {
 		t.Fatalf("Unexpected error decoding cert fingerprint %s", err)
