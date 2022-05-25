@@ -6,6 +6,10 @@ SPDX-License-Identifier: Apache-2.0
 
 package gateway
 
+/*
+pkg/gateway/wallet.go 应用钱包相关接口定义
+*/
+
 import (
 	"encoding/json"
 
