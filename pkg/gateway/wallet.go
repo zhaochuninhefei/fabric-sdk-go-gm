@@ -22,10 +22,15 @@ import (
 )
 
 type wallet interface {
+	// 添加身份
 	Put(label string, id Identity) error
+	// 获取身份
 	Get(label string) (Identity, error)
+	// 删除身份
 	Remove(label string) error
+	// 检查身份是否存在
 	Exists(label string) bool
+	// 列出身份
 	List() ([]string, error)
 }
 
