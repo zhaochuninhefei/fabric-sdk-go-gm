@@ -37,6 +37,7 @@ type wallet interface {
 // A Wallet stores identity information used to connect to a Hyperledger Fabric network.
 // Instances are created using factory methods on the implementing objects.
 type Wallet struct {
+	// 嵌入WalletStore接口:Put/Get/List/Exists/Remove
 	store WalletStore
 }
 
