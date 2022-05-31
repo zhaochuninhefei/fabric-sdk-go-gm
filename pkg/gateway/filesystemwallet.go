@@ -6,6 +6,10 @@ SPDX-License-Identifier: Apache-2.0
 
 package gateway
 
+/*
+pkg/gateway/filesystemwallet.go 本地文件系统钱包
+*/
+
 import (
 	"io/ioutil"
 	"os"
@@ -17,6 +21,7 @@ const extensionLength = 3
 
 // FileSystemWalletStore stores identity information used to connect to a Hyperledger Fabric network.
 // Instances are created using NewFileSystemWallet()
+//  实现`pkg/gateway/spi.go`的`WalletStore`接口。
 type fileSystemWalletStore struct {
 	path string
 }

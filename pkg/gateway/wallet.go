@@ -36,6 +36,7 @@ type wallet interface {
 
 // A Wallet stores identity information used to connect to a Hyperledger Fabric network.
 // Instances are created using factory methods on the implementing objects.
+//  实现当前文件定义的`wallet`接口。
 type Wallet struct {
 	// 嵌入WalletStore接口:Put/Get/List/Exists/Remove
 	store WalletStore
@@ -45,7 +46,7 @@ type Wallet struct {
 //  Parameters:
 //  label specifies the name to be associated with the identity.
 //  id specifies the identity to store in the wallet.
-//
+// 底层的Put调用内部嵌入的`store WalletStore`的Put方法。
 func (w *Wallet) Put(label string, id Identity) error {
 	content, err := id.toJSON()
 	if err != nil {
@@ -61,6 +62,7 @@ func (w *Wallet) Put(label string, id Identity) error {
 //
 //  Returns:
 //  The identity object.
+// 底层的Get调用内部嵌入的`store WalletStore`的Get方法。
 func (w *Wallet) Get(label string) (Identity, error) {
 	content, err := w.store.Get(label)
 
@@ -95,6 +97,7 @@ func (w *Wallet) Get(label string) (Identity, error) {
 //
 //  Returns:
 //  A list of identity labels in the wallet.
+// 底层的List调用内部嵌入的`store WalletStore`的List方法。
 func (w *Wallet) List() ([]string, error) {
 	return w.store.List()
 }
@@ -105,6 +108,7 @@ func (w *Wallet) List() ([]string, error) {
 //
 //  Returns:
 //  True if the named identity is in the wallet.
+// 底层的Exists调用内部嵌入的`store WalletStore`的Exists方法。
 func (w *Wallet) Exists(label string) bool {
 	return w.store.Exists(label)
 }
@@ -112,6 +116,7 @@ func (w *Wallet) Exists(label string) bool {
 // Remove an identity from the wallet. If the identity does not exist, this method does nothing.
 //  Parameters:
 //  label specifies the name of the identity in the wallet.
+// 底层的Remove调用内部嵌入的`store WalletStore`的Remove方法。
 func (w *Wallet) Remove(label string) error {
 	return w.store.Remove(label)
 }
