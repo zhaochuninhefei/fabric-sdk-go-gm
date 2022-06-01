@@ -16,6 +16,10 @@ SPDX-License-Identifier: Apache-2.0
 // for a working sample.
 package gateway
 
+/*
+pkg/gateway/gateway.go 区块链网络的入口
+*/
+
 import (
 	"os"
 	"strings"
@@ -39,6 +43,7 @@ const (
 )
 
 // Gateway is the entry point to a Fabric network
+// 区块链网络入口结构体
 type Gateway struct {
 	sdk        *fabsdk.FabricSDK
 	options    *gatewayOptions
@@ -49,6 +54,7 @@ type Gateway struct {
 	mspfactory api.MSPProviderFactory
 }
 
+// 网络入口参数
 type gatewayOptions struct {
 	Identity mspProvider.SigningIdentity
 	User     string

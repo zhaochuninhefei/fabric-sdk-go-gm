@@ -23,7 +23,7 @@ type X509Identity struct {
 	MspID string `json:"mspId"`
 	// 身份类型，目前固定为"X.509"
 	IDType string `json:"type"`
-	// 身份凭证(数字证书+私钥)
+	// 身份凭证(数字证书+私钥)，一般是给应用申请的client类型账户
 	Credentials credentials `json:"credentials"`
 }
 
