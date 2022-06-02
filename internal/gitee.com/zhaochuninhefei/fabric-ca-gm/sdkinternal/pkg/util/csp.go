@@ -133,19 +133,24 @@ func ImportBCCSPKeyFromPEM(keyFile string, myCSP core.CryptoSuite, temporary boo
 }
 
 // ImportBCCSPKeyFromPEMBytes attempts to create a private BCCSP key from a pem byte slice
+//
+// 根据PEM字节数组与CSP创建BCCSP私钥
 func ImportBCCSPKeyFromPEMBytes(keyBuff []byte, myCSP core.CryptoSuite, temporary bool) (core.Key, error) {
 	keyFile := "pem bytes"
-
+	// PEM字节数组转为私钥
 	key, err := factory.PEMtoPrivateKey(keyBuff, nil)
 	if err != nil {
 		return nil, errors.WithMessage(err, fmt.Sprintf("Failed parsing private key from %s", keyFile))
 	}
 	switch key := key.(type) {
 	case *sm2.PrivateKey:
+		// 将私钥序列化为DER字节数组
 		priv, err := factory.PrivateKeyToDER(key)
 		if err != nil {
 			return nil, errors.WithMessage(err, fmt.Sprintf("Failed to convert SM2 private key for '%s'", keyFile))
 		}
+		// 使用CSP重新将DER转为私钥
+		// 大概是为了检查私钥与CSP中定义的算法是否匹配?
 		sk, err := myCSP.KeyImport(priv, factory.GetSM2PrivateKeyImportOpts(temporary))
 		if err != nil {
 			return nil, errors.WithMessage(err, fmt.Sprintf("Failed to import SM2 private key for '%s'", keyFile))

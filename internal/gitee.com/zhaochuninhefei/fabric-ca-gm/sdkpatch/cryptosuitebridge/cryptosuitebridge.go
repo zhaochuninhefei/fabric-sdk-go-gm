@@ -34,6 +34,8 @@ func NewCspSigner(csp core.CryptoSuite, key core.Key) (crypto.Signer, error) {
 }
 
 // PEMtoPrivateKey is a bridge for bccsp utils.PEMtoPrivateKey()
+//
+// PEM字节数组转为私钥
 func PEMtoPrivateKey(raw []byte, pwd []byte) (interface{}, error) {
 	return keyutil.PEMToPrivateKey(raw, pwd)
 }

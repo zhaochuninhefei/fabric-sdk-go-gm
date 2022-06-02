@@ -71,6 +71,9 @@ type Option = func(*Gateway) error
 type ConfigOption = func(*Gateway) error
 
 // IdentityOption specifies the user identity under which all transactions are performed for this gateway instance.
+//
+// 声明一个接口类型:IdentityOption,该接口类型必须实现函数:func(*Gateway) error
+// 实现的函数是一个apply函数，以自身变量名为函数名调用。
 type IdentityOption = func(*Gateway) error
 
 // Connect to a gateway defined by a network config file.
@@ -82,6 +85,7 @@ type IdentityOption = func(*Gateway) error
 //
 //  Returns:
 //  A Transaction object for subsequent evaluation or submission.
+// 根据连接配置文件与身份信息连接区块链网络
 func Connect(config ConfigOption, identity IdentityOption, options ...Option) (*Gateway, error) {
 
 	g := &Gateway{
@@ -204,12 +208,14 @@ func WithSDK(sdk *fabsdk.FabricSDK) ConfigOption {
 //   An IdentityOption which can be passed as the second parameter to the Connect() function
 func WithIdentity(wallet wallet, label string) IdentityOption {
 	return func(gw *Gateway) error {
+		// 从钱包中获取身份信息
 		creds, err := wallet.Get(label)
 		if err != nil {
 			return err
 		}
-
+		// 根据当前身份的私钥字节数组与默认的CSP密码套件，生成私钥
 		privateKey, _ := fabricCaUtil.ImportBCCSPKeyFromPEMBytes([]byte(creds.(*X509Identity).Key()), cryptosuite.GetDefault(), true)
+		// 获取用于连接fabric区块链网络的身份用户:wid
 		wid := &walletIdentity{
 			id:                    label,
 			mspID:                 creds.mspID(),
@@ -217,6 +223,7 @@ func WithIdentity(wallet wallet, label string) IdentityOption {
 			privateKey:            privateKey,
 		}
 		zclog.Debugf("===== 尝试从wallet获取账户信息 id: %s, mspID: %s, privateKey: %s", wid.id, wid.mspID, wid.privateKey)
+		// 将连接fabric区块链网络的身份用户:wid设置给gateway对象
 		gw.options.Identity = wid
 		gw.mspfactory = &walletmsp{}
 

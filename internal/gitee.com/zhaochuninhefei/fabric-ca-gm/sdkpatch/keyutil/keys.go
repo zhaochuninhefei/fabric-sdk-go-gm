@@ -28,12 +28,13 @@ func PrivateKeyToDER(privateKey *sm2.PrivateKey) ([]byte, error) {
 	return x509.MarshalECPrivateKey(privateKey)
 }
 
+// DER字节数组转为私钥
 func derToPrivateKey(der []byte) (key interface{}, err error) {
-
-	if key, err = x509.ParsePKCS1PrivateKey(der); err == nil {
+	// 优先尝试EC密钥
+	if key, err = x509.ParseECPrivateKey(der); err == nil {
 		return key, nil
 	}
-
+	// 其次尝试PKCS8格式
 	if key, err = x509.ParsePKCS8PrivateKey(der); err == nil {
 		switch key.(type) {
 		case *sm2.PrivateKey:
@@ -42,14 +43,15 @@ func derToPrivateKey(der []byte) (key interface{}, err error) {
 			return nil, errors.New("found unknown private key type in PKCS#8 wrapping")
 		}
 	}
-
-	if key, err = x509.ParseECPrivateKey(der); err == nil {
-		return
+	// 最后尝试RSA
+	if key, err = x509.ParsePKCS1PrivateKey(der); err == nil {
+		return key, nil
 	}
 
 	return nil, errors.New("invalid key type. The DER must contain an ecdsa.PrivateKey")
 }
 
+// PEM字节数组转为私钥
 func PEMToPrivateKey(raw []byte, pwd []byte) (interface{}, error) {
 	block, _ := pem.Decode(raw)
 	if block == nil {

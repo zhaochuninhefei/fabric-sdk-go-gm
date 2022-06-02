@@ -133,6 +133,8 @@ func (f *walletmsp) CreateIdentityManagerProvider(config fab.EndpointConfig, cry
 }
 
 // walletIdentity is a representation of a Fabric User
+//
+// fabric用户的身份结构体
 type walletIdentity struct {
 	id                    string
 	mspID                 string
