@@ -5,7 +5,7 @@ go 1.17
 require (
 	gitee.com/zhaochuninhefei/cfssl-gm v0.0.4
 	gitee.com/zhaochuninhefei/fabric-config-gm v0.0.4
-	gitee.com/zhaochuninhefei/fabric-protos-go-gm v0.0.1
+	gitee.com/zhaochuninhefei/fabric-protos-go-gm v0.0.3
 	gitee.com/zhaochuninhefei/gmgo v0.0.16
 	gitee.com/zhaochuninhefei/zcgolog v0.0.14
 	github.com/Knetic/govaluate v3.0.1-0.20171022003610-9aa49832a739+incompatible
@@ -135,6 +135,7 @@ require (
 )
 
 replace (
+	// gitee.com/zhaochuninhefei/fabric-protos-go-gm => /home/zhaochun/work/sources/gcbaas/fabric-protos-go-gm
 	github.com/zmap/zcrypto => github.com/zmap/zcrypto v0.0.0-20190729165852-9051775e6a2e
 	github.com/zmap/zlint => github.com/zmap/zlint v0.0.0-20190806154020-fd021b4cfbeb
 )
