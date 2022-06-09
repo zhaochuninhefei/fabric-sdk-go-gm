@@ -9,12 +9,15 @@ package gateway
 import (
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/channel"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/event"
+	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/ledger"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/context"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fab/events/deliverclient/seek"
 	"github.com/pkg/errors"
 )
 
+// Network对象表示fabric网络通道中的peer节点集合。
+//
 // A Network object represents the set of peers in a Fabric network (channel).
 // Applications should get a Network instance from a Gateway using the GetNetwork method.
 type Network struct {
@@ -113,4 +116,9 @@ func (n *Network) RegisterFilteredBlockEvent() (fab.Registration, <-chan *fab.Fi
 //  registration is the registration handle that was returned from RegisterBlockEvent method
 func (n *Network) Unregister(registration fab.Registration) {
 	n.event.Unregister(registration)
+}
+
+// 获取LedgerClient
+func (n *Network) GetLedgerClient() (*ledger.Client, error) {
+	return ledger.New(n.client.ChannelProvider)
 }

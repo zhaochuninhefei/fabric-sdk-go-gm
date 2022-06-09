@@ -38,11 +38,12 @@ import (
 // An application that requires interaction with multiple channels should create a separate
 // instance of the channel client for each channel. Channel client supports non-admin functions only.
 type Client struct {
-	context      context.Channel
-	membership   fab.ChannelMembership
-	eventService fab.EventService
-	greylist     *greylist.Filter
-	metrics      *metrics.ClientMetrics
+	context         context.Channel
+	membership      fab.ChannelMembership
+	eventService    fab.EventService
+	greylist        *greylist.Filter
+	metrics         *metrics.ClientMetrics
+	ChannelProvider context.ChannelProvider
 }
 
 // ClientOption describes a functional parameter for the New constructor
@@ -80,6 +81,7 @@ func New(channelProvider context.ChannelProvider, opts ...ClientOption) (*Client
 			return nil, errors.WithMessage(err, "option failed")
 		}
 	}
+	channelClient.ChannelProvider = channelProvider
 
 	return &channelClient, nil
 }
