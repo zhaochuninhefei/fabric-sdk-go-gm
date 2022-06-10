@@ -38,7 +38,8 @@ import (
 	"github.com/pkg/errors"
 )
 
-// Client enables ledger queries on a Fabric network.
+// 账本客户端实例，用于向账本发出查询请求。
+//  Client enables ledger queries on a Fabric network.
 type Client struct {
 	ctx       context.Channel
 	filter    fab.TargetFilter
@@ -118,7 +119,8 @@ func New(channelProvider context.ChannelProvider, opts ...ClientOption) (*Client
 	return &ledgerClient, nil
 }
 
-// QueryInfo queries for various useful blockchain information on this channel such as block height and current block hash.
+// 查询区块链(通道内的blockchain)信息，包括区块高度，当前区块Hash等。
+//  QueryInfo queries for various useful blockchain information on this channel such as block height and current block hash.
 //  Parameters:
 //  options are optional request options
 //
@@ -160,7 +162,8 @@ func (c *Client) QueryInfo(options ...RequestOption) (*fab.BlockchainInfoRespons
 	return response, nil
 }
 
-// QueryBlockByHash queries the ledger for block by block hash.
+// 根据区块Hash从站本查看对应区块数据。
+//  QueryBlockByHash queries the ledger for block by block hash.
 //  Parameters:
 //  blockHash is required block hash
 //  options hold optional request options

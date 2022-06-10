@@ -79,18 +79,20 @@ func createBlockchainInfo(tpr *fab.TransactionProposalResponse) (*common.Blockch
 	return &response, nil
 }
 
-// QueryBlockByHash queries the ledger for Block by block hash.
-// This query will be made to specified targets.
-// Returns the block.
+// 根据区块Hash向账本请求区块数据
+//  QueryBlockByHash queries the ledger for Block by block hash.
+//  This query will be made to specified targets.
+//  Returns the block.
 func (c *Ledger) QueryBlockByHash(reqCtx reqContext.Context, blockHash []byte, targets []fab.ProposalProcessor, verifier ResponseVerifier) ([]*common.Block, error) {
 
 	if len(blockHash) == 0 {
 		return nil, errors.New("blockHash is required")
 	}
-
+	// TODO: 需要调研此处使用的合约是否qscc
 	cir := createBlockByHashInvokeRequest(c.chName, blockHash)
+	// 发起合约调用请求
 	tprs, errs := queryChaincode(reqCtx, c.chName, cir, targets, verifier)
-
+	// 从合约调用返回值中取出目标区块数据
 	responses, errors := getConfigBlocks(tprs)
 	errs = multi.Append(errs, errors)
 
