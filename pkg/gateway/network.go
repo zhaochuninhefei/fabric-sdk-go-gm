@@ -123,6 +123,7 @@ func (n *Network) Unregister(registration fab.Registration) {
 }
 
 // 获取LedgerClient 账本客户端实例
+//  目前LedgerClient用于统计该通道的区块高度与交易总数
 func (n *Network) GetLedgerClient() (*ledger.Client, error) {
 	return ledger.New(n.client.ChannelProvider)
 }
