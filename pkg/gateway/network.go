@@ -27,24 +27,24 @@ type Network struct {
 	event   *event.Client
 }
 
+// 根据 gateway 与 channelProvider 创建网络通道实例
 func newNetwork(gateway *Gateway, channelProvider context.ChannelProvider) (*Network, error) {
 	n := Network{
 		gateway: gateway,
 	}
-
+	// 使用channelProvider创建一个通道客户端实例，用于执行交易
 	// Channel client is used to query and execute transactions
 	client, err := channel.New(channelProvider)
 	if err != nil {
 		return nil, errors.Wrap(err, "Failed to create new channel client")
 	}
-
 	n.client = client
-
+	// 获取通道上下文
 	ctx, err := channelProvider()
 	if err != nil {
 		return nil, errors.Wrap(err, "Failed to create new channel context")
 	}
-
+	// 获取ChannelID
 	n.name = ctx.ChannelID()
 
 	eventOpts := []event.ClientOption{event.WithBlockEvents()}
@@ -68,11 +68,15 @@ func newNetwork(gateway *Gateway, channelProvider context.ChannelProvider) (*Net
 	return &n, nil
 }
 
+// 通道名，即ChannelID
+//
 // Name is the name of the network (also known as channel name)
 func (n *Network) Name() string {
 	return n.name
 }
 
+// 获取智能合约实例
+//
 // GetContract returns instance of a smart contract on the current network.
 //  Parameters:
 //  chaincodeID is the name of the chaincode that contains the smart contract
@@ -118,7 +122,7 @@ func (n *Network) Unregister(registration fab.Registration) {
 	n.event.Unregister(registration)
 }
 
-// 获取LedgerClient
+// 获取LedgerClient 账本客户端实例
 func (n *Network) GetLedgerClient() (*ledger.Client, error) {
 	return ledger.New(n.client.ChannelProvider)
 }

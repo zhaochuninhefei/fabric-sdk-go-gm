@@ -272,7 +272,9 @@ func WithBlockNum(from uint64) Option {
 //
 //  Returns:
 //  A Network object representing the channel
+// 从Gateway获取网络通道
 func (gw *Gateway) GetNetwork(name string) (*Network, error) {
+	// 获取 channelProvider 通道客户端上下文
 	var channelProvider context.ChannelProvider
 	if gw.options.Identity != nil {
 		channelProvider = gw.sdk.ChannelContext(name, fabsdk.WithIdentity(gw.options.Identity), fabsdk.WithOrg(gw.org))
