@@ -46,6 +46,13 @@ func createChannelInfoInvokeRequest(channelID string) fab.ChaincodeInvokeRequest
 	return cir
 }
 
+// 创建GetBlockByHash的请求数据 fab.ChaincodeInvokeRequest:
+//  ChaincodeID: "qscc",
+//  Fcn: "GetBlockByHash",
+//  Lang: ChaincodeSpec_UNDEFINED (0),
+//  TransientMap: map[string][]uint8 nil,
+//  Args: [][]uint8 len: 2, cap: 2, [channelID,blockHash],
+//  IsInit: false
 func createBlockByHashInvokeRequest(channelID string, blockHash []byte) fab.ChaincodeInvokeRequest {
 
 	var args [][]byte

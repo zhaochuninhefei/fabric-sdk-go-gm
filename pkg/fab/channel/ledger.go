@@ -88,11 +88,17 @@ func (c *Ledger) QueryBlockByHash(reqCtx reqContext.Context, blockHash []byte, t
 	if len(blockHash) == 0 {
 		return nil, errors.New("blockHash is required")
 	}
-	// TODO: 需要调研此处使用的合约是否qscc
+	// 创建GetBlockByHash的请求数据 cir:
+	//  ChaincodeID: "qscc",
+	//  Fcn: "GetBlockByHash",
+	//  Lang: ChaincodeSpec_UNDEFINED (0),
+	//  TransientMap: map[string][]uint8 nil,
+	//  Args: [][]uint8 len: 2, cap: 2, [通道名称,区块Hash],
+	//  IsInit: false
 	cir := createBlockByHashInvokeRequest(c.chName, blockHash)
-	// 发起合约调用请求
+	// 发起GetBlockByHash请求
 	tprs, errs := queryChaincode(reqCtx, c.chName, cir, targets, verifier)
-	// 从合约调用返回值中取出目标区块数据
+	// 从GetBlockByHash返回值中取出目标区块数据
 	responses, errors := getConfigBlocks(tprs)
 	errs = multi.Append(errs, errors)
 
