@@ -6,6 +6,16 @@ SPDX-License-Identifier: Apache-2.0
 
 package channel
 
+/*
+pkg/fab/channel/qscc.go qscc合约调用请求生成器，用于查询通道上的各类信息
+
+GetTransactionByID : 根据ID查询交易
+GetChainInfo : 获取区块链信息
+GetBlockByHash : 根据区块Hash获取区块
+GetBlockByNumber : 根据区块编号获取区块
+GetBlockByTxID : 根据交易ID获取区块
+*/
+
 import (
 	"strconv"
 
