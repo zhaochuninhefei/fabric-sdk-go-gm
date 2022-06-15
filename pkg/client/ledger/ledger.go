@@ -187,7 +187,8 @@ func (c *Client) QueryBlockByHash(blockHash []byte, options ...RequestOption) (*
 	return matchBlockData(responses, opts.MinTargets)
 }
 
-// QueryBlockByTxID queries for block which contains a transaction.
+// 根据交易ID查看对应区块数据
+//  QueryBlockByTxID queries for block which contains a transaction.
 //  Parameters:
 //  txID is required transaction ID
 //  options hold optional request options
@@ -211,7 +212,8 @@ func (c *Client) QueryBlockByTxID(txID fab.TransactionID, options ...RequestOpti
 	return matchBlockData(responses, opts.MinTargets)
 }
 
-// QueryBlock queries the ledger for Block by block number.
+// 根据区块编号查看区块数据
+//  QueryBlock queries the ledger for Block by block number.
 //  Parameters:
 //  blockNumber is required block number(ID)
 //  options hold optional request options
@@ -270,7 +272,8 @@ func matchBlockData(responses []*common.Block, minTargets int) (*common.Block, e
 
 }
 
-// QueryTransaction queries the ledger for processed transaction by transaction ID.
+// 根据交易ID查看对应交易数据
+//  QueryTransaction queries the ledger for processed transaction by transaction ID.
 //  Parameters:
 //  txID is required transaction ID
 //  options hold optional request options
@@ -310,7 +313,8 @@ func (c *Client) QueryTransaction(transactionID fab.TransactionID, options ...Re
 	return response, nil
 }
 
-// QueryConfig queries for channel configuration.
+// 查看通道配置
+//  QueryConfig queries for channel configuration.
 //  Parameters:
 //  options hold optional request options
 //
@@ -333,7 +337,8 @@ func (c *Client) QueryConfig(options ...RequestOption) (fab.ChannelCfg, error) {
 	return channelConfig.Query(reqCtx)
 }
 
-// QueryConfigBlock returns the current configuration block for the specified channel.
+// 查看通道配置交易区块
+//  QueryConfigBlock returns the current configuration block for the specified channel.
 func (c *Client) QueryConfigBlock(options ...RequestOption) (*common.Block, error) {
 	targets, opts, err := c.prepareRequestParams(options...)
 	if err != nil {
