@@ -22,6 +22,7 @@ import (
 
 	"github.com/golang/protobuf/proto"
 
+	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-gm/protoutil"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/common/discovery"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/common/filter"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/common/verifier"
@@ -350,6 +351,15 @@ func (c *Client) QueryConfigBlock(options ...RequestOption) (*common.Block, erro
 
 	return c.ledger.QueryConfigBlock(reqCtx, peersToTxnProcessors(targets), c.verifier)
 }
+
+// 查看区块中的交易数据
+func (c *Client) QueryTransactionInBlock(txBytes []byte) (*pb.Transaction, error) {
+	return protoutil.UnmarshalTransaction(txBytes)
+}
+
+// func (c *Client) UnmarshalChaincodeActionPayload(bytes []byte) (*pb.ChaincodeActionPayload, error) {
+// 	return protoutil.UnmarshalChaincodeActionPayload(bytes)
+// }
 
 //prepareRequestOpts Reads Opts from Option array
 func (c *Client) prepareRequestOpts(options ...RequestOption) (requestOptions, error) {
