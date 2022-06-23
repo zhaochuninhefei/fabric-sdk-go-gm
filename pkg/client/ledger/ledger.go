@@ -163,7 +163,7 @@ func (c *Client) QueryInfo(options ...RequestOption) (*fab.BlockchainInfoRespons
 	return response, nil
 }
 
-// 根据区块Hash从站本查看对应区块数据。
+// 根据区块Hash从账本查看对应区块数据。
 //  QueryBlockByHash queries the ledger for block by block hash.
 //  Parameters:
 //  blockHash is required block hash
@@ -353,6 +353,9 @@ func (c *Client) QueryConfigBlock(options ...RequestOption) (*common.Block, erro
 }
 
 // 查看区块中的交易数据
+//  可以从block中获取某一条交易的字节数组，如: block.GetData().GetData()[0]
+//  具体的例子:
+//    tx,err := ledgerClient.QueryTransactionInBlock(block.GetData().GetData()[0])
 func (c *Client) QueryTransactionInBlock(txBytes []byte) (*pb.Transaction, error) {
 	return protoutil.UnmarshalTransaction(txBytes)
 }
