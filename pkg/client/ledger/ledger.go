@@ -360,10 +360,6 @@ func (c *Client) QueryTransactionInBlock(txBytes []byte) (*pb.Transaction, error
 	return protoutil.UnmarshalTransaction(txBytes)
 }
 
-// func (c *Client) UnmarshalChaincodeActionPayload(bytes []byte) (*pb.ChaincodeActionPayload, error) {
-// 	return protoutil.UnmarshalChaincodeActionPayload(bytes)
-// }
-
 //prepareRequestOpts Reads Opts from Option array
 func (c *Client) prepareRequestOpts(options ...RequestOption) (requestOptions, error) {
 	opts := requestOptions{}
