@@ -173,12 +173,6 @@ func UnmarshalBlockData(block *common.Block) (*BlockInfo, error) {
 			return blockInfo, err
 		}
 		transactionInfo.CallerMspID = creator.GetMspid()
-		// // 对 creator.IdBytes 做base64解码，得到证书的pem字节数组
-		// idBase64Str := base64.URLEncoding.EncodeToString([]byte(creator.IdBytes))
-		// certPem, err := base64.URLEncoding.DecodeString(idBase64Str)
-		// if err != nil {
-		// 	return blockInfo, err
-		// }
 		// 证书的pem字节数组解析为x509证书结构
 		cert, err := x509.ReadCertificateFromPem(creator.IdBytes)
 		if err != nil {
