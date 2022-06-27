@@ -31,11 +31,19 @@ pkg/util/chn_browse_util/chn_browse_util.go 通道浏览工具库，提供用于
 */
 
 // 通道情报
-
 type ChannelInfo struct {
 	BlockHeight uint64       // 区块高度
 	TransTotal  uint64       // 交易总数
 	BlockInfos  []*BlockInfo // 区块集合
+}
+
+func (t *ChannelInfo) ToString() string {
+	result := fmt.Sprintf("区块高度:%d, 交易总数: %d,\n区块集合:\n",
+		t.BlockHeight, t.TransTotal)
+	for _, b := range t.BlockInfos {
+		result = result + "\t" + b.ToString() + "\n"
+	}
+	return result
 }
 
 // 区块情报
@@ -45,6 +53,15 @@ type BlockInfo struct {
 	PreBlockHash     string             // 前一区块哈希(16进制字符串)
 	TransCnt         uint64             // 区块内交易数量
 	TransactionInfos []*TransactionInfo // 区块内交易情报集合
+}
+
+func (t *BlockInfo) ToString() string {
+	result := fmt.Sprintf("区块编号: %d, 交易数量: %d, 区块哈希: %s, 前区块哈希: %s,\n\t\t交易集合:\n",
+		t.BlockNum, t.TransCnt, t.BlockHash, t.PreBlockHash)
+	for _, t := range t.TransactionInfos {
+		result = result + "\t\t" + t.ToString() + "\n"
+	}
+	return result
 }
 
 // 交易情报
@@ -60,12 +77,29 @@ type TransactionInfo struct {
 	CallerOU     string                  // 交易发起者OU分组
 }
 
+func (t *TransactionInfo) ToString() string {
+	readSeys := []string{}
+	for _, r := range t.TxReads {
+		readSeys = append(readSeys, r.ToString())
+	}
+	writeSeys := []string{}
+	for _, w := range t.TxWrites {
+		writeSeys = append(writeSeys, w.ToString())
+	}
+	return fmt.Sprintf("TxID: %s, TxCreateTime: %s, TxCcID: %s, TxArgs: %q, TxReads: %q, TxWrites: %q, CallerMspID: %s, CallerName: %s, CallerOU: %s",
+		t.TxID, t.TxCreateTime, t.TxCcID, t.TxArgs, readSeys, writeSeys, t.CallerMspID, t.CallerName, t.CallerOU)
+}
+
 // 交易读取数据情报
 type TransactionReadInfo struct {
 	NameSpace        string // 所属链码
 	ReadKey          string // 交易读取Key
 	ReadBlockNum     uint64 // 交易读取区块编号
 	ReadTxNumInBlock uint64 // 交易读取交易编号(区块内部)
+}
+
+func (t *TransactionReadInfo) ToString() string {
+	return fmt.Sprintf("NameSpace: %s, ReadKey: %s, ReadBlockNum: %d, ReadTxNumInBlock: %d", t.NameSpace, t.ReadKey, t.ReadBlockNum, t.ReadTxNumInBlock)
 }
 
 // 交易写入数据情报
@@ -76,6 +110,13 @@ type TransactionWriteInfo struct {
 	IsDelete   bool   // 是否删除
 }
 
+func (t *TransactionWriteInfo) ToString() string {
+	return fmt.Sprintf("NameSpace: %s, WriteKey: %s, WriteValue: %s, IsDelete: %v", t.NameSpace, t.WriteKey, t.WriteValue, t.IsDelete)
+}
+
+// BrowseChannel 浏览通道数据
+//  入参: ledgerClient 账本客户端实例
+//  返回: ChannelInfo
 func BrowseChannel(ledgerClient *ledger.Client) (*ChannelInfo, error) {
 	blockChainInfo, err := ledgerClient.QueryInfo()
 	if err != nil {
@@ -109,6 +150,9 @@ func BrowseChannel(ledgerClient *ledger.Client) (*ChannelInfo, error) {
 	return channelInfo, nil
 }
 
+// UnmarshalBlockData 反序列化Block区块数据。
+//  入参: block 区块数据
+//  返回: BlockInfo
 func UnmarshalBlockData(block *common.Block) (*BlockInfo, error) {
 	// 区块内交易数据集合
 	tranDatas := block.Data.Data
