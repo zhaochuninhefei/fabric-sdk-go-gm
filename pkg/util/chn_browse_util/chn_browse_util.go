@@ -316,7 +316,7 @@ func UnmarshalBlockData(block *common.Block) (*BlockInfo, error) {
 				for _, r := range readWriteSet.Reads {
 					transactionReadInfo := &TransactionReadInfo{
 						NameSpace: v.Namespace,
-						ReadKey:   string(TrimUnknownHeader([]byte(r.Key))),
+						ReadKey:   TrimUnknownHeader(r.Key),
 					}
 					if r.Version != nil {
 						transactionReadInfo.ReadBlockNum = r.Version.BlockNum
@@ -328,7 +328,7 @@ func UnmarshalBlockData(block *common.Block) (*BlockInfo, error) {
 					// zclog.Debugf("写集 key: %s, value: %s, IsDelete: %v", w.GetKey(), string(w.GetValue()), w.GetIsDelete())
 					transactionWriteInfo := &TransactionWriteInfo{
 						NameSpace:  v.Namespace,
-						WriteKey:   string(TrimUnknownHeader([]byte(w.GetKey()))),
+						WriteKey:   TrimUnknownHeader(w.GetKey()),
 						WriteValue: string(w.GetValue()),
 						IsDelete:   w.GetIsDelete(),
 					}
@@ -361,13 +361,14 @@ func TrimHiddenCharacter(originStr string) string {
 }
 
 // TrimUnknownHeader 去除不能正常解析的头部字节切片[0, 244, 143, 191, 191]
-func TrimUnknownHeader(origin []byte) []byte {
-	if len(origin) < 5 {
+func TrimUnknownHeader(origin string) string {
+	arrIn := []byte(origin)
+	if len(arrIn) < 5 {
 		return origin
 	}
 	// 0, 244, 143, 191, 191
-	if origin[0] == 0 && origin[1] == 244 && origin[2] == 143 && origin[3] == 191 && origin[4] == 191 {
-		return origin[5:]
+	if arrIn[0] == 0 && arrIn[1] == 244 && arrIn[2] == 143 && arrIn[3] == 191 && arrIn[4] == 191 {
+		return string(arrIn[5:])
 	}
 	return origin
 }
