@@ -114,6 +114,25 @@ func (t *TransactionWriteInfo) ToString() string {
 	return fmt.Sprintf("NameSpace: %s, WriteKey: %s, WriteValue: %s, IsDelete: %v", t.NameSpace, t.WriteKey, t.WriteValue, t.IsDelete)
 }
 
+// 浏览通道数据的相关参数
+type BrowseOption struct {
+	// 浏览上限类型
+	//  0:使用BlockCountLimit作为区块浏览上限; 1:使用LastBlockHash作为区块浏览上限; 2:使用LastBlockNum作为区块浏览上限;
+	BrowseLimitType int
+	// 区块数量上限
+	//  BrowseLimit值为0时，BrowseChannel浏览的区块数量<=BlockCountLimit。
+	//  BlockCountLimit默认值为0，此时BrowseChannel浏览的区块数量无限制。
+	BlockCountLimit uint64
+	// 上回区块哈希
+	//  BrowseLimitType值为1时，BrowseChannel浏览的区块向前不超过且不包括LastBlockHash对应的区块。
+	//  LastBlockHash默认值为空。BrowseLimitType值为1时，LastBlockHash不可为空。
+	LastBlockHash string
+	// 上回区块编号
+	//  BrowseLimit值为2时，BrowseChannel浏览的区块向前不超过且不包括LastBlockNum对应的区块。
+	//  LastBlockNum默认值为0。
+	LastBlockNum uint64
+}
+
 // BrowseChannel 浏览通道数据
 //  入参: ledgerClient 账本客户端实例
 //  返回: ChannelInfo
