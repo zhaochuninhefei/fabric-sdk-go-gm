@@ -11,6 +11,7 @@ See the Mulan PSL v2 for more details.
 package chn_browse_util
 
 import (
+	"bytes"
 	"encoding/hex"
 	"fmt"
 	"time"
@@ -132,7 +133,7 @@ func (t *TransactionWriteInfo) ToString() string {
 }
 
 // 浏览通道数据的相关参数
-type BrowseOption struct {
+type BrowseChannelConfig struct {
 	// 浏览上限类型
 	//  0:使用BlockCountLimit作为区块浏览上限; 1:使用LastBlockHash作为区块浏览上限; 2:使用LastBlockNum作为区块浏览上限;
 	BrowseLimitType int
@@ -149,6 +150,8 @@ type BrowseOption struct {
 	//  LastBlockNum默认值为0。
 	LastBlockNum uint64
 }
+
+type BrowseOption func(*BrowseChannelConfig)
 
 // BrowseChannel 浏览通道数据
 //  入参: ledgerClient 账本客户端实例
@@ -172,7 +175,72 @@ func BrowseChannel(ledgerClient *ledger.Client) (*ChannelInfo, error) {
 		if err != nil {
 			return nil, fmt.Errorf("failed to QueryBlockByHash: %s", err)
 		}
-		blockInfo, err := UnmarshalBlockData(block)
+		blockInfo, err := UnmarshalBlockData(block, curBlockHash)
+		if err != nil {
+			return nil, fmt.Errorf("failed to UnmarshalBlockData: %s", err)
+		}
+		total += blockInfo.TransCnt
+		blockInfoWithTxs = append(blockInfoWithTxs, blockInfo)
+		transactionInfos = append(transactionInfos, blockInfo.TransactionInfos...)
+		blockBasicInfos = append(blockBasicInfos, blockInfo.GetBasicInfo())
+		curBlockHash = block.Header.PreviousHash
+		if len(curBlockHash) == 0 {
+			break
+		}
+	}
+	channelInfo.TransTotal = total
+	channelInfo.BlockInfoWithTxs = blockInfoWithTxs
+	channelInfo.TransactionInfos = transactionInfos
+	channelInfo.BlockBasicInfos = blockBasicInfos
+	return channelInfo, nil
+}
+
+// BrowseChannel 浏览通道数据
+//  入参: ledgerClient 账本客户端实例
+//  返回: ChannelInfo
+func BrowseChannelWithConfig(ledgerClient *ledger.Client, config *BrowseChannelConfig) (*ChannelInfo, error) {
+	if config == nil {
+		return nil, fmt.Errorf("no config(*BrowseChannelConfig)")
+	}
+	browseLimitType := config.BrowseLimitType
+	if browseLimitType < 0 || browseLimitType > 2 {
+		return nil, fmt.Errorf("not supported browseLimitType")
+	}
+	lastBlockHash, _ := hex.DecodeString(config.LastBlockHash)
+
+	blockChainInfo, err := ledgerClient.QueryInfo()
+	if err != nil {
+		return nil, fmt.Errorf("failed to get blockInfo: %s", err)
+	}
+	channelInfo := &ChannelInfo{
+		BlockHeight: blockChainInfo.BCI.Height,
+	}
+
+	var total uint64 = 0
+	curBlockHash := blockChainInfo.BCI.CurrentBlockHash
+	blockInfoWithTxs := []*BlockInfoWithTx{}
+	transactionInfos := []*TransactionInfo{}
+	blockBasicInfos := []*BlockInfoBasic{}
+	var blockCnt uint64 = 0
+	for {
+		blockCnt++
+		// 当浏览参数为使用区块数量限制时，检查区块数量是否已超过区块数量上限
+		if browseLimitType == 0 && config.BlockCountLimit <= blockCnt {
+			break
+		}
+		// 当浏览参数为使用前回区块哈希限制时，检查本次遍历的区块哈希
+		if browseLimitType == 1 && bytes.Equal(curBlockHash, lastBlockHash) {
+			break
+		}
+		block, err := ledgerClient.QueryBlockByHash(curBlockHash)
+		if err != nil {
+			return nil, fmt.Errorf("failed to QueryBlockByHash: %s", err)
+		}
+		// 当浏览参数为使用前回区块编号限制时，检查本次遍历的区块编号
+		if browseLimitType == 2 && config.LastBlockNum == block.Header.Number {
+			break
+		}
+		blockInfo, err := UnmarshalBlockData(block, curBlockHash)
 		if err != nil {
 			return nil, fmt.Errorf("failed to UnmarshalBlockData: %s", err)
 		}
@@ -195,7 +263,7 @@ func BrowseChannel(ledgerClient *ledger.Client) (*ChannelInfo, error) {
 // UnmarshalBlockData 反序列化Block区块数据。
 //  入参: block 区块数据
 //  返回: BlockInfo
-func UnmarshalBlockData(block *common.Block) (*BlockInfoWithTx, error) {
+func UnmarshalBlockData(block *common.Block, curBlockHash []byte) (*BlockInfoWithTx, error) {
 	// 区块内交易数据集合
 	tranDatas := block.Data.Data
 	// 区块内交易数量
@@ -204,7 +272,7 @@ func UnmarshalBlockData(block *common.Block) (*BlockInfoWithTx, error) {
 	blockInfo := &BlockInfoWithTx{
 		BlockInfoBasic: BlockInfoBasic{
 			BlockNum:     block.Header.Number,
-			BlockHash:    hex.EncodeToString(block.Header.DataHash),
+			BlockHash:    hex.EncodeToString(curBlockHash),
 			PreBlockHash: hex.EncodeToString(block.Header.PreviousHash),
 			TransCnt:     uint64(transCnt),
 		},
