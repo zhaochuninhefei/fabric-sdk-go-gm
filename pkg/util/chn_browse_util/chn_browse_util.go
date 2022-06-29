@@ -32,35 +32,52 @@ pkg/util/chn_browse_util/chn_browse_util.go 通道浏览工具库，提供用于
 
 // 通道情报
 type ChannelInfo struct {
-	BlockHeight uint64       // 区块高度
-	TransTotal  uint64       // 交易总数
-	BlockInfos  []*BlockInfo // 区块集合
+	BlockHeight      uint64             // 区块高度
+	TransTotal       uint64             // 交易总数
+	BlockInfoWithTxs []*BlockInfoWithTx // 区块情报(包含内部交易情报)集合
+	TransactionInfos []*TransactionInfo // 交易情报集合
+	BlockBasicInfos  []*BlockInfoBasic  // 区块基础信息集合
 }
 
 func (t *ChannelInfo) ToString() string {
 	result := fmt.Sprintf("区块高度:%d, 交易总数: %d,\n区块集合:\n",
 		t.BlockHeight, t.TransTotal)
-	for _, b := range t.BlockInfos {
+	for _, b := range t.BlockInfoWithTxs {
 		result = result + "\t" + b.ToString() + "\n"
 	}
 	return result
 }
 
-// 区块情报
-type BlockInfo struct {
-	BlockNum         uint64             // 区块编号
-	BlockHash        string             // 区块哈希(16进制字符串)
-	PreBlockHash     string             // 前一区块哈希(16进制字符串)
-	TransCnt         uint64             // 区块内交易数量
+// 区块情报(包含内部交易情报)
+type BlockInfoWithTx struct {
+	BlockInfoBasic                      // 区块基础信息
 	TransactionInfos []*TransactionInfo // 区块内交易情报集合
 }
 
-func (t *BlockInfo) ToString() string {
+func (t *BlockInfoWithTx) ToString() string {
 	result := fmt.Sprintf("区块编号: %d, 交易数量: %d, 区块哈希: %s, 前区块哈希: %s,\n\t\t交易集合:\n",
 		t.BlockNum, t.TransCnt, t.BlockHash, t.PreBlockHash)
 	for _, t := range t.TransactionInfos {
 		result = result + "\t\t" + t.ToString() + "\n"
 	}
+	return result
+}
+
+func (t *BlockInfoWithTx) GetBasicInfo() *BlockInfoBasic {
+	return &t.BlockInfoBasic
+}
+
+// 区块基础信息(区块编号、区块哈希、前区块哈希、区块内交易数量)
+type BlockInfoBasic struct {
+	BlockNum     uint64 // 区块编号
+	BlockHash    string // 区块哈希(16进制字符串)
+	PreBlockHash string // 前一区块哈希(16进制字符串)
+	TransCnt     uint64 // 区块内交易数量
+}
+
+func (t *BlockInfoBasic) ToString() string {
+	result := fmt.Sprintf("区块编号: %d, 交易数量: %d, 区块哈希: %s, 前区块哈希: %s",
+		t.BlockNum, t.TransCnt, t.BlockHash, t.PreBlockHash)
 	return result
 }
 
@@ -147,7 +164,9 @@ func BrowseChannel(ledgerClient *ledger.Client) (*ChannelInfo, error) {
 
 	var total uint64 = 0
 	curBlockHash := blockChainInfo.BCI.CurrentBlockHash
-	blockInfos := []*BlockInfo{}
+	blockInfoWithTxs := []*BlockInfoWithTx{}
+	transactionInfos := []*TransactionInfo{}
+	blockBasicInfos := []*BlockInfoBasic{}
 	for {
 		block, err := ledgerClient.QueryBlockByHash(curBlockHash)
 		if err != nil {
@@ -158,31 +177,37 @@ func BrowseChannel(ledgerClient *ledger.Client) (*ChannelInfo, error) {
 			return nil, fmt.Errorf("failed to UnmarshalBlockData: %s", err)
 		}
 		total += blockInfo.TransCnt
-		blockInfos = append(blockInfos, blockInfo)
+		blockInfoWithTxs = append(blockInfoWithTxs, blockInfo)
+		transactionInfos = append(transactionInfos, blockInfo.TransactionInfos...)
+		blockBasicInfos = append(blockBasicInfos, blockInfo.GetBasicInfo())
 		curBlockHash = block.Header.PreviousHash
 		if len(curBlockHash) == 0 {
 			break
 		}
 	}
 	channelInfo.TransTotal = total
-	channelInfo.BlockInfos = blockInfos
+	channelInfo.BlockInfoWithTxs = blockInfoWithTxs
+	channelInfo.TransactionInfos = transactionInfos
+	channelInfo.BlockBasicInfos = blockBasicInfos
 	return channelInfo, nil
 }
 
 // UnmarshalBlockData 反序列化Block区块数据。
 //  入参: block 区块数据
 //  返回: BlockInfo
-func UnmarshalBlockData(block *common.Block) (*BlockInfo, error) {
+func UnmarshalBlockData(block *common.Block) (*BlockInfoWithTx, error) {
 	// 区块内交易数据集合
 	tranDatas := block.Data.Data
 	// 区块内交易数量
 	transCnt := len(tranDatas)
 	// 准备区块情报
-	blockInfo := &BlockInfo{
-		BlockNum:     block.Header.Number,
-		BlockHash:    hex.EncodeToString(block.Header.DataHash),
-		PreBlockHash: hex.EncodeToString(block.Header.PreviousHash),
-		TransCnt:     uint64(transCnt),
+	blockInfo := &BlockInfoWithTx{
+		BlockInfoBasic: BlockInfoBasic{
+			BlockNum:     block.Header.Number,
+			BlockHash:    hex.EncodeToString(block.Header.DataHash),
+			PreBlockHash: hex.EncodeToString(block.Header.PreviousHash),
+			TransCnt:     uint64(transCnt),
+		},
 	}
 	zclog.Debugf("区块编号: %d, 交易数量: %d", blockInfo.BlockNum, blockInfo.TransCnt)
 	transactionInfos := []*TransactionInfo{}
