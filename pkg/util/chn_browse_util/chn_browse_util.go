@@ -23,7 +23,6 @@ import (
 	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/peer"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/ledger"
 	"gitee.com/zhaochuninhefei/gmgo/x509"
-	"gitee.com/zhaochuninhefei/zcgolog/zclog"
 	"github.com/golang/protobuf/proto"
 )
 
@@ -290,13 +289,13 @@ func UnmarshalBlockData(block *common.Block, curBlockHash []byte) (*BlockInfoWit
 			TransCnt:           uint64(transCnt),
 		},
 	}
-	zclog.Debugf("区块编号: %d, 交易数量: %d", blockInfo.BlockNum, blockInfo.TransCnt)
+	// zclog.Debugf("区块编号: %d, 交易数量: %d", blockInfo.BlockNum, blockInfo.TransCnt)
 	transactionInfos := []*TransactionInfo{}
 	// 遍历区块内所有交易
 	for i := 0; i < transCnt; i++ {
 		// 创建交易情报
 		transactionInfo := &TransactionInfo{}
-		zclog.Debugf("第 %d 条交易数据.", i+1)
+		// zclog.Debugf("第 %d 条交易数据.", i+1)
 
 		/*
 		*初步反序列化区块里的本条交易数据，获取payload
@@ -345,7 +344,7 @@ func UnmarshalBlockData(block *common.Block, curBlockHash []byte) (*BlockInfoWit
 		if err != nil {
 			return blockInfo, err
 		}
-		zclog.Debugf("cert owner: %s", cert.Subject)
+		// zclog.Debugf("cert owner: %s", cert.Subject)
 		transactionInfo.CallerName = cert.Subject.CommonName
 		transactionInfo.CallerOU = cert.Subject.OrganizationalUnit[0]
 
@@ -376,7 +375,7 @@ func UnmarshalBlockData(block *common.Block, curBlockHash []byte) (*BlockInfoWit
 		if err != nil {
 			return blockInfo, err
 		}
-		zclog.Debugf("chaincodeProposalPayload: %s", chaincodeProposalPayload.String())
+		// zclog.Debugf("chaincodeProposalPayload: %s", chaincodeProposalPayload.String())
 		// 反序列化 chaincodeProposalPayload.Input
 		chaincodeInvocationSpec := &peer.ChaincodeInvocationSpec{}
 		err = proto.Unmarshal(chaincodeProposalPayload.Input, chaincodeInvocationSpec)
