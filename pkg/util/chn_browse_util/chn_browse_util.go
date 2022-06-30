@@ -152,7 +152,7 @@ type BrowseChannelConfig struct {
 
 type BrowseOption func(*BrowseChannelConfig)
 
-// BrowseChannel 浏览通道数据
+// BrowseChannel 浏览通道数据，遍历所有区块。
 //  入参: ledgerClient 账本客户端实例
 //  返回: ChannelInfo
 func BrowseChannel(ledgerClient *ledger.Client) (*ChannelInfo, error) {
@@ -160,8 +160,9 @@ func BrowseChannel(ledgerClient *ledger.Client) (*ChannelInfo, error) {
 	return BrowseChannelWithConfig(ledgerClient, config)
 }
 
-// BrowseChannel 浏览通道数据
+// BrowseChannelWithBlockCntLimit 浏览通道数据，根据入参blockCntLimit决定遍历区块的数量。
 //  入参: ledgerClient 账本客户端实例
+//  入参: blockCntLimit 区块数量上限
 //  返回: ChannelInfo
 func BrowseChannelWithBlockCntLimit(ledgerClient *ledger.Client, blockCntLimit uint64) (*ChannelInfo, error) {
 	config := &BrowseChannelConfig{
@@ -171,7 +172,7 @@ func BrowseChannelWithBlockCntLimit(ledgerClient *ledger.Client, blockCntLimit u
 	return BrowseChannelWithConfig(ledgerClient, config)
 }
 
-// BrowseChannel 浏览通道数据
+// BrowseChannelWithConfig 浏览通道数据
 //  入参: ledgerClient 账本客户端实例
 //  入参: config 浏览参数
 //  返回: ChannelInfo
