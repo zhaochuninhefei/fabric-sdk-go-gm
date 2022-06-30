@@ -297,9 +297,7 @@ func UnmarshalBlockData(block *common.Block, curBlockHash []byte) (*BlockInfoWit
 		transactionInfo := &TransactionInfo{}
 		// zclog.Debugf("第 %d 条交易数据.", i+1)
 
-		/*
-		*初步反序列化区块里的本条交易数据，获取payload
-		 */
+		/* 初步反序列化区块里的本条交易数据，获取payload */
 		// 交易数据反序列化为 Envelope
 		envelope := &common.Envelope{}
 		err := proto.Unmarshal(tranDatas[i], envelope)
@@ -314,9 +312,7 @@ func UnmarshalBlockData(block *common.Block, curBlockHash []byte) (*BlockInfoWit
 		}
 		// zclog.Debugf("第 %d 条交易数据 payload: %s", i+1, payload.String())
 
-		/*
-		*从payload的header里获取交易ID、交易创建时间、交易发起者的MSPID/CommonName/OU信息
-		 */
+		/* 从payload的header里获取交易ID、交易创建时间、交易发起者的MSPID/CommonName/OU信息 */
 		// 反序列化 payload.Header.ChannelHeader 交易ID、交易创建时间等
 		channelHeader := &common.ChannelHeader{}
 		err = proto.Unmarshal(payload.Header.ChannelHeader, channelHeader)
@@ -348,9 +344,7 @@ func UnmarshalBlockData(block *common.Block, curBlockHash []byte) (*BlockInfoWit
 		transactionInfo.CallerName = cert.Subject.CommonName
 		transactionInfo.CallerOU = cert.Subject.OrganizationalUnit[0]
 
-		/*
-		*从payload的payload.Data里进一步获取 ChaincodeActionPayload
-		 */
+		/* 从payload的payload.Data里进一步获取 ChaincodeActionPayload */
 		// 反序列化 payload.Data
 		transaction := &peer.Transaction{}
 		err = proto.Unmarshal(payload.Data, transaction)
@@ -366,9 +360,7 @@ func UnmarshalBlockData(block *common.Block, curBlockHash []byte) (*BlockInfoWit
 		}
 		// zclog.Debugf("chaincodeActionPayload: %s", chaincodeActionPayload.String())
 
-		/*
-		*从ChaincodeActionPayload里获取 链码以及本次合约调用的入参
-		 */
+		/* 从ChaincodeActionPayload里获取 链码以及本次合约调用的入参 */
 		// 反序列化 chaincodeActionPayload.ChaincodeProposalPayload
 		chaincodeProposalPayload := &peer.ChaincodeProposalPayload{}
 		err = proto.Unmarshal(chaincodeActionPayload.ChaincodeProposalPayload, chaincodeProposalPayload)
@@ -397,9 +389,7 @@ func UnmarshalBlockData(block *common.Block, curBlockHash []byte) (*BlockInfoWit
 			}
 		}
 
-		/*
-		*从ChaincodeActionPayload里获取 本次合约调用的读写集
-		 */
+		/* 从ChaincodeActionPayload里获取 本次合约调用的读写集 */
 		proposalResponsePayloadTmp := string(chaincodeActionPayload.Action.ProposalResponsePayload)
 		if proposalResponsePayloadTmp != "Application" {
 			// 反序列化 chaincodeActionPayload.Action 数据
