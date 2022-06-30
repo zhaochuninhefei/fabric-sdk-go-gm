@@ -34,7 +34,7 @@ pkg/util/chn_browse_util/chn_browse_util.go 通道浏览工具库，提供用于
 // 通道情报
 type ChannelInfo struct {
 	BlockHeight      uint64             // 区块高度
-	TransTotal       uint64             // 交易总数
+	TransTotal       uint64             // 交易总数(仅统计本次浏览的区块)
 	BlockInfoWithTxs []*BlockInfoWithTx // 区块情报(包含内部交易情报)集合
 	TransactionInfos []*TransactionInfo // 交易情报集合
 	BlockBasicInfos  []*BlockInfoBasic  // 区块基础信息集合
@@ -162,6 +162,17 @@ func BrowseChannel(ledgerClient *ledger.Client) (*ChannelInfo, error) {
 
 // BrowseChannel 浏览通道数据
 //  入参: ledgerClient 账本客户端实例
+//  返回: ChannelInfo
+func BrowseChannelWithBlockCntLimit(ledgerClient *ledger.Client, blockCntLimit uint64) (*ChannelInfo, error) {
+	config := &BrowseChannelConfig{
+		BrowseLimitType: 0,
+		BlockCountLimit: blockCntLimit,
+	}
+	return BrowseChannelWithConfig(ledgerClient, config)
+}
+
+// BrowseChannel 浏览通道数据
+//  入参: ledgerClient 账本客户端实例
 //  入参: config 浏览参数
 //  返回: ChannelInfo
 func BrowseChannelWithConfig(ledgerClient *ledger.Client, config *BrowseChannelConfig) (*ChannelInfo, error) {
@@ -217,7 +228,7 @@ func BrowseChannelWithConfig(ledgerClient *ledger.Client, config *BrowseChannelC
 		curBlockNum--
 		// 当浏览参数为使用区块数量限制时，检查区块数量是否已超过区块数量上限。
 		// BlockCountLimit为0时表示没有区块数量限制。
-		if browseLimitType == 0 && config.BlockCountLimit > 0 && config.BlockCountLimit <= blockCnt {
+		if browseLimitType == 0 && config.BlockCountLimit > 0 && config.BlockCountLimit < blockCnt {
 			break
 		}
 		// 当浏览参数为使用前回区块哈希限制时，检查本次遍历的区块哈希
