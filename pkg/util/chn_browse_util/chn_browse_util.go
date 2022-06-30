@@ -157,46 +157,13 @@ type BrowseOption func(*BrowseChannelConfig)
 //  入参: ledgerClient 账本客户端实例
 //  返回: ChannelInfo
 func BrowseChannel(ledgerClient *ledger.Client) (*ChannelInfo, error) {
-	blockChainInfo, err := ledgerClient.QueryInfo()
-	if err != nil {
-		return nil, fmt.Errorf("failed to get blockInfo: %s", err)
-	}
-	channelInfo := &ChannelInfo{
-		BlockHeight: blockChainInfo.BCI.Height,
-	}
-
-	var total uint64 = 0
-	curBlockHash := blockChainInfo.BCI.CurrentBlockHash
-	blockInfoWithTxs := []*BlockInfoWithTx{}
-	transactionInfos := []*TransactionInfo{}
-	blockBasicInfos := []*BlockInfoBasic{}
-	for {
-		block, err := ledgerClient.QueryBlockByHash(curBlockHash)
-		if err != nil {
-			return nil, fmt.Errorf("failed to QueryBlockByHash: %s", err)
-		}
-		blockInfo, err := UnmarshalBlockData(block, curBlockHash)
-		if err != nil {
-			return nil, fmt.Errorf("failed to UnmarshalBlockData: %s", err)
-		}
-		total += blockInfo.TransCnt
-		blockInfoWithTxs = append(blockInfoWithTxs, blockInfo)
-		transactionInfos = append(transactionInfos, blockInfo.TransactionInfos...)
-		blockBasicInfos = append(blockBasicInfos, blockInfo.GetBasicInfo())
-		curBlockHash = block.Header.PreviousHash
-		if len(curBlockHash) == 0 {
-			break
-		}
-	}
-	channelInfo.TransTotal = total
-	channelInfo.BlockInfoWithTxs = blockInfoWithTxs
-	channelInfo.TransactionInfos = transactionInfos
-	channelInfo.BlockBasicInfos = blockBasicInfos
-	return channelInfo, nil
+	config := &BrowseChannelConfig{}
+	return BrowseChannelWithConfig(ledgerClient, config)
 }
 
 // BrowseChannel 浏览通道数据
 //  入参: ledgerClient 账本客户端实例
+//  入参: config 浏览参数
 //  返回: ChannelInfo
 func BrowseChannelWithConfig(ledgerClient *ledger.Client, config *BrowseChannelConfig) (*ChannelInfo, error) {
 	if config == nil {
@@ -224,8 +191,9 @@ func BrowseChannelWithConfig(ledgerClient *ledger.Client, config *BrowseChannelC
 	var blockCnt uint64 = 0
 	for {
 		blockCnt++
-		// 当浏览参数为使用区块数量限制时，检查区块数量是否已超过区块数量上限
-		if browseLimitType == 0 && config.BlockCountLimit <= blockCnt {
+		// 当浏览参数为使用区块数量限制时，检查区块数量是否已超过区块数量上限。
+		// BlockCountLimit为0时表示没有区块数量限制。
+		if browseLimitType == 0 && config.BlockCountLimit > 0 && config.BlockCountLimit <= blockCnt {
 			break
 		}
 		// 当浏览参数为使用前回区块哈希限制时，检查本次遍历的区块哈希
