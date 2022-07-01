@@ -10,6 +10,10 @@ See the Mulan PSL v2 for more details.
 
 package chn_browse_util
 
+/*
+pkg/util/chn_browse_util/chn_browse_util.go 通道浏览工具库，提供用于查询通道的区块与交易信息的通用函数。
+*/
+
 import (
 	"bytes"
 	"encoding/hex"
@@ -25,10 +29,6 @@ import (
 	"gitee.com/zhaochuninhefei/gmgo/x509"
 	"github.com/golang/protobuf/proto"
 )
-
-/*
-pkg/util/chn_browse_util/chn_browse_util.go 通道浏览工具库，提供用于查询通道的区块与交易信息的通用函数。
-*/
 
 // 通道情报
 type ChannelInfo struct {
@@ -133,7 +133,7 @@ func (t *TransactionWriteInfo) ToString() string {
 // 浏览通道数据的相关参数
 type BrowseChannelConfig struct {
 	// 浏览上限类型
-	//  0:使用BlockCountLimit作为区块浏览上限; 1:使用LastBlockHash作为区块浏览上限; 2:使用LastBlockNum作为区块浏览上限;
+	//  0:使用BlockCountLimit作为区块浏览上限; 1:使用LastBlockHeaderHash作为区块浏览上限; 2:使用LastBlockNum作为区块浏览上限;
 	BrowseLimitType int
 	// 区块数量上限
 	//  BrowseLimit值为0时，BrowseChannel浏览的区块数量<=BlockCountLimit。
@@ -167,6 +167,18 @@ func BrowseChannelWithBlockCntLimit(ledgerClient *ledger.Client, blockCntLimit u
 	config := &BrowseChannelConfig{
 		BrowseLimitType: 0,
 		BlockCountLimit: blockCntLimit,
+	}
+	return BrowseChannelWithConfig(ledgerClient, config)
+}
+
+// BrowseChannelWithLastBlockHeaderHash 浏览通道数据，根据入参lastBlockHeaderHash决定遍历区块向前回溯的上限。
+//  入参: ledgerClient 账本客户端实例
+//  入参: lastBlockHeaderHash 前回浏览的最后区块头哈希
+//  返回: ChannelInfo
+func BrowseChannelWithLastBlockHeaderHash(ledgerClient *ledger.Client, lastBlockHeaderHash string) (*ChannelInfo, error) {
+	config := &BrowseChannelConfig{
+		BrowseLimitType:     1,
+		LastBlockHeaderHash: lastBlockHeaderHash,
 	}
 	return BrowseChannelWithConfig(ledgerClient, config)
 }
