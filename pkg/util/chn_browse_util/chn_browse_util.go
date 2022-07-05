@@ -18,6 +18,7 @@ import (
 	"bytes"
 	"encoding/hex"
 	"fmt"
+	"strings"
 	"time"
 
 	"gitee.com/zhaochuninhefei/fabric-protos-go-gm/common"
@@ -91,6 +92,8 @@ type TransactionInfo struct {
 	CallerMspID  string                  // 交易发起者MSPID
 	CallerName   string                  // 交易发起者名称
 	CallerOU     string                  // 交易发起者OU分组
+	TxDesc       string                  // 交易说明
+	ErrorMsg     string                  // 交易解析错误消息
 }
 
 func (t *TransactionInfo) ToString() string {
@@ -102,8 +105,8 @@ func (t *TransactionInfo) ToString() string {
 	for _, w := range t.TxWrites {
 		writeSeys = append(writeSeys, w.ToString())
 	}
-	return fmt.Sprintf("TxID: %s, TxCreateTime: %s, TxCcID: %s, TxArgs: %q, TxReads: %q, TxWrites: %q, CallerMspID: %s, CallerName: %s, CallerOU: %s",
-		t.TxID, t.TxCreateTime, t.TxCcID, t.TxArgs, readSeys, writeSeys, t.CallerMspID, t.CallerName, t.CallerOU)
+	return fmt.Sprintf("TxID: %s, TxCreateTime: %s, TxCcID: %s, TxArgs: %q, TxReads: %q, TxWrites: %q, CallerMspID: %s, CallerName: %s, CallerOU: %s, TxDesc: %s, ErrorMsg: %s",
+		t.TxID, t.TxCreateTime, t.TxCcID, t.TxArgs, readSeys, writeSeys, t.CallerMspID, t.CallerName, t.CallerOU, t.TxDesc, t.ErrorMsg)
 }
 
 // 交易读取数据情报
@@ -327,13 +330,15 @@ func UnmarshalBlockData(block *common.Block, curBlockHash []byte) (*BlockInfoWit
 		envelope := &common.Envelope{}
 		err := proto.Unmarshal(tranDatas[i], envelope)
 		if err != nil {
-			return blockInfo, err
+			transactionInfo.ErrorMsg = err.Error()
+			continue
 		}
 		// 反序列化 envelope.Payload
 		payload := &common.Payload{}
 		err = proto.Unmarshal(envelope.Payload, payload)
 		if err != nil {
-			return blockInfo, err
+			transactionInfo.ErrorMsg = err.Error()
+			continue
 		}
 		// zclog.Debugf("第 %d 条交易数据 payload: %s", i+1, payload.String())
 
@@ -342,7 +347,8 @@ func UnmarshalBlockData(block *common.Block, curBlockHash []byte) (*BlockInfoWit
 		channelHeader := &common.ChannelHeader{}
 		err = proto.Unmarshal(payload.Header.ChannelHeader, channelHeader)
 		if err != nil {
-			return blockInfo, err
+			transactionInfo.ErrorMsg = err.Error()
+			continue
 		}
 		transactionInfo.TxID = channelHeader.TxId
 		transactionInfo.TxCreateTime = time.Unix(channelHeader.Timestamp.Seconds, 0).Format("2006-01-02 15:04:05")
@@ -351,19 +357,22 @@ func UnmarshalBlockData(block *common.Block, curBlockHash []byte) (*BlockInfoWit
 		signatureHeader := &common.SignatureHeader{}
 		err = proto.Unmarshal(payload.Header.SignatureHeader, signatureHeader)
 		if err != nil {
-			return blockInfo, err
+			transactionInfo.ErrorMsg = err.Error()
+			continue
 		}
 		// 反序列化 signatureHeader.Creator 发起交易请求的身份信息, 包括MSPID，以及身份字节数组IdBytes
 		creator := &msp.SerializedIdentity{}
 		err = proto.Unmarshal(signatureHeader.Creator, creator)
 		if err != nil {
-			return blockInfo, err
+			transactionInfo.ErrorMsg = err.Error()
+			continue
 		}
 		transactionInfo.CallerMspID = creator.GetMspid()
 		// 证书的pem字节数组解析为x509证书结构
 		cert, err := x509.ReadCertificateFromPem(creator.IdBytes)
 		if err != nil {
-			return blockInfo, err
+			transactionInfo.ErrorMsg = err.Error()
+			continue
 		}
 		// zclog.Debugf("cert owner: %s", cert.Subject)
 		transactionInfo.CallerName = cert.Subject.CommonName
@@ -374,14 +383,16 @@ func UnmarshalBlockData(block *common.Block, curBlockHash []byte) (*BlockInfoWit
 		transaction := &peer.Transaction{}
 		err = proto.Unmarshal(payload.Data, transaction)
 		if err != nil {
-			return blockInfo, err
+			transactionInfo.ErrorMsg = err.Error()
+			continue
 		}
 		// zclog.Debugf("transaction: %s", transaction.String())
 		// 反序列化 transaction.Actions[0].Payload
 		chaincodeActionPayload := &peer.ChaincodeActionPayload{}
 		err = proto.Unmarshal(transaction.Actions[0].Payload, chaincodeActionPayload)
 		if err != nil {
-			return blockInfo, err
+			transactionInfo.ErrorMsg = err.Error()
+			continue
 		}
 		// zclog.Debugf("chaincodeActionPayload: %s", chaincodeActionPayload.String())
 
@@ -390,105 +401,114 @@ func UnmarshalBlockData(block *common.Block, curBlockHash []byte) (*BlockInfoWit
 		chaincodeProposalPayload := &peer.ChaincodeProposalPayload{}
 		err = proto.Unmarshal(chaincodeActionPayload.ChaincodeProposalPayload, chaincodeProposalPayload)
 		if err != nil {
-			return blockInfo, err
+			transactionInfo.ErrorMsg = err.Error()
+			continue
 		}
 		if chaincodeProposalPayload == nil || len(chaincodeProposalPayload.Input) == 0 {
-			fmt.Printf("区块编号: %d, 第 %d 条交易不是合约调用。\n", blockInfo.BlockNum, i+1)
-
+			transactionInfo.TxDesc = fmt.Sprintf("区块编号: %d, 第 %d 条交易不是合约调用。", blockInfo.BlockNum, i+1)
+			continue
+		}
+		// zclog.Debugf("chaincodeProposalPayload: %s", chaincodeProposalPayload.String())
+		// 反序列化 chaincodeProposalPayload.Input
+		chaincodeInvocationSpec := &peer.ChaincodeInvocationSpec{}
+		err = proto.Unmarshal(chaincodeProposalPayload.Input, chaincodeInvocationSpec)
+		if err != nil {
+			transactionInfo.ErrorMsg = err.Error()
+			continue
+		}
+		// zclog.Debugf("chaincodeInvocationSpec: %s", chaincodeInvocationSpec.String())
+		if chaincodeInvocationSpec != nil && chaincodeInvocationSpec.ChaincodeSpec != nil {
+			if chaincodeInvocationSpec.ChaincodeSpec.Input != nil {
+				// 获取本次交易的链码调用输入参数
+				var args []string
+				for _, v := range chaincodeInvocationSpec.ChaincodeSpec.Input.Args {
+					args = append(args, string(v))
+				}
+				transactionInfo.TxArgs = args
+			}
+			if chaincodeInvocationSpec.ChaincodeSpec.ChaincodeId != nil {
+				transactionInfo.TxCcID = chaincodeInvocationSpec.ChaincodeSpec.ChaincodeId.Name
+			}
 		} else {
-			// zclog.Debugf("chaincodeProposalPayload: %s", chaincodeProposalPayload.String())
-			// 反序列化 chaincodeProposalPayload.Input
-			chaincodeInvocationSpec := &peer.ChaincodeInvocationSpec{}
-			err = proto.Unmarshal(chaincodeProposalPayload.Input, chaincodeInvocationSpec)
-			if err != nil {
-				return blockInfo, err
-			}
-			// zclog.Debugf("chaincodeInvocationSpec: %s", chaincodeInvocationSpec.String())
-			if chaincodeInvocationSpec != nil && chaincodeInvocationSpec.ChaincodeSpec != nil {
-				if chaincodeInvocationSpec.ChaincodeSpec.Input != nil {
-					// 获取本次交易的链码调用输入参数
-					var args []string
-					for _, v := range chaincodeInvocationSpec.ChaincodeSpec.Input.Args {
-						args = append(args, string(v))
-					}
-					transactionInfo.TxArgs = args
-				}
-				if chaincodeInvocationSpec.ChaincodeSpec.ChaincodeId != nil {
-					transactionInfo.TxCcID = chaincodeInvocationSpec.ChaincodeSpec.ChaincodeId.Name
-				}
-			} else {
-				fmt.Printf("区块编号: %d, 第 %d 条交易, chaincodeActionPayload: %s\n", blockInfo.BlockNum, i+1, chaincodeActionPayload.String())
-			}
+			transactionInfo.ErrorMsg = fmt.Sprintf("区块编号: %d, 第 %d 条交易, chaincodeInvocationSpec是预期外的值: %s", blockInfo.BlockNum, i+1, chaincodeInvocationSpec.String())
+			continue
+		}
 
-			/* 从ChaincodeActionPayload里获取 本次合约调用的读写集 */
-			proposalResponsePayloadTmp := string(chaincodeActionPayload.Action.ProposalResponsePayload)
-			// proposalResponsePayloadTmp的值为"Application"或"Orderer"时，代表当前交易是通道配置交易等非业务交易。
-			if proposalResponsePayloadTmp != "Application" && proposalResponsePayloadTmp != "Orderer" {
-				// 反序列化 chaincodeActionPayload.Action 数据
-				proposalResponsePayload := &peer.ProposalResponsePayload{}
-				err = proto.Unmarshal(chaincodeActionPayload.Action.ProposalResponsePayload, proposalResponsePayload)
-				// 反序列化 chaincodeActionPayload.Action 成功才能执行以下处理
-				if err == nil {
-					// zclog.Debugf("proposalResponsePayload: %s", proposalResponsePayload.String())
-					// 反序列化 proposalResponsePayload.Extension
-					chaincodeAction := &peer.ChaincodeAction{}
-					err = proto.Unmarshal(proposalResponsePayload.Extension, chaincodeAction)
-					if err != nil {
-						return blockInfo, err
-					}
-					// zclog.Debugf("chaincodeAction: %s", chaincodeAction.String())
-					// 反序列化 chaincodeAction.Results
-					txReadWriteSet := &rwset.TxReadWriteSet{}
-					err = proto.Unmarshal(chaincodeAction.Results, txReadWriteSet)
-					if err != nil {
-						return blockInfo, err
-					}
-					// zclog.Debugf("txReadWriteSet: %s", txReadWriteSet.String())
-					transactionReadInfos := []*TransactionReadInfo{}
-					transactionWriteInfos := []*TransactionWriteInfo{}
-					// 遍历 txReadWriteSet.NsRwset
-					for _, v := range txReadWriteSet.NsRwset {
-						// 不处理 _lifecycle
-						if v.Namespace == "_lifecycle" {
-							continue
-						}
-						// zclog.Debugf("Namespace: %s", v.Namespace)
-						readWriteSet := &kvrwset.KVRWSet{}
-						err = proto.Unmarshal(v.Rwset, readWriteSet)
-						if err != nil {
-							return blockInfo, err
-						}
-						for _, r := range readWriteSet.Reads {
-							transactionReadInfo := &TransactionReadInfo{
-								NameSpace: v.Namespace,
-								ReadKey:   TrimUnknownHeader(r.Key),
-							}
-							if r.Version != nil {
-								transactionReadInfo.ReadBlockNum = r.Version.BlockNum
-								transactionReadInfo.ReadTxNumInBlock = r.Version.TxNum
-							}
-							transactionReadInfos = append(transactionReadInfos, transactionReadInfo)
-						}
-						for _, w := range readWriteSet.Writes {
-							// zclog.Debugf("写集 key: %s, value: %s, IsDelete: %v", w.GetKey(), string(w.GetValue()), w.GetIsDelete())
-							transactionWriteInfo := &TransactionWriteInfo{
-								NameSpace:  v.Namespace,
-								WriteKey:   TrimUnknownHeader(w.GetKey()),
-								WriteValue: string(w.GetValue()),
-								IsDelete:   w.GetIsDelete(),
-							}
-							transactionWriteInfos = append(transactionWriteInfos, transactionWriteInfo)
-						}
-					}
-					transactionInfo.TxReads = transactionReadInfos
-					transactionInfo.TxWrites = transactionWriteInfos
-				} else {
-					fmt.Printf("区块编号: %d, 第 %d 条交易, proposalResponsePayloadTmp: %s\n", blockInfo.BlockNum, i+1, proposalResponsePayloadTmp)
+		/* 从ChaincodeActionPayload里获取 本次合约调用的读写集 */
+		proposalResponsePayloadTmp := string(chaincodeActionPayload.Action.ProposalResponsePayload)
+		// proposalResponsePayloadTmp的值为"Application"或"Orderer"时，代表当前交易是通道配置交易等非业务交易。
+		if proposalResponsePayloadTmp == "Application" || proposalResponsePayloadTmp == "Orderer" {
+			transactionInfo.TxDesc = fmt.Sprintf("区块编号: %d, 第 %d 条交易不是合约调用。", blockInfo.BlockNum, i+1)
+			continue
+		}
+		// 反序列化 chaincodeActionPayload.Action 数据
+		proposalResponsePayload := &peer.ProposalResponsePayload{}
+		err = proto.Unmarshal(chaincodeActionPayload.Action.ProposalResponsePayload, proposalResponsePayload)
+		if err != nil {
+			transactionInfo.ErrorMsg = err.Error()
+			continue
+		}
+		// zclog.Debugf("proposalResponsePayload: %s", proposalResponsePayload.String())
+		// 反序列化 proposalResponsePayload.Extension
+		chaincodeAction := &peer.ChaincodeAction{}
+		err = proto.Unmarshal(proposalResponsePayload.Extension, chaincodeAction)
+		if err != nil {
+			transactionInfo.ErrorMsg = err.Error()
+			continue
+		}
+		// zclog.Debugf("chaincodeAction: %s", chaincodeAction.String())
+		// 反序列化 chaincodeAction.Results
+		txReadWriteSet := &rwset.TxReadWriteSet{}
+		err = proto.Unmarshal(chaincodeAction.Results, txReadWriteSet)
+		if err != nil {
+			transactionInfo.ErrorMsg = err.Error()
+			continue
+		}
+		// zclog.Debugf("txReadWriteSet: %s", txReadWriteSet.String())
+		transactionReadInfos := []*TransactionReadInfo{}
+		transactionWriteInfos := []*TransactionWriteInfo{}
+		errInRwset := []string{}
+		// 遍历 txReadWriteSet.NsRwset
+		for _, v := range txReadWriteSet.NsRwset {
+			// 不处理 _lifecycle
+			if v.Namespace == "_lifecycle" {
+				continue
+			}
+			// zclog.Debugf("Namespace: %s", v.Namespace)
+			readWriteSet := &kvrwset.KVRWSet{}
+			err = proto.Unmarshal(v.Rwset, readWriteSet)
+			if err != nil {
+				errInRwset = append(errInRwset, err.Error())
+				continue
+			}
+			for _, r := range readWriteSet.Reads {
+				transactionReadInfo := &TransactionReadInfo{
+					NameSpace: v.Namespace,
+					ReadKey:   TrimUnknownHeader(r.Key),
 				}
-			} else {
-				fmt.Printf("区块编号: %d, 第 %d 条交易, proposalResponsePayloadTmp: %s\n", blockInfo.BlockNum, i+1, proposalResponsePayloadTmp)
+				if r.Version != nil {
+					transactionReadInfo.ReadBlockNum = r.Version.BlockNum
+					transactionReadInfo.ReadTxNumInBlock = r.Version.TxNum
+				}
+				transactionReadInfos = append(transactionReadInfos, transactionReadInfo)
+			}
+			for _, w := range readWriteSet.Writes {
+				// zclog.Debugf("写集 key: %s, value: %s, IsDelete: %v", w.GetKey(), string(w.GetValue()), w.GetIsDelete())
+				transactionWriteInfo := &TransactionWriteInfo{
+					NameSpace:  v.Namespace,
+					WriteKey:   TrimUnknownHeader(w.GetKey()),
+					WriteValue: string(w.GetValue()),
+					IsDelete:   w.GetIsDelete(),
+				}
+				transactionWriteInfos = append(transactionWriteInfos, transactionWriteInfo)
 			}
 		}
+		if len(errInRwset) > 0 {
+			transactionInfo.ErrorMsg = strings.Join(errInRwset, ";")
+		}
+		transactionInfo.TxReads = transactionReadInfos
+		transactionInfo.TxWrites = transactionWriteInfos
+
 	}
 	blockInfo.TransactionInfos = transactionInfos
 	return blockInfo, nil
