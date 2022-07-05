@@ -183,6 +183,18 @@ func BrowseChannelWithLastBlockHeaderHash(ledgerClient *ledger.Client, lastBlock
 	return BrowseChannelWithConfig(ledgerClient, config)
 }
 
+// BrowseChannelWithLastBlockNum 浏览通道数据，根据入参lastBlockNum决定遍历区块向前回溯的上限。
+//  入参: ledgerClient 账本客户端实例
+//  入参: lastBlockNum 前回浏览的最后区块编号
+//  返回: ChannelInfo
+func BrowseChannelWithLastBlockNum(ledgerClient *ledger.Client, lastBlockNum uint64) (*ChannelInfo, error) {
+	config := &BrowseChannelConfig{
+		BrowseLimitType: 2,
+		LastBlockNum:    lastBlockNum,
+	}
+	return BrowseChannelWithConfig(ledgerClient, config)
+}
+
 // BrowseChannelWithConfig 浏览通道数据
 //  入参: ledgerClient 账本客户端实例
 //  入参: config 浏览参数
