@@ -92,6 +92,7 @@ type TransactionInfo struct {
 	CallerMspID  string                  // 交易发起者MSPID
 	CallerName   string                  // 交易发起者名称
 	CallerOU     string                  // 交易发起者OU分组
+	BlockNum     uint64                  // 交易所属区块编号
 	TxDesc       string                  // 交易说明
 	ErrorMsg     string                  // 交易解析错误消息
 }
@@ -105,8 +106,8 @@ func (t *TransactionInfo) ToString() string {
 	for _, w := range t.TxWrites {
 		writeSeys = append(writeSeys, w.ToString())
 	}
-	return fmt.Sprintf("TxID: %s, TxCreateTime: %s, TxCcID: %s, TxArgs: %q, TxReads: %q, TxWrites: %q, CallerMspID: %s, CallerName: %s, CallerOU: %s, TxDesc: %s, ErrorMsg: %s",
-		t.TxID, t.TxCreateTime, t.TxCcID, t.TxArgs, readSeys, writeSeys, t.CallerMspID, t.CallerName, t.CallerOU, t.TxDesc, t.ErrorMsg)
+	return fmt.Sprintf("TxID: %s, TxCreateTime: %s, BlockNum: %d, TxCcID: %s, TxArgs: %q, TxReads: %q, TxWrites: %q, CallerMspID: %s, CallerName: %s, CallerOU: %s, TxDesc: %s, ErrorMsg: %s",
+		t.TxID, t.TxCreateTime, t.BlockNum, t.TxCcID, t.TxArgs, readSeys, writeSeys, t.CallerMspID, t.CallerName, t.CallerOU, t.TxDesc, t.ErrorMsg)
 }
 
 // 交易读取数据情报
@@ -321,7 +322,9 @@ func UnmarshalBlockData(block *common.Block, curBlockHash []byte) (*BlockInfoWit
 	// 遍历区块内所有交易
 	for i := 0; i < transCnt; i++ {
 		// 创建交易情报
-		transactionInfo := &TransactionInfo{}
+		transactionInfo := &TransactionInfo{
+			BlockNum: blockInfo.BlockNum,
+		}
 		transactionInfos = append(transactionInfos, transactionInfo)
 		// zclog.Debugf("第 %d 条交易数据.", i+1)
 
