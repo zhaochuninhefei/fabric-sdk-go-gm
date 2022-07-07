@@ -150,7 +150,9 @@ type BrowseChannelConfig struct {
 	// 上回区块编号
 	//  BrowseLimit值为2时，BrowseChannel浏览的区块向前不超过且不包括LastBlockNum对应的区块。
 	//  LastBlockNum默认值为0。
-	LastBlockNum uint64
+	LastBlockNum    uint64
+	OnlyBussinessTx bool
+	OnlyCcTx        bool
 }
 
 type BrowseOption func(*BrowseChannelConfig)
