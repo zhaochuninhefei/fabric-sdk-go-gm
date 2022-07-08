@@ -570,3 +570,18 @@ func IsSysCC(name string) bool {
 func IsBussinessCC(name string) bool {
 	return len(name) > 0 && !IsSysCC(name)
 }
+
+// 格式化交易类型
+//  0:未知; 1:业务合约交易数据; 2:系统合约交易数据; 3:通道创建或配置交易数据
+func FormatTxType(txType int) string {
+	switch txType {
+	case 1:
+		return "业务合约交易"
+	case 2:
+		return "系统合约交易"
+	case 3:
+		return "通道创建或配置交易"
+	default:
+		return "未知"
+	}
+}
