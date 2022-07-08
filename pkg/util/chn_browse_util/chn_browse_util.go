@@ -95,6 +95,7 @@ type TransactionInfo struct {
 	BlockNum     uint64                  // 交易所属区块编号
 	TxDesc       string                  // 交易说明
 	ErrorMsg     string                  // 交易解析错误消息
+	TxType       int                     // 交易类型(0:业务合约交易数据; 1:系统合约交易数据; 2:通道创建或配置交易数据)
 }
 
 func (t *TransactionInfo) ToString() string {
