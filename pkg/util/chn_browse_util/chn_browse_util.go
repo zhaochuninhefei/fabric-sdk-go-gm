@@ -550,3 +550,8 @@ func TrimUnknownHeader(origin string) string {
 	}
 	return origin
 }
+
+// 判断目标合约是否是系统合约
+func IsSysCC(name string) bool {
+	return name == "_lifecycle" || name == "vscc" || name == "escc" || name == "lscc" || name == "qscc" || name == "cscc"
+}
