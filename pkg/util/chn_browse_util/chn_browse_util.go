@@ -150,9 +150,13 @@ type BrowseChannelConfig struct {
 	// 上回区块编号
 	//  BrowseLimit值为2时，BrowseChannel浏览的区块向前不超过且不包括LastBlockNum对应的区块。
 	//  LastBlockNum默认值为0。
-	LastBlockNum    uint64
-	OnlyBussinessTx bool
-	OnlyCcTx        bool
+	LastBlockNum uint64
+
+	// 交易数据浏览级别
+	//  0:默认值，无限制
+	//  1:只浏览合约交易数据，包括业务合约与系统合约(如`_lifecycle`)，不包括通道的创建交易、配置交易等
+	//  2:只浏览业务合约数据
+	TxBrowseLevel int
 }
 
 type BrowseOption func(*BrowseChannelConfig)
