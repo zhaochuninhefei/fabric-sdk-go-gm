@@ -153,11 +153,12 @@ type BrowseChannelConfig struct {
 	//  LastBlockNum默认值为0。
 	LastBlockNum uint64
 
+	// 暂时不考虑浏览通道数据时对交易做过滤
 	// 交易数据浏览级别
 	//  0:默认值，无限制
 	//  1:只浏览合约交易数据，包括业务合约与系统合约(如`_lifecycle`)，不包括通道的创建交易、配置交易等
 	//  2:只浏览业务合约数据
-	TxBrowseLevel int
+	// TxBrowseLevel int
 }
 
 type BrowseOption func(*BrowseChannelConfig)
