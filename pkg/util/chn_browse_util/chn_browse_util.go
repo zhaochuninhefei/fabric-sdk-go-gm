@@ -95,7 +95,7 @@ type TransactionInfo struct {
 	BlockNum     uint64                  // 交易所属区块编号
 	TxDesc       string                  // 交易说明
 	ErrorMsg     string                  // 交易解析错误消息
-	TxType       int                     // 交易类型(0:业务合约交易数据; 1:系统合约交易数据; 2:通道创建或配置交易数据)
+	TxType       int                     // 交易类型(0:未知; 1:业务合约交易数据; 2:系统合约交易数据; 3:通道创建或配置交易数据)
 }
 
 func (t *TransactionInfo) ToString() string {
@@ -415,6 +415,7 @@ func UnmarshalBlockData(block *common.Block, curBlockHash []byte) (*BlockInfoWit
 			continue
 		}
 		if chaincodeProposalPayload == nil || len(chaincodeProposalPayload.Input) == 0 {
+			transactionInfo.TxType = 3
 			transactionInfo.TxDesc = fmt.Sprintf("区块编号: %d, 第 %d 条交易不是合约调用。", blockInfo.BlockNum, i+1)
 			continue
 		}
@@ -438,6 +439,13 @@ func UnmarshalBlockData(block *common.Block, curBlockHash []byte) (*BlockInfoWit
 			}
 			if chaincodeInvocationSpec.ChaincodeSpec.ChaincodeId != nil {
 				transactionInfo.TxCcID = chaincodeInvocationSpec.ChaincodeSpec.ChaincodeId.Name
+				if IsBussinessCC(transactionInfo.TxCcID) {
+					transactionInfo.TxType = 1
+				} else if IsSysCC(transactionInfo.TxCcID) {
+					transactionInfo.TxType = 2
+				} else {
+					transactionInfo.TxType = 3
+				}
 			}
 		} else {
 			transactionInfo.ErrorMsg = fmt.Sprintf("区块编号: %d, 第 %d 条交易, chaincodeInvocationSpec是预期外的值: %s", blockInfo.BlockNum, i+1, chaincodeInvocationSpec.String())
@@ -448,6 +456,7 @@ func UnmarshalBlockData(block *common.Block, curBlockHash []byte) (*BlockInfoWit
 		proposalResponsePayloadTmp := string(chaincodeActionPayload.Action.ProposalResponsePayload)
 		// proposalResponsePayloadTmp的值为"Application"或"Orderer"时，代表当前交易是通道配置交易等非业务交易。
 		if proposalResponsePayloadTmp == "Application" || proposalResponsePayloadTmp == "Orderer" {
+			transactionInfo.TxType = 3
 			transactionInfo.TxDesc = fmt.Sprintf("区块编号: %d, 第 %d 条交易不是合约调用。", blockInfo.BlockNum, i+1)
 			continue
 		}
@@ -480,8 +489,8 @@ func UnmarshalBlockData(block *common.Block, curBlockHash []byte) (*BlockInfoWit
 		errInRwset := []string{}
 		// 遍历 txReadWriteSet.NsRwset
 		for _, v := range txReadWriteSet.NsRwset {
-			// 不处理 _lifecycle
-			if v.Namespace == "_lifecycle" {
+			// 不处理 _lifecycle 等系统合约
+			if IsSysCC(v.Namespace) {
 				continue
 			}
 			// zclog.Debugf("Namespace: %s", v.Namespace)
@@ -555,4 +564,9 @@ func TrimUnknownHeader(origin string) string {
 // 判断目标合约是否是系统合约
 func IsSysCC(name string) bool {
 	return name == "_lifecycle" || name == "vscc" || name == "escc" || name == "lscc" || name == "qscc" || name == "cscc"
+}
+
+// 判断目标合约是否是业务合约
+func IsBussinessCC(name string) bool {
+	return len(name) > 0 && !IsSysCC(name)
 }
