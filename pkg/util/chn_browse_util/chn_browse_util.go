@@ -107,8 +107,8 @@ func (t *TransactionInfo) ToString() string {
 	for _, w := range t.TxWrites {
 		writeSeys = append(writeSeys, w.ToString())
 	}
-	return fmt.Sprintf("TxID: %s, TxCreateTime: %s, BlockNum: %d, TxCcID: %s, TxArgs: %q, TxReads: %q, TxWrites: %q, CallerMspID: %s, CallerName: %s, CallerOU: %s, TxDesc: %s, ErrorMsg: %s",
-		t.TxID, t.TxCreateTime, t.BlockNum, t.TxCcID, t.TxArgs, readSeys, writeSeys, t.CallerMspID, t.CallerName, t.CallerOU, t.TxDesc, t.ErrorMsg)
+	return fmt.Sprintf("TxID: %s, TxType: %d, TxCreateTime: %s, BlockNum: %d, TxCcID: %s, TxArgs: %q, TxReads: %q, TxWrites: %q, CallerMspID: %s, CallerName: %s, CallerOU: %s, TxDesc: %s, ErrorMsg: %s",
+		t.TxID, t.TxType, t.TxCreateTime, t.BlockNum, t.TxCcID, t.TxArgs, readSeys, writeSeys, t.CallerMspID, t.CallerName, t.CallerOU, t.TxDesc, t.ErrorMsg)
 }
 
 // 交易读取数据情报
