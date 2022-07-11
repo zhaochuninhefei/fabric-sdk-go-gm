@@ -26,10 +26,13 @@ import (
 	"time"
 
 	fabricCaUtil "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/internal/gitee.com/zhaochuninhefei/fabric-ca-gm/sdkinternal/pkg/util"
+	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/client/resmgmt"
+	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/errors/retry"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/context"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/core"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/fab"
 	mspProvider "gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/common/providers/msp"
+	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/config/lookup"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/core/cryptosuite"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fabsdk"
 	"gitee.com/zhaochuninhefei/fabric-sdk-go-gm/pkg/fabsdk/api"
@@ -292,6 +295,55 @@ func (gw *Gateway) Close() {
 
 func (gw *Gateway) getOrg() string {
 	return gw.org
+}
+
+func (gw *Gateway) QueryChannels() ([]string, error) {
+	configBackend, err := gw.sdk.Config()
+	if err != nil {
+		return nil, errors.Errorf("Failed to get config backend from SDK: %s", err)
+	}
+	targets, err := orgTargetPeers([]string{gw.org}, configBackend)
+	if err != nil {
+		return nil, errors.Errorf("Creating peers failed: %s", err)
+	}
+	var clientContext context.ClientProvider
+	if gw.options.Identity != nil {
+		clientContext = gw.sdk.Context(fabsdk.WithIdentity(gw.options.Identity), fabsdk.WithOrg(gw.org))
+	} else {
+		clientContext = gw.sdk.Context(fabsdk.WithUser(gw.options.User), fabsdk.WithOrg(gw.org))
+	}
+	resMgmtClient, err := resmgmt.New(clientContext)
+	if err != nil {
+		return nil, errors.Errorf("Failed to query channel management client: %s", err)
+	}
+	channelQueryResponse, err := resMgmtClient.QueryChannels(
+		resmgmt.WithTargetEndpoints(targets[0]), resmgmt.WithRetry(retry.DefaultResMgmtOpts))
+	if err != nil {
+		return nil, errors.Errorf("QueryChannels return error: %s", err)
+	}
+	var channelIds []string
+	for _, channel := range channelQueryResponse.Channels {
+		channelIds = append(channelIds, channel.ChannelId)
+	}
+	return channelIds, nil
+}
+
+func orgTargetPeers(orgs []string, configBackend ...core.ConfigBackend) ([]string, error) {
+	networkConfig := fab.NetworkConfig{}
+	err := lookup.New(configBackend...).UnmarshalKey("organizations", &networkConfig.Organizations)
+	if err != nil {
+		return nil, errors.WithMessage(err, "failed to get organizations from config ")
+	}
+
+	var peers []string
+	for _, org := range orgs {
+		orgConfig, ok := networkConfig.Organizations[strings.ToLower(org)]
+		if !ok {
+			continue
+		}
+		peers = append(peers, orgConfig.Peers...)
+	}
+	return peers, nil
 }
 
 func createGatewayConfigProvider(config core.ConfigProvider, org func() string) func() ([]core.ConfigBackend, error) {
