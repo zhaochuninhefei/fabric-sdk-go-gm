@@ -329,6 +329,7 @@ func (gw *Gateway) QueryChannels() ([]string, error) {
 	return channelIds, nil
 }
 
+// orgTargetPeers 查看目标配置下目标组织的peers
 func orgTargetPeers(orgs []string, configBackend ...core.ConfigBackend) ([]string, error) {
 	networkConfig := fab.NetworkConfig{}
 	err := lookup.New(configBackend...).UnmarshalKey("organizations", &networkConfig.Organizations)
