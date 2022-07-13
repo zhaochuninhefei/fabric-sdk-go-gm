@@ -297,6 +297,7 @@ func (gw *Gateway) getOrg() string {
 	return gw.org
 }
 
+// QueryChannels 查询当前连接peer已加入的通道
 func (gw *Gateway) QueryChannels() ([]string, error) {
 	configBackend, err := gw.sdk.Config()
 	if err != nil {
