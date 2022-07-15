@@ -329,6 +329,15 @@ func (gw *Gateway) QueryChannels() ([]string, error) {
 	return channelIds, nil
 }
 
+// QueryOrgTargetPeers 查看目标配置下目标组织的peers
+func (gw *Gateway) QueryOrgTargetPeers() ([]string, error) {
+	configBackend, err := gw.sdk.Config()
+	if err != nil {
+		return nil, errors.Errorf("Failed to get config backend from SDK: %s", err)
+	}
+	return orgTargetPeers([]string{gw.org}, configBackend)
+}
+
 // orgTargetPeers 查看目标配置下目标组织的peers
 func orgTargetPeers(orgs []string, configBackend ...core.ConfigBackend) ([]string, error) {
 	networkConfig := fab.NetworkConfig{}
