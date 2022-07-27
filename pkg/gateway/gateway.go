@@ -299,6 +299,7 @@ func (gw *Gateway) getOrg() string {
 
 // QueryChannels 查询当前连接peer已加入的通道
 func (gw *Gateway) QueryChannels() ([]string, error) {
+	// 获取当前连接配置
 	configBackend, err := gw.sdk.Config()
 	if err != nil {
 		return nil, errors.Errorf("Failed to get config backend from SDK: %s", err)
