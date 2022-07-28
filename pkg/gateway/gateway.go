@@ -304,6 +304,7 @@ func (gw *Gateway) QueryChannels() ([]string, error) {
 	if err != nil {
 		return nil, errors.Errorf("Failed to get config backend from SDK: %s", err)
 	}
+	// 查看当前配置下目标组织的peers
 	targets, err := orgTargetPeers([]string{gw.org}, configBackend)
 	if err != nil {
 		return nil, errors.Errorf("Creating peers failed: %s", err)
