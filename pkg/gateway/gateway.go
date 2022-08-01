@@ -309,6 +309,7 @@ func (gw *Gateway) QueryChannels() ([]string, error) {
 	if err != nil {
 		return nil, errors.Errorf("Creating peers failed: %s", err)
 	}
+	// 获取客户端上下文
 	var clientContext context.ClientProvider
 	if gw.options.Identity != nil {
 		clientContext = gw.sdk.Context(fabsdk.WithIdentity(gw.options.Identity), fabsdk.WithOrg(gw.org))
