@@ -312,8 +312,10 @@ func (gw *Gateway) QueryChannels() ([]string, error) {
 	// 获取客户端上下文
 	var clientContext context.ClientProvider
 	if gw.options.Identity != nil {
+		// gateway连接配置中使用Identity
 		clientContext = gw.sdk.Context(fabsdk.WithIdentity(gw.options.Identity), fabsdk.WithOrg(gw.org))
 	} else {
+		// gateway连接配置中未使用Identity
 		clientContext = gw.sdk.Context(fabsdk.WithUser(gw.options.User), fabsdk.WithOrg(gw.org))
 	}
 	resMgmtClient, err := resmgmt.New(clientContext)
