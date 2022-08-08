@@ -318,6 +318,7 @@ func (gw *Gateway) QueryChannels() ([]string, error) {
 		// gateway连接配置中未使用Identity
 		clientContext = gw.sdk.Context(fabsdk.WithUser(gw.options.User), fabsdk.WithOrg(gw.org))
 	}
+	// 创建通道管理客户端
 	resMgmtClient, err := resmgmt.New(clientContext)
 	if err != nil {
 		return nil, errors.Errorf("Failed to query channel management client: %s", err)
