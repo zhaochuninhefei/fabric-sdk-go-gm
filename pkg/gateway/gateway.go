@@ -323,6 +323,7 @@ func (gw *Gateway) QueryChannels() ([]string, error) {
 	if err != nil {
 		return nil, errors.Errorf("Failed to query channel management client: %s", err)
 	}
+	// 查询当前连接peer已加入的通道信息
 	channelQueryResponse, err := resMgmtClient.QueryChannels(
 		resmgmt.WithTargetEndpoints(targets[0]), resmgmt.WithRetry(retry.DefaultResMgmtOpts))
 	if err != nil {
