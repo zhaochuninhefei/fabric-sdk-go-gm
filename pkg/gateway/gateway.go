@@ -327,7 +327,7 @@ func (gw *Gateway) QueryChannels() ([]string, error) {
 	channelQueryResponse, err := resMgmtClient.QueryChannels(
 		resmgmt.WithTargetEndpoints(targets[0]), resmgmt.WithRetry(retry.DefaultResMgmtOpts))
 	if err != nil {
-		return nil, errors.Errorf("QueryChannels return error: %s", err)
+		return nil, errors.Errorf("resMgmtClient.QueryChannels return error: %s", err)
 	}
 	var channelIds []string
 	for _, channel := range channelQueryResponse.Channels {
