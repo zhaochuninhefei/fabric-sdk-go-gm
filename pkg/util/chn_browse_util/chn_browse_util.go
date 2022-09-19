@@ -417,7 +417,7 @@ func UnmarshalBlockData(block *common.Block, curBlockHash []byte) (*BlockInfoWit
 		}
 		if chaincodeProposalPayload == nil || len(chaincodeProposalPayload.Input) == 0 {
 			transactionInfo.TxType = 3
-			transactionInfo.TxDesc = fmt.Sprintf("区块编号: %d, 第 %d 条交易不是合约调用。", blockInfo.BlockNum, i+1)
+			transactionInfo.TxDesc = fmt.Sprintf("区块编号: %d, 第 %d 条交易不是业务合约或系统合约的交易数据。", blockInfo.BlockNum, i+1)
 			continue
 		}
 		// zclog.Debugf("chaincodeProposalPayload: %s", chaincodeProposalPayload.String())
