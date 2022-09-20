@@ -458,7 +458,7 @@ func UnmarshalBlockData(block *common.Block, curBlockHash []byte) (*BlockInfoWit
 		// proposalResponsePayloadTmp的值为"Application"或"Orderer"时，代表当前交易是通道配置交易等非业务交易。
 		if proposalResponsePayloadTmp == "Application" || proposalResponsePayloadTmp == "Orderer" {
 			transactionInfo.TxType = 3
-			transactionInfo.TxDesc = fmt.Sprintf("区块编号: %d, 第 %d 条交易不是合约调用的交易。", blockInfo.BlockNum, i+1)
+			transactionInfo.TxDesc = fmt.Sprintf("区块编号: %d, 第 %d 条交易不是业务合约或系统合约的交易数据。", blockInfo.BlockNum, i+1)
 			continue
 		}
 		// 反序列化 chaincodeActionPayload.Action 数据
