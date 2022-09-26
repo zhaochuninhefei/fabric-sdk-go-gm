@@ -272,7 +272,7 @@ func BrowseChannelWithConfig(ledgerClient *ledger.Client, config *BrowseChannelC
 			break
 		}
 		// 当浏览参数为使用前回区块编号限制时，检查本次遍历的区块编号
-		if browseLimitType == 2 && config.LastBlockNum == curBlockNum {
+		if browseLimitType == 2 && config.LastBlockNum >= curBlockNum {
 			break
 		}
 		// 使用当前区块头哈希查询当前区块
